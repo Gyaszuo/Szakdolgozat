@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bolj1oiudlh54"]
+
+[ext_resource type="Script" uid="uid://baoonv6mo738d" path="res://scenes/entities/player/player.gd" id="1_1hmtu"]
+[ext_resource type="PackedScene" uid="uid://cx6clbtqgkj85" path="res://scenes/entities/player/camera.tscn" id="2_635qg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_635qg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hmtu"]
+albedo_color = Color(1, 0.4745098, 0.30980393, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yel1f"]
+material = SubResource("StandardMaterial3D_1hmtu")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_635qg"]
+material = SubResource("StandardMaterial3D_1hmtu")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.5
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_1hmtu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_635qg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_yel1f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.4541691, -0.48557043)
+mesh = SubResource("CylinderMesh_635qg")
+
+[node name="Camera" parent="." instance=ExtResource("2_635qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.120095, 0)
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
