@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=11 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
+[ext_resource type="PackedScene" uid="uid://bni2noqq6djn6" path="res://scenes/test/test_enemy.tscn" id="3_fn47k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -67,3 +68,6 @@ material = SubResource("StandardMaterial3D_spoc0")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="CSGBox3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_spoc0")
+
+[node name="TestEnemy" parent="." instance=ExtResource("3_fn47k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.477085, 1.0500004, 0)
