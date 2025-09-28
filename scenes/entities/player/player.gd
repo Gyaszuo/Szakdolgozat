@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var attack_cooldown_timer: Timer = $Timers/AttackCooldownTimer
 @onready var attack_area: Area3D = $AttackArea
 @onready var ground_pound_area: Area3D = $GroundPoundArea
+@onready var roll_cooldown_timer: Timer = $Timers/RollCooldownTimer
 
 var movement_input: Vector2 = Vector2.ZERO
 var can_double_jump: bool = true
@@ -40,6 +41,7 @@ func _physics_process(delta: float) -> void:
 func move_logic(delta: float) -> void:
 	movement_input = Input.get_vector("left","right","forward","backward").rotated(-camera.global_rotation.y)
 	var velocity_2d = Vector2(velocity.x,velocity.z)
+	is_running = true if Input.is_action_pressed("sprint") else false
 	var speed = run_speed if is_running else base_speed
 	if movement_input != Vector2.ZERO:
 		velocity_2d += movement_input * speed * delta * 8.0
@@ -81,6 +83,8 @@ func ability_logic(delta) -> void:
 			attack()
 		else:
 			ground_pound(delta)
+	if Input.is_action_just_pressed("roll") and is_on_floor():
+		roll()
 
 func attack() -> void:
 	if attack_cooldown_timer.time_left:
@@ -138,3 +142,16 @@ func _on_attack_cooldown_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	attack_count = 3
+
+func roll() -> void:
+	if roll_cooldown_timer.time_left:
+		return
+	base_speed = 10.0
+	run_speed = 10.0
+	set_collision_mask_value(3,false)
+	set_collision_mask_value(4,false)
+	await get_tree().create_timer(0.2).timeout
+	set_collision_mask_value(3,true)
+	set_collision_mask_value(4,true)
+	toggle_speed(true)
+	roll_cooldown_timer.start()
