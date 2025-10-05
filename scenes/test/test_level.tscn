@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=12 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
+[ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
 [ext_resource type="PackedScene" uid="uid://bni2noqq6djn6" path="res://scenes/test/test_enemy.tscn" id="3_fn47k"]
 
@@ -31,7 +32,10 @@ data = PackedVector3Array(-0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.
 albedo_texture = ExtResource("2_spoc0")
 uv1_scale = Vector3(4, 4, 4)
 
-[node name="Node3D" type="Node3D"]
+[node name="TestLevel" type="Node3D" node_paths=PackedStringArray("player", "hook_group")]
+script = ExtResource("1_ipv86")
+player = NodePath("Entities/Player")
+hook_group = NodePath("Hooks")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fn47k")
@@ -39,9 +43,6 @@ environment = SubResource("Environment_fn47k")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("1_euepx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5795575, 1.0500001, 1.8490039)
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, 0, 0)
@@ -69,5 +70,12 @@ material = SubResource("StandardMaterial3D_spoc0")
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="CSGBox3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_spoc0")
 
-[node name="TestEnemy" parent="." instance=ExtResource("3_fn47k")]
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_euepx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5795575, 1.0500001, 1.8490039)
+
+[node name="TestEnemy" parent="Entities" instance=ExtResource("3_fn47k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.477085, 1.0500004, 0)
+
+[node name="Hooks" type="Node3D" parent="."]

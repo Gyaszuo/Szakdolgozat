@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://be2nk4mmt1ffm"]
+
+[ext_resource type="Script" uid="uid://cd7u6oqr6uka0" path="res://scenes/components/hook_hitbox_component.gd" id="1_hrwth"]
+
+[node name="HookHitboxComponent" type="Area3D" groups=["HookHitbox"]]
+collision_layer = 256
+collision_mask = 16
+script = ExtResource("1_hrwth")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

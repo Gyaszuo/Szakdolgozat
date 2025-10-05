@@ -1,10 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx6clbtqgkj85"]
+[gd_scene load_steps=3 format=3 uid="uid://cx6clbtqgkj85"]
 
 [ext_resource type="Script" uid="uid://qhi4qmg8xcdh" path="res://scenes/entities/player/camera.gd" id="1_nx6hm"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_nx6hm"]
+
 [node name="Camera" type="SpringArm3D"]
+collision_mask = 5
 spring_length = 4.0
 margin = 0.5
 script = ExtResource("1_nx6hm")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="Marker3D" type="Marker3D" parent="RayCast3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_nx6hm")

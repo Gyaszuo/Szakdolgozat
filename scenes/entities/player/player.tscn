@@ -38,6 +38,10 @@ mesh = SubResource("CapsuleMesh_yel1f")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.4541691, -0.48557043)
 mesh = SubResource("CylinderMesh_635qg")
 
+[node name="HookLaunchPoint" type="Marker3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6721504, 0, 0)
+gizmo_extents = 0.4
+
 [node name="Camera" parent="." instance=ExtResource("2_635qg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.120095, 0)
 
