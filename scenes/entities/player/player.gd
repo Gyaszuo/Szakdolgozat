@@ -11,6 +11,8 @@ extends CharacterBody3D
 @onready var ground_pound_area: Area3D = $GroundPoundArea
 @onready var roll_cooldown_timer: Timer = $Timers/RollCooldownTimer
 @onready var hook_launch_point: Marker3D = $MeshInstance3D/HookLaunchPoint
+@onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
+@onready var main_ui: MainUI = $MainUi
 
 var movement_input: Vector2 = Vector2.ZERO
 var can_double_jump: bool = true
@@ -24,10 +26,18 @@ var jump_impulse: float = 0.8
 var fall_speed: float = 1.0
 var is_ground_pounding: bool = false
 var is_running: bool = false
+var is_dead: bool = false
 
 var is_hooking: bool = false
 var hook_target: Vector3
 var prev_position: Vector3
+
+var health: int = 6:
+	set(value):
+		health = value
+		main_ui.update_health(value)
+		if value == 0:
+			die()
 
 const MAX_WALK: float = 4.0
 const MAX_RUN: float = 6.0
@@ -67,6 +77,8 @@ func move_logic(delta: float) -> void:
 		else:
 			is_running = false
 		speed = run_speed if is_running else base_speed
+		if is_dead:
+			speed = 0.0
 		velocity_2d += movement_input * speed * delta * 8.0
 		velocity_2d = velocity_2d.limit_length(speed)
 		var target_angle = -movement_input.angle() - PI/2
@@ -89,23 +101,27 @@ func jump_logic() -> void:
 	if is_on_floor():
 		can_double_jump = true
 	if Input.is_action_pressed("jump"):
+		if is_dead:
+			return
 		if is_on_floor():
 			jump_timer.start()
 		if jump_timer.time_left:
 			velocity.y += jump_impulse
 	if Input.is_action_just_pressed("jump"):
-		if !is_on_floor() and can_double_jump:
+		if !is_on_floor() and can_double_jump and not is_dead:
 			can_double_jump = false
 			velocity.y = djump_impulse
 	else:
 		if !is_ground_pounding and !is_on_floor() and !jump_timer.time_left:
-			velocity.y = clampf(velocity.y - fall_speed, -20.0,100)
+			velocity.y = clampf(velocity.y - fall_speed, -15.0,100)
 
 func recenter_camera(delta: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(camera,"rotation",mesh.rotation,delta * 10)
 
 func ability_logic(delta) -> void:
+	if is_dead:
+		return
 	if Input.is_action_just_pressed("attack"):
 		if is_on_floor():
 			attack()
@@ -115,6 +131,8 @@ func ability_logic(delta) -> void:
 		roll()
 	if Input.is_action_just_pressed("hook"):
 		hook()
+	if Input.is_action_just_pressed("hit"):
+		hit()
 
 func attack() -> void:
 	if attack_cooldown_timer.time_left or is_hooking:
@@ -197,3 +215,13 @@ func travel_hook(target: Vector3) -> void:
 func end_hooking() -> void:
 	if hook_target.distance_to(global_position) <= HOOK_MIN_DIST or prev_position == position or Input.is_action_just_pressed("hook"):
 		is_hooking = false
+
+func hit() -> void:
+	if not invulnerability_timer.time_left and not is_dead:
+		health -= 1
+		invulnerability_timer.start()
+
+func die() -> void:
+	var tween = create_tween()
+	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,1),1.0)
+	is_dead = true

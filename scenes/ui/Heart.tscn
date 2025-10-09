@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://r3sqedyv07m1"]
+
+[ext_resource type="Texture2D" uid="uid://4xv7m8lt8hwk" path="res://assets/ui_textures/heart_full.png" id="1_cxlbt"]
+[ext_resource type="Shader" uid="uid://cfvbpe7sotvy3" path="res://scenes/ui/Heart.gdshader" id="1_y4e31"]
+[ext_resource type="Script" uid="uid://lwqjtpexhiwp" path="res://scenes/ui/heart.gd" id="2_2difq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6mos"]
+shader = ExtResource("1_y4e31")
+shader_parameter/beat_speed = 0.5
+shader_parameter/pulse_strength = 0.2
+shader_parameter/pulse_mode = 1
+
+[node name="Heart" type="TextureRect"]
+material = SubResource("ShaderMaterial_h6mos")
+anchors_preset = -1
+anchor_right = 0.583
+anchor_bottom = 1.0
+offset_right = 0.38397217
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cxlbt")
+expand_mode = 3
+stretch_mode = 4
+script = ExtResource("2_2difq")

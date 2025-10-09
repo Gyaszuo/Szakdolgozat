@@ -2,11 +2,10 @@ class_name Hook
 extends Area3D
 
 var direction: Vector3
-var speed: float = 10.0
+var speed: float = 30.0
 var player_position: Vector3
 var player: Player
 var hook_started: bool = false
-var stuck: bool = false
 
 @onready var chain: Node3D = $Chain
 @onready var chain_end: Marker3D = $Chain/Marker3D
@@ -17,7 +16,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	position += Vector3(direction.x,direction.y,direction.z) * speed * delta
-	if not stuck: position = chain_end.global_position
 	update_chain()
 	if position.distance_to(player_position) > 20.0:
 		queue_free()
@@ -30,7 +28,6 @@ func stop_movement():
 
 func _on_area_entered(area: Area3D) -> void:
 	stop_movement()
-	stuck = true
 	set_deferred("monitoring",false)
 	set_deferred("monitorable",false)
 	area.connect("hook_hit",hook_hit)
@@ -49,5 +46,5 @@ func update_chain():
 	chain.visible = true
 	var dist = player.hook_launch_point.global_position.distance_to(global_position)
 	chain.global_position = player.hook_launch_point.global_position
-	chain.look_at(global_transform.origin + direction,Vector3.UP)
+	chain.look_at(global_transform.origin + chain.global_position.direction_to(global_position),Vector3.UP)
 	chain.scale = Vector3(1,1,dist)

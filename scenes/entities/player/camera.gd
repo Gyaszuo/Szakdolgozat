@@ -8,14 +8,10 @@ extends SpringArm3D
 @export var mouse_acceleration: float = 0.005
 
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var marker_3d: Marker3D = $RayCast3D/Marker3D
 
 var smooth_rotation: Vector3
-var collision_point: Vector3:
-	set(value):
-		collision_point = value
-		mesh_instance_3d.global_position = collision_point
+var collision_point: Vector3
 
 func _ready() -> void:
 	marker_3d.position = ray_cast_3d.target_position
