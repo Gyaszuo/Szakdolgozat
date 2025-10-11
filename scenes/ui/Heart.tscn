@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h6mos"]
 shader = ExtResource("1_y4e31")
 shader_parameter/beat_speed = 0.5
-shader_parameter/pulse_strength = 0.2
+shader_parameter/pulse_strength = 0.050000002375
 shader_parameter/pulse_mode = 1
 
 [node name="Heart" type="TextureRect"]
@@ -20,5 +20,4 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_cxlbt")
 expand_mode = 3
-stretch_mode = 4
 script = ExtResource("2_2difq")

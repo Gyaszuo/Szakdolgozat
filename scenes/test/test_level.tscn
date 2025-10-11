@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=13 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
 [ext_resource type="PackedScene" uid="uid://bni2noqq6djn6" path="res://scenes/test/test_enemy.tscn" id="3_fn47k"]
+[ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="5_rnfgp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -79,3 +80,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5795575, 1.0500001, 1.8490
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.477085, 1.0500004, 0)
 
 [node name="Hooks" type="Node3D" parent="."]
+
+[node name="BreakableWall" parent="." instance=ExtResource("5_rnfgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, -4.9432883)

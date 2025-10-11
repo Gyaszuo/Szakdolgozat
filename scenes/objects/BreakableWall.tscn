@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://6r51oodsmn1p"]
+
+[ext_resource type="Script" uid="uid://fgrkoydmlhwy" path="res://scenes/objects/breakable_wall.gd" id="1_5cft5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_giyvh"]
+
+[node name="BreakableWall" type="Node3D"]
+script = ExtResource("1_5cft5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 5
+collision_mask = 51
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_giyvh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0)

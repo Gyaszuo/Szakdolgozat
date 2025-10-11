@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 // --- Uniform Parameters ---
 uniform float beat_speed : hint_range(0.1, 10.0) = 0.5; // Beats per second
-uniform float pulse_strength : hint_range(0.0, 0.25) = 0.2; // How much to scale
+uniform float pulse_strength : hint_range(0.0, 0.25) = 0.1; // How much to scale
 
 // Pulse Mode Selector
 // 0: Sine Pulse (Smooth)
