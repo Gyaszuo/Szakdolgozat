@@ -43,6 +43,7 @@ const MAX_WALK: float = 4.0
 const MAX_RUN: float = 6.0
 const HOOK_SPEED: float = 6.0
 const HOOK_MIN_DIST: float = 2.0
+const PUSH_FORCE = 1.0
 
 signal shoot_hook(direction: Vector3)
 
@@ -56,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	ability_logic(delta)
 	finish_ground_pound()
 	move_and_slide()
+	push()
 	end_hooking()
 
 func move_logic(delta: float) -> void:
@@ -225,3 +227,9 @@ func die() -> void:
 	var tween = create_tween()
 	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,1),1.0)
 	is_dead = true
+
+func push() -> void:
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)

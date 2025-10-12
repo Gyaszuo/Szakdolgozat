@@ -25,11 +25,11 @@ collision_layer = 128
 collision_mask = 519
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, -0.01, 0)
 shape = SubResource("BoxShape3D_v6q85")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1.1, 0, 0, 0, 5, 0, 0, 0, 1.1, 0, 1, 0)
 collision_layer = 128
 collision_mask = 2048
 
