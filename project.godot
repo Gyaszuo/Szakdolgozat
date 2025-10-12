@@ -138,6 +138,9 @@ menu={
 3d_physics/layer_7="Switch"
 3d_physics/layer_8="HeavyPlate"
 3d_physics/layer_9="HookHitbox"
+3d_physics/layer_10="Box"
+3d_physics/layer_11="PressurePlate"
+3d_physics/layer_12="PlayerGroundPound"
 
 [rendering]
 

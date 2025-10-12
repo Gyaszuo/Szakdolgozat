@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=16 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
 [ext_resource type="PackedScene" uid="uid://bni2noqq6djn6" path="res://scenes/test/test_enemy.tscn" id="3_fn47k"]
 [ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="5_rnfgp"]
+[ext_resource type="PackedScene" uid="uid://bln72krdh4ej3" path="res://scenes/objects/activators/PermPressurePlate.tscn" id="6_mr7is"]
+[ext_resource type="PackedScene" uid="uid://drx6p0ym787qq" path="res://scenes/objects/activators/TempPressurePlate.tscn" id="7_aq6h5"]
+[ext_resource type="PackedScene" uid="uid://ckh1m7p7ab37s" path="res://scenes/objects/activators/HeavyPressurePlate.tscn" id="8_rk3gu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -83,3 +86,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.477085, 1.0500004, 0)
 
 [node name="BreakableWall" parent="." instance=ExtResource("5_rnfgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, -4.9432883)
+
+[node name="PermPressurePlate" parent="." instance=ExtResource("6_mr7is")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1499999, 5.631119)
+
+[node name="TempPressurePlate" parent="." instance=ExtResource("7_aq6h5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7323222, 0.15000002, 5.8825397)
+
+[node name="HeavyPressurePlate" parent="." instance=ExtResource("8_rk3gu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.34654, 0.1499999, 6.0951796)

@@ -179,7 +179,6 @@ func _on_attack_hitbox_fade_timeout() -> void:
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if "hit" in body.get_parent():
-		print("hit")
 		body.get_parent().hit()
 
 func _on_ground_pound_area_body_entered(body: Node3D) -> void:

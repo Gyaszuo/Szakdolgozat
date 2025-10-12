@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://drx6p0ym787qq"]
+
+[ext_resource type="Script" uid="uid://7wlpcgiyiy5l" path="res://scenes/objects/activators/temp_pressure_plate.gd" id="1_tskfu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tskfu"]
+albedo_color = Color(0.54901963, 0.21568628, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tskfu"]
+material = SubResource("StandardMaterial3D_tskfu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6o44h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyi8g"]
+
+[node name="TempPressurePlate" type="Node3D"]
+script = ExtResource("1_tskfu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_tskfu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 1024
+collision_mask = 519
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_6o44h")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 1024
+collision_mask = 518
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_jyi8g")
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_exited"]
