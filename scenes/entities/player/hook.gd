@@ -6,12 +6,13 @@ var speed: float = 30.0
 var player_position: Vector3
 var player: Player
 var hook_started: bool = false
+var switching: bool = false
 
 @onready var chain: Node3D = $Chain
 @onready var chain_end: Marker3D = $Chain/Marker3D
 
 func _process(delta: float) -> void:
-	if hook_started and !player.is_hooking:
+	if hook_started and !player.is_hooking and !switching:
 		queue_free()
 
 func _physics_process(delta: float) -> void:
@@ -32,11 +33,18 @@ func _on_area_entered(area: Area3D) -> void:
 	set_deferred("monitorable",false)
 	area.connect("hook_hit",hook_hit)
 
-func hook_hit(variant: HookVariants.variants,global_pos: Vector3):
+func hook_hit(variant: HookVariants.variants,global_pos: Vector3,parent: Node3D):
 	if variant == HookVariants.variants.PULL:
 		player.travel_hook(global_pos)
 		hook_started = true
+		player.is_hooking = true
 	elif variant == HookVariants.variants.SWITCH:
+		hook_started = true
+		switching = true
+		await get_tree().create_timer(0.5).timeout
+		parent.switch()
+		hook_started = false
+		switching = false
 		queue_free()
 	else:
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=23 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="10_k1k2k"]
 [ext_resource type="PackedScene" uid="uid://dpbvqt4mxety1" path="res://scenes/objects/activators/Lock.tscn" id="11_hsfnj"]
 [ext_resource type="PackedScene" uid="uid://c1ax6ryjuxbkt" path="res://scenes/objects/activators/Switch.tscn" id="12_cudyp"]
+[ext_resource type="PackedScene" uid="uid://dq2qkiiiu5pl3" path="res://scenes/objects/HookPoint.tscn" id="13_uquo7"]
+[ext_resource type="PackedScene" uid="uid://byfcyt6ira4ck" path="res://scenes/objects/activators/HookSwitch.tscn" id="14_n14kl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -102,6 +104,12 @@ activatables = [NodePath("../Door")]
 [node name="Switch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
 transform = Transform3D(2.9802319e-08, 1, -2.9802322e-08, -1, 2.9802322e-08, 4.371139e-08, 4.371139e-08, 2.9802322e-08, 1, -5.605384, 1.5008686, -3.0418637)
 activatables = [NodePath("../Door")]
+
+[node name="HookPoint" parent="Objects" instance=ExtResource("13_uquo7")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5781612, 5.601453, 0)
+
+[node name="HookSwitch" parent="Objects" instance=ExtResource("14_n14kl")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -6.522583, 4.4830556, 1.948772)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
