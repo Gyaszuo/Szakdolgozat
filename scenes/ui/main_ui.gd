@@ -4,9 +4,13 @@ extends Control
 @onready var health_bar: HealthBar = $HealthBar
 @onready var color_rect: ColorRect = $MarginContainer/ColorRect
 @onready var menu: Control = $Menu
+@onready var key_bar: KeyBar = $KeyBar
 
 func update_health(value: int) -> void:
 	health_bar.update_health(value)
+
+func update_keys(value: int) -> void:
+	key_bar.update_keys(value)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):

@@ -39,6 +39,11 @@ var health: int = 6:
 		if value == 0:
 			die()
 
+var keys: int = 0:
+	set(value):
+		keys = value
+		main_ui.update_keys(value)
+
 const MAX_WALK: float = 4.0
 const MAX_RUN: float = 6.0
 const HOOK_SPEED: float = 6.0

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://wff5cdgwbvj3"]
+
+[ext_resource type="Script" uid="uid://nkqse1yy22c0" path="res://scenes/objects/collectibles/key.gd" id="2_2o6mp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hm7b3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wteri"]
+albedo_color = Color(0.93731666, 0.6127228, 7.70092e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2o6mp"]
+material = SubResource("StandardMaterial3D_wteri")
+
+[node name="Key" type="Node3D"]
+script = ExtResource("2_2o6mp")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 4096
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_hm7b3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_2o6mp")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 3.821371e-15, 8.742278e-08, 8.742278e-08, 4.371139e-08, 1, 0, 1, -4.371139e-08, 0, 1.0673431, 0)
+light_color = Color(1, 1, 0, 1)
+light_energy = 5.289
+spot_range = 2.121
+spot_angle = 26.44
+spot_angle_attenuation = 0.007812513
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnky73q5y4qnk"]
+[gd_scene load_steps=6 format=3 uid="uid://dnky73q5y4qnk"]
 
 [ext_resource type="PackedScene" uid="uid://b2iggmq88eesw" path="res://scenes/ui/HealthBar.tscn" id="1_1h4gc"]
 [ext_resource type="Script" uid="uid://cnhmbn5ays7pl" path="res://scenes/ui/main_ui.gd" id="1_xxi1i"]
 [ext_resource type="Texture2D" uid="uid://c4fdr7miwoqp2" path="res://assets/ui_textures/crosshair.png" id="2_ahyum"]
+[ext_resource type="PackedScene" uid="uid://b8ami5c1bn0fj" path="res://scenes/ui/KeyBar.tscn" id="3_uqdwk"]
 [ext_resource type="PackedScene" uid="uid://2pxmhy7kjy8v" path="res://scenes/ui/Menu.tscn" id="4_cdatp"]
 
 [node name="MainUi" type="Control"]
@@ -17,6 +18,16 @@ script = ExtResource("1_xxi1i")
 
 [node name="HealthBar" parent="." instance=ExtResource("1_1h4gc")]
 layout_mode = 1
+
+[node name="KeyBar" parent="." instance=ExtResource("3_uqdwk")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Crosshair" type="TextureRect" parent="."]
 layout_mode = 1
