@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1ax6ryjuxbkt"]
+
+[ext_resource type="Script" uid="uid://cst8iukv5oo3s" path="res://scenes/objects/activators/switch.gd" id="1_wxevu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vig33"]
+size = Vector3(1, 0.2, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxevu"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wxevu"]
+material = SubResource("StandardMaterial3D_wxevu")
+size = Vector3(0.1, 1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vig33"]
+
+[node name="Switch" type="Node3D"]
+script = ExtResource("1_wxevu")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vig33")
+
+[node name="Stick" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 0, 0.41249573, 0)
+mesh = SubResource("BoxMesh_wxevu")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.5426258, 0)
+collision_layer = 64
+collision_mask = 2080
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_vig33")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

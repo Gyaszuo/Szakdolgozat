@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=21 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dit6nuictyh6y" path="res://scenes/objects/Box.tscn" id="9_uf6c7"]
 [ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="10_k1k2k"]
 [ext_resource type="PackedScene" uid="uid://dpbvqt4mxety1" path="res://scenes/objects/activators/Lock.tscn" id="11_hsfnj"]
+[ext_resource type="PackedScene" uid="uid://c1ax6ryjuxbkt" path="res://scenes/objects/activators/Switch.tscn" id="12_cudyp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -92,10 +93,14 @@ activatables = [NodePath("../Door")]
 
 [node name="Door" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("10_k1k2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1695337, 0.05, -3.8661747)
-activators = [NodePath("../TempPressurePlate"), NodePath("../HeavyPressurePlate"), NodePath("../PermPressurePlate"), NodePath("../Lock")]
+activators = [NodePath("../TempPressurePlate"), NodePath("../HeavyPressurePlate"), NodePath("../PermPressurePlate"), NodePath("../Lock"), NodePath("../Switch")]
 
 [node name="Lock" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("11_hsfnj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.913691, 0.988315, -3.633063)
+activatables = [NodePath("../Door")]
+
+[node name="Switch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
+transform = Transform3D(2.9802319e-08, 1, -2.9802322e-08, -1, 2.9802322e-08, 4.371139e-08, 4.371139e-08, 2.9802322e-08, 1, -5.605384, 1.5008686, -3.0418637)
 activatables = [NodePath("../Door")]
 
 [node name="LevelGeometry" type="Node3D" parent="."]
