@@ -1,16 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy2iswsdq7y0q"]
+[gd_scene load_steps=5 format=3 uid="uid://dy2iswsdq7y0q"]
 
 [ext_resource type="Script" uid="uid://cs4s8n52sd7a4" path="res://scenes/entities/player/hook.gd" id="1_fxqey"]
 [ext_resource type="PackedScene" uid="uid://dkuv7lhhcyab6" path="res://scenes/entities/player/Chain.tscn" id="2_01s1b"]
+[ext_resource type="PackedScene" uid="uid://c4fjm1kalkp18" path="res://assets/models/terrain/hook.glb" id="3_4mnfp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fxqey"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01s1b"]
-albedo_color = Color(0.40832946, 0.40832946, 0.40832946, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4mnfp"]
-material = SubResource("StandardMaterial3D_01s1b")
-size = Vector3(0.5, 0.5, 1)
 
 [node name="Hitbox" type="Area3D"]
 collision_layer = 16
@@ -26,9 +20,8 @@ visible = false
 [node name="Marker3D" type="Marker3D" parent="Chain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Hook" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.50000006, 0, -1.4901161e-08, 0, 0.5, 0, 1.4901161e-08, 0, -0.50000006, 0, 0, 0)
-mesh = SubResource("BoxMesh_4mnfp")
+[node name="hook" parent="." instance=ExtResource("3_4mnfp")]
+transform = Transform3D(-0.22, 1.9233012e-08, -8.407016e-16, 0, -9.616505e-09, -0.22, -1.9233012e-08, -0.22, 9.616505e-09, 0, 0, 0.23789066)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

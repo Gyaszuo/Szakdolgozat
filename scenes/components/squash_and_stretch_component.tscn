@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csxussth2kgd3"]
+
+[ext_resource type="Script" uid="uid://g5i4j8hb8vvp" path="res://scenes/components/squash_and_stretch_component.gd" id="1_fxk1y"]
+
+[node name="SquashAndStretchComponent" type="Node"]
+script = ExtResource("1_fxk1y")

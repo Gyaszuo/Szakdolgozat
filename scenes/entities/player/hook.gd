@@ -13,15 +13,18 @@ var switching: bool = false
 
 func _process(delta: float) -> void:
 	if hook_started and !player.is_hooking and !switching:
+		player.toggle_main_hand(false)
 		queue_free()
 
 func _physics_process(delta: float) -> void:
 	position += Vector3(direction.x,direction.y,direction.z) * speed * delta
 	update_chain()
 	if position.distance_to(player_position) > 20.0:
+		player.toggle_main_hand(false)
 		queue_free()
 
 func _on_body_entered(body: Node3D) -> void:
+	player.toggle_main_hand(false)
 	queue_free()
 
 func stop_movement():
@@ -45,8 +48,10 @@ func hook_hit(variant: HookVariants.variants,global_pos: Vector3,parent: Node3D)
 		parent.switch()
 		hook_started = false
 		switching = false
+		player.toggle_main_hand(false)
 		queue_free()
 	else:
+		player.toggle_main_hand(false)
 		queue_free()
 
 func update_chain():

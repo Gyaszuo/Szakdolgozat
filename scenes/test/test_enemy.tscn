@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bna4uqucts7o5" path="res://scenes/test/test_enemy.gd" id="1_rdvna"]
 [ext_resource type="PackedScene" uid="uid://be2nk4mmt1ffm" path="res://scenes/components/HookHitboxComponent.tscn" id="2_t2i70"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_apary"]
+[ext_resource type="PackedScene" uid="uid://dfnpnupd4vptj" path="res://assets/models/enemies/minion/Skeleton_Minion.glb" id="3_463jr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rdvna"]
 
@@ -11,9 +10,6 @@
 
 [node name="TestEnemy" type="Node3D"]
 script = ExtResource("1_rdvna")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_apary")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 4
@@ -30,3 +26,6 @@ transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_t2i70")
 
 [node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Skeleton_Minion" parent="." instance=ExtResource("3_463jr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
