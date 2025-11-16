@@ -2,6 +2,7 @@ class_name MainUI
 extends Control
 
 @onready var health_bar: HealthBar = $HealthBar
+@onready var treasure_counter: Control = $TreasureCounter
 @onready var color_rect: ColorRect = $MarginContainer/ColorRect
 @onready var menu: Control = $Menu
 @onready var key_bar: KeyBar = $KeyBar
@@ -12,6 +13,9 @@ func update_health(value: int) -> void:
 func update_keys(value: int) -> void:
 	key_bar.update_keys(value)
 
+func update_treasure(value: int) -> void:
+	treasure_counter.update_treasure(value)
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		open_menu()

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlnec7qs4oc0o"]
+
+[ext_resource type="PackedScene" uid="uid://biti7qy7n4xgv" path="res://assets/models/objects/bottle_B_brown.fbx" id="1_3b1wt"]
+[ext_resource type="Script" uid="uid://coa4luv3j8hm8" path="res://scenes/objects/pot.gd" id="1_xpfp2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3b1wt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xpfp2"]
+height = 1.484375
+
+[node name="Pot" type="Node3D"]
+script = ExtResource("1_xpfp2")
+
+[node name="bottle_B_brown" parent="." instance=ExtResource("1_3b1wt")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 519
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.685, 0, 0, 0, 0.54281694, 0, 0, 0, 0.685, 0, 0.4893011, 0)
+shape = SubResource("CapsuleShape3D_3b1wt")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 5
+collision_mask = 2099
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48106116, 0)
+shape = SubResource("CapsuleShape3D_xpfp2")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9042371, 0)

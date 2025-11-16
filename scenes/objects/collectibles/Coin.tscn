@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://btw7hag6n8dvi"]
+
+[ext_resource type="Script" uid="uid://bealjih436sg2" path="res://scenes/objects/collectibles/Coin.gd" id="2_fm6mi"]
+[ext_resource type="PackedScene" uid="uid://cr1nsk15hroe3" path="res://assets/models/objects/coin.fbx" id="3_11k5e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hm7b3"]
+
+[node name="Coin" type="Node3D"]
+script = ExtResource("2_fm6mi")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 4096
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, 0, 0)
+shape = SubResource("SphereShape3D_hm7b3")
+
+[node name="coin" parent="." instance=ExtResource("3_11k5e")]
+transform = Transform3D(0.7041015, 0.46063524, 0.54042226, 0, 0.7610517, -0.64869136, -0.7100994, 0.45674455, 0.5358577, 0, 0, 0)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

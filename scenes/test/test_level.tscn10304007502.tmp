@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c1ax6ryjuxbkt" path="res://scenes/objects/activators/Switch.tscn" id="12_cudyp"]
 [ext_resource type="PackedScene" uid="uid://dq2qkiiiu5pl3" path="res://scenes/objects/HookPoint.tscn" id="13_uquo7"]
 [ext_resource type="PackedScene" uid="uid://byfcyt6ira4ck" path="res://scenes/objects/activators/HookSwitch.tscn" id="14_n14kl"]
-[ext_resource type="PackedScene" uid="uid://dlnec7qs4oc0o" path="res://scenes/objects/Pot.tscn" id="15_q5g0a"]
+[ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="15_q5g0a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -112,14 +112,8 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5
 [node name="HookSwitch" parent="Objects" instance=ExtResource("14_n14kl")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -6.522583, 4.4830556, 1.948772)
 
-[node name="Pot" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10351585, 0)
-
-[node name="Pot2" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.345011, 0.10351585, 0)
-
-[node name="Pot3" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1309931, 0.10351585, 0)
+[node name="Coin" parent="Objects" instance=ExtResource("15_q5g0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8000002, 0)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

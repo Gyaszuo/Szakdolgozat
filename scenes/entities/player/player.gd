@@ -50,6 +50,11 @@ var keys: int = 0:
 	set(value):
 		keys = value
 		main_ui.update_keys(value)
+		
+var treasure: int = 0:
+	set(value):
+		treasure = value
+		main_ui.update_treasure(value)
 
 const MAX_WALK: float = 4.0
 const MAX_RUN: float = 6.0
@@ -214,6 +219,14 @@ func _on_attack_area_body_entered(body: Node3D) -> void:
 func _on_ground_pound_area_body_entered(body: Node3D) -> void:
 	if "hit" in body.get_parent():
 		body.get_parent().hit()
+
+func _on_attack_area_area_entered(area: Area3D) -> void:
+	if "hit" in area.get_parent():
+		area.get_parent().hit()
+
+func _on_ground_pound_area_area_entered(area: Area3D) -> void:
+	if "hit" in area.get_parent():
+		area.get_parent().hit()
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	attack_count = 3
