@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctkqp4py2q2e5"]
-
-[ext_resource type="Script" uid="uid://dhiw6qdhw48iw" path="res://scenes/objects/activatables/activatable.gd" id="1_y4rjr"]
+[gd_scene format=3 uid="uid://ctkqp4py2q2e5"]
 
 [node name="Activatable" type="Node3D"]
-script = ExtResource("1_y4rjr")

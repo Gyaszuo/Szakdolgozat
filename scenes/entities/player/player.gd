@@ -23,7 +23,6 @@ var movement_input: Vector2 = Vector2.ZERO
 var can_double_jump: bool = true
 var attack_count: int = 3:
 	set(value):
-		print(value)
 		attack_count = value
 var run_speed: float = 6.0
 var base_speed: float = 4.0
@@ -178,7 +177,6 @@ func attack() -> void:
 	var anim_name: String = "Attack" + str(attack_count % 2)
 	attack_state_machine.travel(anim_name)
 	$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	print("AttackAnim", attack_count % 2)
 	attack_count -= 1
 	if attack_count == 0:
 		attack_cooldown_timer.start()

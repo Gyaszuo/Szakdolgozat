@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://lok2g5bwkuc7"]
+
+[ext_resource type="Script" uid="uid://swrca1a0ctgv" path="res://scenes/objects/activatables/moving_platform.gd" id="1_js4u5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_js4u5"]
+albedo_color = Color(0.36862746, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tdmos"]
+size = Vector3(1.5, 0.2, 1.5)
+
+[node name="MovingPlatform" type="Node3D"]
+script = ExtResource("1_js4u5")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1.5, 0.2, 1.5)
+material = SubResource("StandardMaterial3D_js4u5")
+
+[node name="StaticBody3D" type="AnimatableBody3D" parent="."]
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_tdmos")

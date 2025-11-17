@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=29 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://7rqjqj6yniuk" path="res://scenes/objects/collectibles/crest.tscn" id="16_lrdq0"]
 [ext_resource type="PackedScene" uid="uid://fs6vyoysmf4a" path="res://scenes/objects/TempPlatform.tscn" id="17_tgyrj"]
 [ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="18_vyhog"]
+[ext_resource type="PackedScene" uid="uid://lok2g5bwkuc7" path="res://scenes/objects/activatables/MovingPlatform.tscn" id="19_ufchl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,6 +33,15 @@ background_mode = 2
 sky = SubResource("Sky_spoc0")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_b2lp2"]
+closed = true
+bake_interval = 15.71
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.0031356812, 0, -0.012131536, 0, 0, 0, 0, 0, 0, 1.8909378, 0, 3.428113, 0, 0, 0, 0, 0, 0, -0.08098221, 0, 5.0220084, 0, 0, 0, 0, 0, 0, -2.389515, 0.2159816, 4.7010393, 0, 0, 0, 0, 0, 0, -4.530283, -3.0994415e-05, 3.2849321, 0, 0, 0, 0, 0, 0, -3.5214844, 0.91407347, 0.74481654),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn47k"]
 albedo_texture = ExtResource("2_spoc0")
@@ -107,7 +117,7 @@ activatables = [NodePath("../Door")]
 
 [node name="Switch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
 transform = Transform3D(2.9802319e-08, 1, -2.9802322e-08, -1, 2.9802322e-08, 4.371139e-08, 4.371139e-08, 2.9802322e-08, 1, -5.605384, 1.5008686, -3.0418637)
-activatables = [NodePath("../Door")]
+activatables = [NodePath("../Door"), NodePath("../Path3D/PathFollow3D/MovingPlatform")]
 
 [node name="HookPoint" parent="Objects" instance=ExtResource("13_uquo7")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5781612, 5.601453, 0)
@@ -133,6 +143,20 @@ reappear_time = 4.0
 
 [node name="Coin" parent="Objects" instance=ExtResource("18_vyhog")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4954815, 1.3733711, 0.9469894)
+
+[node name="Path3D" type="Path3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02908, 1.3401189, 0)
+curve = SubResource("Curve3D_b2lp2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Objects/Path3D"]
+transform = Transform3D(0.99999803, 0, 0, 0, 0.999999, 0, 0, 0, 0.9999954, -0.0031356812, 0, -0.012131536)
+rotation_mode = 0
+
+[node name="MovingPlatform" parent="Objects/Path3D/PathFollow3D" node_paths=PackedStringArray("path", "activators") instance=ExtResource("19_ufchl")]
+path = NodePath("..")
+preActivated = true
+speed = 5.0
+activators = [NodePath("../../../Switch")]
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 
