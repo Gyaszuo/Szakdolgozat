@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=27 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://byfcyt6ira4ck" path="res://scenes/objects/activators/HookSwitch.tscn" id="14_n14kl"]
 [ext_resource type="PackedScene" uid="uid://dlnec7qs4oc0o" path="res://scenes/objects/Pot.tscn" id="15_q5g0a"]
 [ext_resource type="PackedScene" uid="uid://7rqjqj6yniuk" path="res://scenes/objects/collectibles/crest.tscn" id="16_lrdq0"]
+[ext_resource type="PackedScene" uid="uid://fs6vyoysmf4a" path="res://scenes/objects/TempPlatform.tscn" id="17_tgyrj"]
+[ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="18_vyhog"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,8 +37,8 @@ glow_enabled = true
 albedo_texture = ExtResource("2_spoc0")
 uv1_scale = Vector3(10, 10, 10)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_euepx"]
-data = PackedVector3Array(-0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tgyrj"]
+data = PackedVector3Array(-0.89819336, -0.5, 0.5, -0.89819336, -0.5, -0.5, -0.89819336, 0.5, -0.5, 0.89819336, -0.5, -0.5, -0.89819336, -0.5, -0.5, -0.89819336, -0.5, 0.5, -0.89819336, 0.5, -0.5, -0.89819336, -0.5, -0.5, 0.89819336, -0.5, -0.5, -0.89819336, 0.5, -0.5, -0.89819336, 0.5, 0.5, -0.89819336, -0.5, 0.5, -0.89819336, -0.5, 0.5, -0.89819336, 0.5, 0.5, 0.89819336, 0.5, 0.5, 0.89819336, 0.5, 0.5, -0.89819336, 0.5, 0.5, -0.89819336, 0.5, -0.5, -0.89819336, -0.5, 0.5, 0.89819336, -0.5, 0.5, 0.89819336, -0.5, -0.5, 0.89819336, 0.5, 0.5, 0.89819336, -0.5, 0.5, -0.89819336, -0.5, 0.5, 0.89819336, -0.5, -0.5, 0.89819336, -0.5, 0.5, 0.89819336, 0.5, 0.5, 0.89819336, -0.5, -0.5, 0.89819336, 0.5, -0.5, -0.89819336, 0.5, -0.5, -0.89819336, 0.5, -0.5, 0.89819336, 0.5, -0.5, 0.89819336, 0.5, 0.5, 0.89819336, 0.5, 0.5, 0.89819336, 0.5, -0.5, 0.89819336, -0.5, -0.5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_spoc0"]
 data = PackedVector3Array(-0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5)
@@ -125,16 +127,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1309931, 0.10351585, 0)
 [node name="Crest" parent="Objects" instance=ExtResource("16_lrdq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8194115, 1.05, 3.2154107)
 
+[node name="TempPlatform" parent="Objects" instance=ExtResource("17_tgyrj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.70629, 1.8639455, 0)
+reappear_time = 4.0
+
+[node name="Coin" parent="Objects" instance=ExtResource("18_vyhog")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4954815, 1.3733711, 0.9469894)
+
 [node name="LevelGeometry" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="LevelGeometry"]
-transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 7.963867, 0, 0)
+size = Vector3(1.7963867, 1, 1)
 material = SubResource("StandardMaterial3D_fn47k")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/Floor"]
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_euepx")
+shape = SubResource("ConcavePolygonShape3D_tgyrj")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="LevelGeometry"]
 transform = Transform3D(1, 0, 0, 0, 2.0070424, 0, 0, 0, 7.9588923, -6.1379642, 1.0535214, 0)

@@ -7,7 +7,8 @@ extends CharacterBody3D
 @onready var attack_timer: Timer = $Timers/AttackTimer
 @onready var ground_pound_timer: Timer = $Timers/GroundPoundTimer
 @onready var attack_cooldown_timer: Timer = $Timers/AttackCooldownTimer
-@onready var attack_area: Area3D = $AttackArea
+@onready var attack0_area: Area3D = $Attack0Area
+@onready var attack1_area: Area3D = $Attack1Area
 @onready var ground_pound_area: Area3D = $GroundPoundArea
 @onready var dodge_cooldown_timer: Timer = $Timers/DodgeCooldownTimer
 @onready var hook_launch_point: Marker3D = $"ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_r/1H_Crossbow/HookLaunchPoint"
@@ -85,7 +86,8 @@ func move_logic(delta: float) -> void:
 		var hook_dir_2d = Vector2(hook_dir.x,hook_dir.z)
 		var target_angle = -hook_dir_2d.angle() - PI/2
 		mesh.rotation.y = rotate_toward(mesh.rotation.y,target_angle,turn_speed * delta)
-		attack_area.rotation.y = rotate_toward(attack_area.rotation.y,target_angle,turn_speed * delta)
+		attack0_area.rotation.y = rotate_toward(attack0_area.rotation.y,target_angle,turn_speed * delta)
+		attack1_area.rotation.y = rotate_toward(attack1_area.rotation.y,target_angle,turn_speed * delta)
 		return
 	movement_input = Input.get_vector("left","right","forward","backward").rotated(-camera.global_rotation.y)
 	var velocity_2d = Vector2(velocity.x,velocity.z)
@@ -106,7 +108,8 @@ func move_logic(delta: float) -> void:
 		velocity_2d = velocity_2d.limit_length(speed)
 		var target_angle = -movement_input.angle() - PI/2
 		mesh.rotation.y = rotate_toward(mesh.rotation.y,target_angle,turn_speed * delta)
-		attack_area.rotation.y = rotate_toward(attack_area.rotation.y,target_angle,turn_speed * delta)
+		attack0_area.rotation.y = rotate_toward(attack0_area.rotation.y,target_angle,turn_speed * delta)
+		attack1_area.rotation.y = rotate_toward(attack1_area.rotation.y,target_angle,turn_speed * delta)
 		mesh.rotation.y = wrapf(mesh.rotation.y,-PI,PI)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO,speed * stop_speed * delta)
@@ -209,7 +212,8 @@ func _on_ground_pound_timer_timeout() -> void:
 
 func _on_attack_hitbox_fade_timeout() -> void:
 	attack_cooldown_timer.start()
-	attack_area.get_child(0).disabled = true
+	attack0_area.get_child(0).disabled = true
+	attack1_area.get_child(0).disabled = true
 	attack_count = 3
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
@@ -268,7 +272,8 @@ func hit() -> void:
 		extra_anim.animation = "Hit_A"
 		$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		enable_attack_hitbox(false)
+		enable_attack0_hitbox(false)
+		enable_attack1_hitbox(false)
 		can_attack(false)
 		health -= 1
 		invulnerability_timer.start()
@@ -292,11 +297,18 @@ func set_move_state(state_name: String) -> void:
 func can_attack(value: bool) -> void:
 	is_attacking = value
 
-func enable_attack_hitbox(value: bool) -> void:
+func enable_attack0_hitbox(value: bool) -> void:
 	if value:
-		attack_area.get_child(0).disabled = false
+		attack0_area.get_child(0).disabled = false
 	else:
-		attack_area.get_child(0).disabled = true
+		attack0_area.get_child(0).disabled = true
+		attack_timer.start()
+
+func enable_attack1_hitbox(value: bool) -> void:
+	if value:
+		attack1_area.get_child(0).disabled = false
+	else:
+		attack1_area.get_child(0).disabled = true
 		attack_timer.start()
 
 func toggle_main_hand(value: bool) -> void:

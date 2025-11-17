@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://fs6vyoysmf4a"]
+
+[ext_resource type="Script" uid="uid://b1wuvh5d81f8r" path="res://scenes/objects/temp_platform.gd" id="1_jqk1b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rpvpb"]
+size = Vector3(1.5, 0.2, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqk1b"]
+size = Vector3(1.5, 0.2, 1.5)
+
+[node name="TempPlatform" type="Node3D"]
+script = ExtResource("1_jqk1b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 543
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rpvpb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1.5, 0.2, 1.5)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_jqk1b")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DisappearTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="ReappearTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timers/DisappearTimer" to="." method="_on_disappear_timer_timeout"]
+[connection signal="timeout" from="Timers/ReappearTimer" to="." method="_on_reappear_timer_timeout"]
