@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://djeokbcp1fj86"]
+
+[ext_resource type="Script" uid="uid://dxna2vxt61vb1" path="res://scenes/objects/activatables/player_barrier.gd" id="1_rm77v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe57a"]
+transparency = 1
+albedo_color = Color(1, 0.4117647, 0.19607843, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vx5ge"]
+material = SubResource("StandardMaterial3D_fe57a")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rm77v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vx5ge"]
+
+[node name="PlayerBarrier" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_rm77v")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vx5ge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 8192
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rm77v")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8192
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.2962538, 0, 0, 0)
+shape = SubResource("BoxShape3D_vx5ge")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

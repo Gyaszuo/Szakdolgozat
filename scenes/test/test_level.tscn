@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=32 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="18_vyhog"]
 [ext_resource type="PackedScene" uid="uid://lok2g5bwkuc7" path="res://scenes/objects/activatables/MovingPlatform.tscn" id="19_ufchl"]
 [ext_resource type="PackedScene" uid="uid://bnw813h0b6545" path="res://scenes/objects/activatables/ToggleableTerrain.tscn" id="20_b2lp2"]
+[ext_resource type="PackedScene" uid="uid://djeokbcp1fj86" path="res://scenes/objects/activatables/PlayerBarrier.tscn" id="21_2q3dp"]
+[ext_resource type="PackedScene" uid="uid://50jlnc5pp1t" path="res://scenes/objects/activatables/HookBarrier.tscn" id="22_trjkq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -161,7 +163,19 @@ activators = [NodePath("../../../Switch")]
 
 [node name="ToggleableTerrain" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("20_b2lp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.115544, 0.54999983, 0)
+preActivated = true
 activators = [NodePath("../Switch")]
+
+[node name="PlayerBarrier" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("21_2q3dp")]
+transform = Transform3D(-2.7998743e-07, 0, 0.5, 0, 5.4408035, 0, -6.405366, 0, -2.1855694e-08, -4.3441577, 2.7704017, 0)
+activators = [NodePath("../Switch2")]
+
+[node name="Switch2" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.907388, 0, -2.2549226)
+activatables = [NodePath("../PlayerBarrier")]
+
+[node name="HookBarrier" parent="Objects" instance=ExtResource("22_trjkq")]
+transform = Transform3D(1, 0, 0, 0, 4.466353, 0, 0, 0, 6.9022326, 14.214169, 2.2831767, 0)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

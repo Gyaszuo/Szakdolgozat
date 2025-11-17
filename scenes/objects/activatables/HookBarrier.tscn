@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://50jlnc5pp1t"]
+
+[ext_resource type="Script" uid="uid://bwfqjylolmnnu" path="res://scenes/objects/activatables/hook_barrier.gd" id="1_65kwk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe57a"]
+transparency = 1
+albedo_color = Color(0.33056295, 0.6291571, 0.9986382, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a4q40"]
+material = SubResource("StandardMaterial3D_fe57a")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65kwk"]
+
+[node name="HookBarrier" type="Node3D"]
+script = ExtResource("1_65kwk")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_a4q40")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 16384
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_65kwk")

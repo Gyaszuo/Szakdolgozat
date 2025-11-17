@@ -142,6 +142,8 @@ menu={
 3d_physics/layer_11="PressurePlate"
 3d_physics/layer_12="PlayerGroundPound"
 3d_physics/layer_13="Collectible"
+3d_physics/layer_14="PlayerBarrier"
+3d_physics/layer_15="HookBarrier"
 
 [rendering]
 
