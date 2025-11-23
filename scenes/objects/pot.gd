@@ -12,7 +12,7 @@ func hit() -> void:
 		var coin: Coin = coin_scene.instantiate()
 		get_parent().add_child(coin)
 		coin.global_position = $Marker3D.global_position
-		coin.spawn(global_position + Vector3(randf_range(-1.0,1.0),0.15,randf_range(-1.0,1.0)))
+		coin.spawn(global_position + Vector3(randf_range(-1.0,1.0),1.25,randf_range(-1.0,1.0)))
 	queue_free()
 
 	

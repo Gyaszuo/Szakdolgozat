@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=33 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bnw813h0b6545" path="res://scenes/objects/activatables/ToggleableTerrain.tscn" id="20_b2lp2"]
 [ext_resource type="PackedScene" uid="uid://djeokbcp1fj86" path="res://scenes/objects/activatables/PlayerBarrier.tscn" id="21_2q3dp"]
 [ext_resource type="PackedScene" uid="uid://50jlnc5pp1t" path="res://scenes/objects/activatables/HookBarrier.tscn" id="22_trjkq"]
+[ext_resource type="PackedScene" uid="uid://f30wcuk3pj51" path="res://scenes/objects/activatables/Spikes.tscn" id="23_q0o7u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -172,10 +173,14 @@ activators = [NodePath("../Switch2")]
 
 [node name="Switch2" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.907388, 0, -2.2549226)
-activatables = [NodePath("../PlayerBarrier")]
+activatables = [NodePath("../PlayerBarrier"), NodePath("../Spikes")]
 
 [node name="HookBarrier" parent="Objects" instance=ExtResource("22_trjkq")]
 transform = Transform3D(1, 0, 0, 0, 4.466353, 0, 0, 0, 6.9022326, 14.214169, 2.2831767, 0)
+
+[node name="Spikes" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("23_q0o7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.422945, 0.048193097, 4.015609)
+activators = [NodePath("../Switch2")]
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

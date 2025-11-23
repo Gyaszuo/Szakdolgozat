@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7rkvg4jjlykt"]
+
+[ext_resource type="PackedScene" uid="uid://kd65jwfij704" path="res://assets/models/terrain/floor_tile_big_spikes.fbx" id="1_1wof3"]
+
+[node name="floor_tile_big_spikes" instance=ExtResource("1_1wof3")]
