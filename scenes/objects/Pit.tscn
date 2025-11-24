@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://hes0inl1wmwm"]
+
+[ext_resource type="Script" uid="uid://cpf62nnep0b4" path="res://scenes/objects/pit.gd" id="1_xhpmm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcasu"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcasu"]
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+roughness = 0.0
+emission_on_uv2 = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xhpmm"]
+material = SubResource("StandardMaterial3D_vcasu")
+size = Vector2(1, 1)
+
+[node name="Pit" type="Area3D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_xhpmm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051519044, 0)
+shape = SubResource("BoxShape3D_vcasu")
+debug_color = Color(0.93966174, 0.116844065, 0.54242563, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xhpmm")
+skeleton = NodePath("")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

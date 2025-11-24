@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=36 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -24,6 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://djeokbcp1fj86" path="res://scenes/objects/activatables/PlayerBarrier.tscn" id="21_2q3dp"]
 [ext_resource type="PackedScene" uid="uid://50jlnc5pp1t" path="res://scenes/objects/activatables/HookBarrier.tscn" id="22_trjkq"]
 [ext_resource type="PackedScene" uid="uid://f30wcuk3pj51" path="res://scenes/objects/activatables/Spikes.tscn" id="23_q0o7u"]
+[ext_resource type="PackedScene" uid="uid://0bwngw7xpmcg" path="res://scenes/objects/FallRescue.tscn" id="24_hfaih"]
+[ext_resource type="PackedScene" uid="uid://c2bpf44pw5sq0" path="res://scenes/objects/Lava.tscn" id="25_xefnc"]
+[ext_resource type="PackedScene" uid="uid://so40ueoxk262" path="res://scenes/objects/Save platform.tscn" id="26_ommu7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -94,6 +97,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.306526, 0.8000002, 0)
 [node name="Key2" parent="Collectibles" instance=ExtResource("5_llyy7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.306526, 0.8000002, 3.4997454)
 
+[node name="Crest" parent="Collectibles" instance=ExtResource("16_lrdq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8194115, 1.05, 3.2154107)
+
+[node name="Coin" parent="Collectibles" instance=ExtResource("18_vyhog")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4954815, 1.3733711, 0.9469894)
+
+[node name="Pot" parent="Collectibles" instance=ExtResource("15_q5g0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10351585, 0)
+
+[node name="Pot2" parent="Collectibles" instance=ExtResource("15_q5g0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.345011, 0.10351585, 0)
+
+[node name="Pot3" parent="Collectibles" instance=ExtResource("15_q5g0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1309931, 0.10351585, 0)
+
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="BreakableWall" parent="Objects" instance=ExtResource("5_rnfgp")]
@@ -129,24 +147,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5
 [node name="HookSwitch" parent="Objects" instance=ExtResource("14_n14kl")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -6.522583, 4.4830556, 1.948772)
 
-[node name="Pot" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10351585, 0)
-
-[node name="Pot2" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.345011, 0.10351585, 0)
-
-[node name="Pot3" parent="Objects" instance=ExtResource("15_q5g0a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1309931, 0.10351585, 0)
-
-[node name="Crest" parent="Objects" instance=ExtResource("16_lrdq0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8194115, 1.05, 3.2154107)
-
 [node name="TempPlatform" parent="Objects" instance=ExtResource("17_tgyrj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.70629, 1.8639455, 0)
 reappear_time = 4.0
-
-[node name="Coin" parent="Objects" instance=ExtResource("18_vyhog")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4954815, 1.3733711, 0.9469894)
 
 [node name="Path3D" type="Path3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02908, 1.3401189, 0)
@@ -181,6 +184,15 @@ transform = Transform3D(1, 0, 0, 0, 4.466353, 0, 0, 0, 6.9022326, 14.214169, 2.2
 [node name="Spikes" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("23_q0o7u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.422945, 0.048193097, 4.015609)
 activators = [NodePath("../Switch2")]
+
+[node name="FallRescue" parent="Objects" instance=ExtResource("24_hfaih")]
+transform = Transform3D(2.16, 0, 0, 0, 2.16, 0, 0, 0, 2.16, 12.675945, 1.1818469, 8.208781)
+
+[node name="Area3D" parent="Objects" instance=ExtResource("25_xefnc")]
+transform = Transform3D(98.75564, 0, 0, 0, 1, 0, 0, 0, 60.1018, 0, -5.427313, 0)
+
+[node name="SavePlatform" parent="Objects" instance=ExtResource("26_ommu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1446276, 0.10000001, 1.5084391)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

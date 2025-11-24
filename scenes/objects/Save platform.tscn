@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://so40ueoxk262"]
+
+[ext_resource type="Script" uid="uid://ep0rqljxlbkj" path="res://scenes/objects/save_platform.gd" id="1_tbh3o"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dusbq"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbh3o"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dusbq"]
+material = SubResource("StandardMaterial3D_tbh3o")
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dusbq"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dusbq"]
+material = SubResource("StandardMaterial3D_dusbq")
+size = Vector3(0.5, 0.1, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tbh3o"]
+height = 0.1
+radius = 0.6
+
+[node name="SavePlatform" type="StaticBody3D"]
+script = ExtResource("1_tbh3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_dusbq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_dusbq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0.006725818, 0)
+mesh = SubResource("BoxMesh_dusbq")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1020195, 0)
+shape = SubResource("CylinderShape3D_tbh3o")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20430869, 0)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

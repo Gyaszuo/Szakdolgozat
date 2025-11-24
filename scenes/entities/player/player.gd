@@ -38,6 +38,8 @@ var is_attacking: bool = false
 var is_hooking: bool = false
 var hook_target: Vector3
 var prev_position: Vector3
+var respawn_pos: Vector3 = Vector3(0,1,0)
+var fall_rescue_pos: Vector3 = Vector3(0,1,0)
 
 var health: int = 6:
 	set(value):
@@ -168,7 +170,7 @@ func ability_logic(delta) -> void:
 	if Input.is_action_just_pressed("hook"):
 		hook()
 	if Input.is_action_just_pressed("hit"):
-		hit()
+		fall()
 
 func attack() -> void:
 	if attack_cooldown_timer.time_left or is_hooking or is_attacking:
@@ -282,6 +284,13 @@ func die() -> void:
 	$AnimationTree.set("parameters/DeathOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	var tween = create_tween()
 	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,1),2.0)
+	await tween.finished
+	global_position = respawn_pos
+	health = 6
+	$AnimationTree.set("parameters/DeathOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	tween = create_tween()
+	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,0),2.0)
+	is_dead = false
 
 func push() -> void:
 	for i in get_slide_collision_count():
@@ -312,3 +321,9 @@ func enable_attack1_hitbox(value: bool) -> void:
 func toggle_main_hand(value: bool) -> void:
 	$"ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_r/1H_Crossbow".visible = value
 	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_r/Knife.visible = !value
+
+func get_fall_pos():
+	fall_rescue_pos = $FallRaycast.get_collision_point() + Vector3(0,1,0)
+	
+func fall():
+	global_position = fall_rescue_pos

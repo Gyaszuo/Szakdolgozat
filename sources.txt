@@ -1,1 +1,2 @@
 heart pulse shader: https://godotshaders.com/shader/pulsing-screen-scale-shader-heartbeat-sine-modes
+lava shader: https://godotshaders.com/shader/stylized-lava

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://0bwngw7xpmcg"]
+
+[ext_resource type="Script" uid="uid://j2sk6mxbquu2" path="res://scenes/objects/fall_rescue.gd" id="1_iqw7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leiky"]
+
+[node name="FallRescue" type="Area3D"]
+collision_layer = 32768
+collision_mask = 2
+script = ExtResource("1_iqw7a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_leiky")
+debug_color = Color(0.75089854, 0.361905, 0.72835803, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

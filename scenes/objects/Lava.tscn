@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2bpf44pw5sq0"]
+
+[ext_resource type="Script" uid="uid://cpf62nnep0b4" path="res://scenes/objects/pit.gd" id="1_7h0rk"]
+[ext_resource type="Shader" uid="uid://5a8hn7rx68cv" path="res://scenes/objects/Lava.gdshader" id="2_v1m6n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcasu"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xhpmm"]
+size = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0gke"]
+render_priority = 0
+shader = ExtResource("2_v1m6n")
+shader_parameter/dark_lava_color = Color(0.94509804, 0.015686275, 0, 1)
+shader_parameter/light_lava_color = Color(0.9764706, 0.45490196, 0, 1)
+shader_parameter/speed = 0.310000014725
+shader_parameter/scale = 11.83500055890262
+shader_parameter/sharpness = 18.0690008107775
+shader_parameter/emission_intensity = 0.6890000327275
+
+[node name="Lava" type="Area3D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_7h0rk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051519044, 0)
+shape = SubResource("BoxShape3D_vcasu")
+debug_color = Color(0.93966174, 0.116844065, 0.54242563, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xhpmm")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_u0gke")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
