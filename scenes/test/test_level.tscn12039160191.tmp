@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
+[ext_resource type="PackedScene" uid="uid://bni2noqq6djn6" path="res://scenes/test/test_enemy.tscn" id="3_fn47k"]
 [ext_resource type="PackedScene" uid="uid://ced0ep2tr0bll" path="res://scenes/entities/enemies/Grunt.tscn" id="5_4vwgt"]
-[ext_resource type="PackedScene" uid="uid://dlixmnl3dkjjx" path="res://scenes/entities/enemies/Warrior.tscn" id="5_8lmeq"]
 [ext_resource type="PackedScene" uid="uid://wff5cdgwbvj3" path="res://scenes/objects/collectibles/key.tscn" id="5_llyy7"]
 [ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="5_rnfgp"]
 [ext_resource type="PackedScene" uid="uid://bln72krdh4ej3" path="res://scenes/objects/activators/PermPressurePlate.tscn" id="6_mr7is"]
@@ -82,14 +82,14 @@ shadow_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("1_euepx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5795575, 1.0500001, 1.8490039)
 
+[node name="TestEnemy" parent="Entities" instance=ExtResource("3_fn47k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.477085, 1.0500004, 0)
+
 [node name="Box" parent="Entities" instance=ExtResource("9_uf6c7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6995115, 3.0925434, 6.816755)
 
 [node name="Grunt" parent="Entities" instance=ExtResource("5_4vwgt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04031664, -27.63966)
-
-[node name="Warrior" parent="Entities" instance=ExtResource("5_8lmeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33.736305)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26500016, 29.333889)
 
 [node name="Hooks" type="Node3D" parent="."]
 
@@ -199,9 +199,10 @@ transform = Transform3D(359.15057, 0, 0, 0, 1, 0, 0, 0, 290.8028, 0, -5.427313, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1446276, 0.10000001, 1.5084391)
 
 [node name="LevelGeometry" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.5922143, 0, 0, 0)
 
 [node name="Floor" type="CSGBox3D" parent="LevelGeometry"]
-transform = Transform3D(87.25595, 0, 0, 0, 0.1, 0, 0, 0, 124.31792, 7.963867, 0, 0)
+transform = Transform3D(87.25595, 0, 0, 0, 0.1, 0, 0, 0, 35.574787, 7.963867, 0, 0)
 size = Vector3(1.7963867, 1, 1)
 material = SubResource("StandardMaterial3D_fn47k")
 

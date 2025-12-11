@@ -33,6 +33,10 @@ folder_colors={
 "res://scenes/ui/": "gray"
 }
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 pan_down={
@@ -145,6 +149,11 @@ menu={
 3d_physics/layer_14="PlayerBarrier"
 3d_physics/layer_15="HookBarrier"
 3d_physics/layer_16="Fall"
+3d_physics/layer_17="NavRegion"
+
+[navigation]
+
+3d/default_cell_height=4.523000000000001
 
 [rendering]
 

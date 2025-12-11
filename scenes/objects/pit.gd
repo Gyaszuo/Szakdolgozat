@@ -12,4 +12,7 @@ func _on_body_entered(body: Node3D) -> void:
 			tween = create_tween()
 			tween.tween_property(body.main_ui.color_rect,"color",Color(0,0,0,0),0.2)
 	else:
-		body.queue_free()
+		if body.is_in_group("Enemy"):
+			body.get_parent().queue_free()
+		else:
+			body.queue_free()
