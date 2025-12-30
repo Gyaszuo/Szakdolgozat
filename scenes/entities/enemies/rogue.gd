@@ -1,25 +1,26 @@
-class_name Grunt
+class_name Rogue
 extends Node3D
 
-@export var health: int = 3:
+@export var health: int = 4:
 	set(value):
 		print(health)
 		if value >= 0:
 			health = value
 			if health == 0:
 				die()
-@export var speed: float = 2.0
+@export var speed: float = 4.0
 
-@onready var body: CharacterBody3D = $Grunt
-@onready var model: Node3D = $Grunt/model
-@onready var move_state_machine: AnimationNodeStateMachinePlayback = $Grunt/AnimationTree.get("parameters/MoveStateMachine/playback")
-@onready var attack_anim: AnimationNodeAnimation = $Grunt/AnimationTree.get_tree_root().get_node('AttackAnimation')
-@onready var extra_anim: AnimationNodeAnimation = $Grunt/AnimationTree.get_tree_root().get_node('ExtraAnim')
+@onready var body: CharacterBody3D = $Rogue
+@onready var model: Node3D = $Rogue/model
+@onready var move_state_machine: AnimationNodeStateMachinePlayback = $Rogue/AnimationTree.get("parameters/MoveStateMachine/playback")
+@onready var attack_anim: AnimationNodeAnimation = $Rogue/AnimationTree.get_tree_root().get_node('AttackAnimation')
+@onready var extra_anim: AnimationNodeAnimation = $Rogue/AnimationTree.get_tree_root().get_node('ExtraAnimation')
 
 var player: Player
 var aggro: bool = false
 var dead: bool = false
 var attack_range: float = 2.0
+var attacking: bool = false
 const TURN_SPEED = 10.0
 
 signal death
@@ -35,12 +36,12 @@ func die() -> void:
 	dead = true
 	call_deferred("disable_collision")
 	extra_anim.animation = "Death_C_Skeletons"
-	$Grunt/AnimationTree.set("parameters/ExtraAnimOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	$Rogue/AnimationTree.set("parameters/ExtraAnimOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	await get_tree().create_timer(1.5).timeout
 	queue_free()
 	
 func disable_collision() -> void:
-	$Grunt/CollisionShape3D.disabled = true
+	$Rogue/CollisionShape3D.disabled = true
 
 func _physics_process(delta: float) -> void:
 	movement_logic(delta)
@@ -50,7 +51,7 @@ func movement_logic(delta: float) -> void:
 		return
 	body.velocity = Vector3.ZERO
 	if aggro:
-		set_move_state("Walking_D_Skeletons")
+		set_move_state("Running_C")
 		var target_dir: Vector3 = (player.global_position - body.global_position).normalized()
 		var target_v2: Vector2 = Vector2(target_dir.x,target_dir.z)
 		var target_angle: float = -target_v2.angle() + PI/2
@@ -79,14 +80,18 @@ func _on_vision_circle_body_exited(_body: Node3D) -> void:
 	print("Lost aggro")
 
 func attack() -> void:
-	if(randi_range(0,1) == 0):
-		attack_anim.animation = "Unarmed_Melee_Attack_Punch_A"
+	var attack_type = randi_range(0,2)
+	if(attack_type == 0):
+		attack_anim.animation = "Dualwield_Melee_Attack_Chop"
+	elif(attack_type == 1):
+		attack_anim.animation = "Dualwield_Melee_Attack_Slice"
 	else:
-		attack_anim.animation = "Unarmed_Melee_Attack_Punch_B"
-	$Grunt/AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		attack_anim.animation = "Dualwield_Melee_Attack_Stab"
+	$Rogue/AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func toggle_attack_hitbox(value: bool) -> void:
-	$Grunt/model/Area3D/CollisionShape3D.disabled = !value
+	attacking = value
+	$Rogue/model/Area3D/CollisionShape3D.disabled = !value
 
 func _on_attack_timer_timeout() -> void:
 	if dead:

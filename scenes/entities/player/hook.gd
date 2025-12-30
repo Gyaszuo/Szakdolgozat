@@ -3,7 +3,6 @@ extends Area3D
 
 var direction: Vector3
 var speed: float = 30.0
-var player_position: Vector3
 var player: Player
 var hook_started: bool = false
 var switching: bool = false
@@ -19,12 +18,12 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if stuck_point != null:
-		print(stuck_point.global_position.distance_to(player_position))
-		#player.travel_hook(stuck_point.global_position)
-		position = stuck_point.global_position
+		print(stuck_point.global_position.distance_to(player.global_position))
+		player.hook_target = stuck_point.global_position
+		global_position = stuck_point.global_position
 	position += Vector3(direction.x,direction.y,direction.z) * speed * delta
 	update_chain()
-	if position.distance_to(player_position) > 20.0:
+	if position.distance_to(player.global_position) > 20.0:
 		player.toggle_main_hand(false)
 		queue_free()
 
@@ -36,6 +35,8 @@ func stop_movement():
 	speed = 0.0
 
 func _on_area_entered(area: Area3D) -> void:
+	if area.get_parent() is Pot:
+		return
 	stop_movement()
 	set_deferred("monitoring",false)
 	set_deferred("monitorable",false)

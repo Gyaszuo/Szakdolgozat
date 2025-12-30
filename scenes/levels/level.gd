@@ -16,5 +16,4 @@ func shoot_hook(direction: Vector3):
 		hook_group.add_child(hook_instance)
 		hook_instance.global_position = player.hook_launch_point.global_position
 		hook_instance.direction = direction
-		hook_instance.player_position = player.global_position
 		hook_instance.player = player

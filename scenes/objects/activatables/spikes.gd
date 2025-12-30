@@ -35,8 +35,10 @@ func untrigger() -> void:
 		tween.tween_property(spikes,"position",Vector3(0,0,-0.02),0.5)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if "hit" in body:
-		body.hit()
+	if body is Player:
+		body.health -= 1
+	else:
+		body.get_parent().health -= 1
 
 func _on_refresh_timer_timeout() -> void:
 	$floor_tile_big_spikes/floor_tile_big_spikes/spikes/Area3D/CollisionShape3D.disabled = !damage

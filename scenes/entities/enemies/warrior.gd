@@ -43,7 +43,7 @@ func die() -> void:
 	call_deferred("disable_collision")
 	extra_anim.animation = "Death_C_Skeletons"
 	$Warrior/AnimationTree.set("parameters/ExtraAnimOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	queue_free()
 	
 func disable_collision() -> void:
@@ -61,7 +61,7 @@ func movement_logic(delta: float) -> void:
 		var target_dir: Vector3 = (player.global_position - body.global_position).normalized()
 		var target_v2: Vector2 = Vector2(target_dir.x,target_dir.z)
 		var target_angle: float = -target_v2.angle() + PI/2
-		model.rotation.y = rotate_toward(model.rotation.y,target_angle,TURN_SPEED * delta)
+		model.global_rotation.y = rotate_toward(model.global_rotation.y,target_angle,TURN_SPEED * delta)
 		if body.global_position.distance_to(player.global_position) >= attack_range:
 			body.velocity = Vector3(target_v2.x,0,target_v2.y) * speed
 		else:
@@ -86,14 +86,20 @@ func _on_vision_circle_body_exited(_body: Node3D) -> void:
 	print("Lost aggro")
 
 func attack() -> void:
-	if(randi_range(0,1) == 0):
+	var attack_type = randi_range(0,2)
+	if(attack_type == 0):
 		attack_anim.animation = "2H_Melee_Attack_Chop"
-	else:
+	elif(attack_type == 1):
 		attack_anim.animation = "2H_Melee_Attack_Slice"
+	else:
+		attack_anim.animation = "2H_Melee_Attack_Spin"
 	$Warrior/AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func toggle_attack_hitbox(value: bool) -> void:
 	$Warrior/model/Area3D/CollisionShape3D.disabled = !value
+
+func toggle_spin_hitbox(value: bool) -> void:
+	$Warrior/model/Area3D2/CollisionShape3D.disabled = !value
 
 func _on_attack_timer_timeout() -> void:
 	if dead:
@@ -102,4 +108,7 @@ func _on_attack_timer_timeout() -> void:
 		attack()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
+	body.hit()
+
+func _on_area_3d_2_body_entered(body: Node3D) -> void:
 	body.hit()

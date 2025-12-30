@@ -98,6 +98,8 @@ transform = Transform3D(-0.7097307, 0, -0.70447314, 0, 1, 0, 0.70447314, 0, -0.7
 
 [node name="Mage" parent="Entities" instance=ExtResource("7_yqvmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.570663, 0.35499984, -25.178259)
+health = 4
+speed = 2.0
 
 [node name="Hooks" type="Node3D" parent="."]
 

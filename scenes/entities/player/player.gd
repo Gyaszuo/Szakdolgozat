@@ -40,6 +40,7 @@ var hook_target: Vector3
 var prev_position: Vector3
 var respawn_pos: Vector3 = Vector3(0,1,0)
 var fall_rescue_pos: Vector3 = Vector3(0,1,0)
+var dashing: bool = false
 
 var health: int = 6:
 	set(value):
@@ -86,9 +87,9 @@ func move_logic(delta: float) -> void:
 		velocity = hook_dir * HOOK_SPEED
 		var hook_dir_2d = Vector2(hook_dir.x,hook_dir.z)
 		var target_angle = -hook_dir_2d.angle() - PI/2
-		mesh.rotation.y = rotate_toward(mesh.rotation.y,target_angle,turn_speed * delta)
-		attack0_area.rotation.y = rotate_toward(attack0_area.rotation.y,target_angle,turn_speed * delta)
-		attack1_area.rotation.y = rotate_toward(attack1_area.rotation.y,target_angle,turn_speed * delta)
+		mesh.global_rotation.y = rotate_toward(mesh.global_rotation.y,target_angle,turn_speed * delta)
+		attack0_area.global_rotation.y = rotate_toward(attack0_area.global_rotation.y,target_angle,turn_speed * delta)
+		attack1_area.global_rotation.y = rotate_toward(attack1_area.global_rotation.y,target_angle,turn_speed * delta)
 		return
 	movement_input = Input.get_vector("left","right","forward","backward").rotated(-camera.global_rotation.y)
 	var velocity_2d = Vector2(velocity.x,velocity.z)
@@ -108,10 +109,10 @@ func move_logic(delta: float) -> void:
 		velocity_2d += movement_input * speed * delta * 8.0
 		velocity_2d = velocity_2d.limit_length(speed)
 		var target_angle = -movement_input.angle() - PI/2
-		mesh.rotation.y = rotate_toward(mesh.rotation.y,target_angle,turn_speed * delta)
-		attack0_area.rotation.y = rotate_toward(attack0_area.rotation.y,target_angle,turn_speed * delta)
-		attack1_area.rotation.y = rotate_toward(attack1_area.rotation.y,target_angle,turn_speed * delta)
-		mesh.rotation.y = wrapf(mesh.rotation.y,-PI,PI)
+		mesh.global_rotation.y = rotate_toward(mesh.global_rotation.y,target_angle,turn_speed * delta)
+		attack0_area.global_rotation.y = rotate_toward(attack0_area.global_rotation.y,target_angle,turn_speed * delta)
+		attack1_area.global_rotation.y = rotate_toward(attack1_area.global_rotation.y,target_angle,turn_speed * delta)
+		mesh.global_rotation.y = wrapf(mesh.global_rotation.y,-PI,PI)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO,speed * stop_speed * delta)
 		if is_on_floor():
@@ -245,11 +246,9 @@ func dodge() -> void:
 	$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	run_speed = 10.0
 	base_speed = 10.0
-	set_collision_mask_value(3,false)
-	set_collision_mask_value(4,false)
+	dashing = true
 	await get_tree().create_timer(0.2).timeout
-	set_collision_mask_value(3,true)
-	set_collision_mask_value(4,true)
+	dashing = false
 	toggle_speed(true)
 	dodge_cooldown_timer.start()
 
@@ -268,7 +267,7 @@ func end_hooking() -> void:
 		is_hooking = false
 
 func hit() -> void:
-	if not invulnerability_timer.time_left and not is_dead:
+	if not invulnerability_timer.time_left and not is_dead and not dashing:
 		extra_anim.animation = "Hit_A"
 		$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
