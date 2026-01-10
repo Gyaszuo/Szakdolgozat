@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmcq8aioj8qit" path="res://assets/models/objects/sword_shield_gold.fbx" id="2_eif7o"]
 [ext_resource type="Script" uid="uid://dfvggm411bipg" path="res://scenes/objects/collectibles/crest.gd" id="2_h7xbu"]
 
-[node name="Crest" instance=ExtResource("1_m026h")]
+[node name="Crest" groups=["Persist"] instance=ExtResource("1_m026h")]
 script = ExtResource("2_h7xbu")
 
 [node name="CollisionShape3D" parent="Hitbox" index="0"]

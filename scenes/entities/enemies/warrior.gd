@@ -3,7 +3,6 @@ extends Node3D
 
 @export var health: int = 6:
 	set(value):
-		print(health)
 		if value >= 0:
 			health = value
 			if health == 0:
@@ -25,7 +24,6 @@ const TURN_SPEED = 10.0
 signal death
 
 func _ready() -> void:
-	player = get_parent().find_child("Player")
 	var rand = randi_range(0,1)
 	if rand == 0:
 		$"Warrior/model/Rig/Skeleton3D/handslot-r/Skeleton_Axe".visible = true
@@ -102,7 +100,7 @@ func toggle_spin_hitbox(value: bool) -> void:
 	$Warrior/model/Area3D2/CollisionShape3D.disabled = !value
 
 func _on_attack_timer_timeout() -> void:
-	if dead:
+	if dead or player == null:
 		return
 	if body.global_position.distance_to(player.global_position) <= attack_range:
 		attack()
@@ -112,3 +110,25 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 func _on_area_3d_2_body_entered(body: Node3D) -> void:
 	body.hit()
+
+func save() -> Dictionary:
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"parent" : get_parent().get_path(),
+		"node_name" : name,
+		"health" : health,
+		"speed" : speed,
+		"pos_x" : body.global_position.x,
+		"pos_y" : body.global_position.y,
+		"pos_z" : body.global_position.z,
+		"rot_x" : body.global_rotation.x,
+		"rot_y" : global_rotation.y,
+		"rot_z" : global_rotation.z,
+		"scale_x" : body.scale.x,
+		"scale_y" : body.scale.y,
+		"scale_z" : body.scale.z
+	}
+	return save_dict
+
+func init():
+	player = get_parent().find_child("Player*")

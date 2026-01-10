@@ -10,13 +10,15 @@ radius = 0.6
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfaut"]
+resource_local_to_scene = true
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_41jyy"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_rfaut")
 height = 0.2
 
-[node name="HookSwitch" type="Node3D"]
+[node name="HookSwitch" type="Node3D" groups=["PersistState"]]
 script = ExtResource("1_rfaut")
 
 [node name="HookHitboxComponent" parent="." node_paths=PackedStringArray("collision_shape", "snap_marker") instance=ExtResource("1_jcuex")]

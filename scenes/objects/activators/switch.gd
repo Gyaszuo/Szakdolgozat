@@ -24,3 +24,14 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 		deactivate()
 	area_3d.set_deferred("monitoring",true)
 	area_3d.set_deferred("monitorable",true)
+
+func load_state(activated: bool) -> void:
+	if activated:
+		_on_area_3d_area_entered(null)
+
+func save() -> Dictionary:
+	var save_dict = {
+		"name" : name,
+		"activated" : activated
+	}
+	return save_dict

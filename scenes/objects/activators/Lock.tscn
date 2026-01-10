@@ -10,7 +10,7 @@ albedo_color = Color(0.7294118, 0.5058824, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ctr5d"]
 material = SubResource("StandardMaterial3D_x3pp3")
 
-[node name="Lock" type="Node3D"]
+[node name="Lock" type="Node3D" groups=["PersistState"]]
 script = ExtResource("1_ctr5d")
 
 [node name="Area3D" type="Area3D" parent="."]

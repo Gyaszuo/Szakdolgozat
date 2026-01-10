@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3jqpd8yaby5n"]
+
+[ext_resource type="Script" uid="uid://txqtpcdc7oof" path="res://scenes/objects/activators/trigger.gd" id="1_hb20i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8jgev"]
+
+[node name="Trigger" type="Node3D" groups=["PersistState"]]
+script = ExtResource("1_hb20i")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4096
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_8jgev")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

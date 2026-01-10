@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_tskfu")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jyi8g"]
 
-[node name="TempPressurePlate" type="Node3D"]
+[node name="TempPressurePlate" type="Node3D" groups=["PersistState"]]
 script = ExtResource("1_tskfu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

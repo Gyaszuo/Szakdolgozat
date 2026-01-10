@@ -67,6 +67,9 @@ const PUSH_FORCE = 1.0
 
 signal shoot_hook(direction: Vector3)
 
+func _ready() -> void:
+	print("player")
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("recenter_camera"):
 		recenter_camera(delta)
@@ -326,3 +329,29 @@ func get_fall_pos():
 	
 func fall():
 	global_position = fall_rescue_pos
+
+func save() -> Dictionary:
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"node_name" : name,
+		"parent" : get_parent().get_path(),
+		"pos_x" : global_position.x,
+		"pos_y" : global_position.y,
+		"pos_z" : global_position.z,
+		"health" : health,
+		"keys" : keys,
+		"treasure" : treasure,
+		"respawn_pos_x" : respawn_pos.x,
+		"respawn_pos_y" : respawn_pos.y,
+		"respawn_pos_z" : respawn_pos.z,
+		"fall_rescue_pos_x" : fall_rescue_pos.x,
+		"fall_rescue_pos_y" : fall_rescue_pos.y,
+		"fall_rescue_pos_z" : fall_rescue_pos.z,
+		"rot_x" : global_rotation.x,
+		"rot_y" : global_rotation.y,
+		"rot_z" : global_rotation.z,
+		"scale_x" : scale.x,
+		"scale_y" : scale.y,
+		"scale_z" : scale.z
+	}
+	return save_dict

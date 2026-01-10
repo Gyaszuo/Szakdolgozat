@@ -10,7 +10,7 @@ bounce = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hm7b3"]
 
-[node name="Coin" type="RigidBody3D"]
+[node name="Coin" type="RigidBody3D" groups=["Persist"]]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_4geym")
 script = ExtResource("1_4geym")

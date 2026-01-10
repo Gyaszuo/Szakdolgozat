@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Szakdolgozat"
-run/main_scene="uid://bade3llwvsvug"
+run/main_scene="uid://gd27e3psvoeq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -36,6 +36,8 @@ folder_colors={
 [global_group]
 
 Enemy=""
+Persist=""
+PersistState=""
 
 [input]
 
