@@ -11,6 +11,7 @@ func _on_life_timer_timeout() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node3D) -> void:
+	print("entered")
 	if "hit" in body:
 		body.hit()
 	if "hit" in body.get_parent():

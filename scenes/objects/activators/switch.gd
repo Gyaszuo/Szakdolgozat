@@ -10,13 +10,16 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	var color_tween = create_tween()
 	area_3d.set_deferred("monitoring",false)
 	area_3d.set_deferred("monitorable",false)
+	print(activated)
 	if not activated:
+		print("activate")
 		rotation_tween.tween_property(stick,"rotation",Vector3(0,0,deg_to_rad(-30)),0.5)
 		color_tween.tween_property(stick.mesh.material,"albedo_color",Color(0,0.7,0),0.5)	
 		await rotation_tween.finished
 		activated = true;
 		activate()
 	else:
+		print("deactivate")
 		rotation_tween.tween_property(stick,"rotation",Vector3(0,0,deg_to_rad(30)),0.5)
 		color_tween.tween_property(stick.mesh.material,"albedo_color",Color(1,0,0),0.5)
 		await rotation_tween.finished
@@ -27,7 +30,17 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 
 func load_state(activated: bool) -> void:
 	if activated:
-		_on_area_3d_area_entered(null)
+		var rotation_tween = create_tween()
+		var color_tween = create_tween()
+		area_3d.set_deferred("monitoring",false)
+		area_3d.set_deferred("monitorable",false)
+		rotation_tween.tween_property(stick,"rotation",Vector3(0,0,deg_to_rad(-30)),0.5)
+		color_tween.tween_property(stick.mesh.material,"albedo_color",Color(0,0.7,0),0.5)	
+		await rotation_tween.finished
+		self.activated = true;
+		activate()
+		area_3d.set_deferred("monitoring",true)
+		area_3d.set_deferred("monitorable",true)
 
 func save() -> Dictionary:
 	var save_dict = {

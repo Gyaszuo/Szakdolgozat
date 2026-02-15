@@ -1,14 +1,16 @@
 class_name Coin
 extends Collectible
 
+@onready var body: RigidBody3D = $"."
+
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	body.treasure += 1
 	queue_free()
 
 func spawn(pos: Vector3) -> void:
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(self,"global_position",pos,0.2)
+	var dir: Vector3 = global_position.direction_to(pos)
+	body.apply_impulse(dir)
+	
 
 func save() -> Dictionary:
 	var save_dict = {
@@ -26,3 +28,6 @@ func save() -> Dictionary:
 		"scale_z" : scale.z
 	}
 	return save_dict
+
+func get_value():
+	return 1

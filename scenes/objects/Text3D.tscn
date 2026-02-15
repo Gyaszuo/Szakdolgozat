@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n4m4kcepfjyg"]
+
+[ext_resource type="Script" uid="uid://b084p8y3tc48u" path="res://scenes/objects/text_3D.gd" id="1_7s6af"]
+
+[node name="Text3D" type="Label3D"]
+script = ExtResource("1_7s6af")

@@ -9,6 +9,7 @@ extends SpringArm3D
 
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var marker_3d: Marker3D = $RayCast3D/Marker3D
+@onready var camera_3d: Camera3D = $Camera3D
 
 var smooth_rotation: Vector3
 var collision_point: Vector3

@@ -15,6 +15,7 @@ extends CharacterBody3D
 @onready var invulnerability_timer: Timer = $Timers/InvulnerabilityTimer
 @onready var ground_pound_cooldown_timer: Timer = $Timers/GroundPoundCooldownTimer
 @onready var main_ui: MainUI = $MainUi
+@onready var aggro_cast: Node3D = $AggroCasts
 @onready var squash_and_stretch_component: SqashAndStretchComponent = $SquashAndStretchComponent
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var attack_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/AttackStateMachine/playback")
@@ -29,7 +30,7 @@ var base_speed: float = 4.0
 var stop_speed: float = 2.0
 var turn_speed: float = 6.0
 var djump_impulse: float = 15.0
-var jump_impulse: float = 0.8
+var jump_impulse: float = 1.0
 var fall_speed: float = 1.0
 var is_ground_pounding: bool = false
 var is_running: bool = false
@@ -146,16 +147,20 @@ func jump_logic() -> void:
 		if jump_timer.time_left:
 			velocity.y += jump_impulse
 	if Input.is_action_just_pressed("jump"):
-		if !is_on_floor() and can_double_jump and not is_dead:
-			set_move_state("Jump_Idle")
-			squash_and_stretch_component.do_squash_and_stretch(1.2,0.15)
-			can_double_jump = false
-			velocity.y = djump_impulse
+		double_jump()
 	else:
 		if !is_ground_pounding and !is_on_floor() and !jump_timer.time_left:
 			velocity.y = clampf(velocity.y - fall_speed, -15.0,100)
 			if move_state_machine.get_current_node() != "Jump_Idle":
 				set_move_state("Jump_Idle")
+
+func double_jump() -> void:
+	if !is_on_floor() and can_double_jump and not is_dead:
+		jump_timer.stop()
+		set_move_state("Jump_Idle")
+		squash_and_stretch_component.do_squash_and_stretch(1.2,0.15)
+		can_double_jump = false
+		velocity.y = djump_impulse
 
 func recenter_camera(delta: float) -> void:
 	var tween = create_tween()

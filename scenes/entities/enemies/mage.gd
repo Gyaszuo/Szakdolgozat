@@ -17,10 +17,13 @@ extends Node3D
 
 var player: Player
 var aggro: bool = false
+var pre_aggro: bool = false
 var dead: bool = false
 var attack_range: float = 15.0
 var attacking: bool = false
-var fireball_scene: PackedScene = preload("res://assets/models/enemies/mage/Fireball.tscn") 
+var fireball_scene: PackedScene = preload("res://scenes/entities/enemies/Fireball.tscn") 
+var aggro_cast_scene: PackedScene = preload("res://scenes/entities/player/AggroCast.tscn")
+var aggro_cast
 const TURN_SPEED = 10.0
 
 signal death
@@ -42,6 +45,10 @@ func disable_collision() -> void:
 
 func _physics_process(delta: float) -> void:
 	movement_logic(delta)
+	if aggro_cast:
+		aggro_cast.target_position = player.to_local($Mage/Marker3D.global_position)
+		if not aggro_cast.is_colliding() && pre_aggro:
+			aggro = true
 
 func movement_logic(delta: float) -> void:
 	if dead:
@@ -66,15 +73,21 @@ func movement_logic(delta: float) -> void:
 	body.move_and_slide()
 
 func _on_vision_circle_body_entered(_body: Node3D) -> void:
-	aggro = true
-	print("Gained aggro")
+	if aggro:
+		return
+	aggro_cast = aggro_cast_scene.instantiate()
+	player.aggro_cast.add_child(aggro_cast)
+	await get_tree().create_timer(0.1).timeout
+	pre_aggro = true
 
 func set_move_state(state_name: String) -> void:
 	move_state_machine.travel(state_name)
 
 func _on_vision_circle_body_exited(_body: Node3D) -> void:
 	aggro = false
-	print("Lost aggro")
+	pre_aggro = false
+	player.aggro_cast.remove_child(aggro_cast)
+	aggro_cast = null
 
 func attack() -> void:
 	$Mage/AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
@@ -117,4 +130,4 @@ func save() -> Dictionary:
 	return save_dict
 
 func init():
-	player = get_parent().find_child("Player*")
+	death.connect(get_parent().get_parent().update_kill_switches)

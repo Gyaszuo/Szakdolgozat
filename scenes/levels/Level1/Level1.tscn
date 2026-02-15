@@ -1,0 +1,441 @@
+[gd_scene load_steps=27 format=3 uid="uid://c1fa3lkbijhpb"]
+
+[ext_resource type="Script" uid="uid://wsuys181ijcp" path="res://scenes/levels/Level1/level_1.gd" id="1_1pwbc"]
+[ext_resource type="PackedScene" uid="uid://c3ftjr526bkk3" path="res://scenes/levels/Level1/Level1Geometry.tscn" id="2_607xp"]
+[ext_resource type="PackedScene" uid="uid://hes0inl1wmwm" path="res://scenes/objects/Pit.tscn" id="3_avroq"]
+[ext_resource type="PackedScene" uid="uid://b7g8gmv0osnmr" path="res://scenes/objects/LevelBeginPlatform.tscn" id="3_et5g2"]
+[ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="3_tqoff"]
+[ext_resource type="PackedScene" uid="uid://dlnec7qs4oc0o" path="res://scenes/objects/Pot.tscn" id="4_mtxap"]
+[ext_resource type="PackedScene" uid="uid://0bwngw7xpmcg" path="res://scenes/objects/FallRescue.tscn" id="4_ygbf3"]
+[ext_resource type="PackedScene" uid="uid://ced0ep2tr0bll" path="res://scenes/entities/enemies/Grunt.tscn" id="6_ix6jj"]
+[ext_resource type="PackedScene" uid="uid://n4m4kcepfjyg" path="res://scenes/objects/Text3D.tscn" id="6_p8gt5"]
+[ext_resource type="PackedScene" uid="uid://wff5cdgwbvj3" path="res://scenes/objects/collectibles/key.tscn" id="7_us4oo"]
+[ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="9_63pat"]
+[ext_resource type="PackedScene" uid="uid://7rqjqj6yniuk" path="res://scenes/objects/collectibles/crest.tscn" id="9_rq5f5"]
+[ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="10_2ktxa"]
+[ext_resource type="PackedScene" uid="uid://dpbvqt4mxety1" path="res://scenes/objects/activators/Lock.tscn" id="10_qwrgn"]
+[ext_resource type="PackedScene" uid="uid://c1ax6ryjuxbkt" path="res://scenes/objects/activators/Switch.tscn" id="11_di3eq"]
+[ext_resource type="PackedScene" uid="uid://dq2qkiiiu5pl3" path="res://scenes/objects/HookPoint.tscn" id="12_sg1p3"]
+[ext_resource type="PackedScene" uid="uid://bln72krdh4ej3" path="res://scenes/objects/activators/PermPressurePlate.tscn" id="13_d2h6j"]
+[ext_resource type="PackedScene" uid="uid://bgtlhskkgke67" path="res://scenes/objects/LevelEndPlatform.tscn" id="15_tt7l4"]
+[ext_resource type="PackedScene" uid="uid://so40ueoxk262" path="res://scenes/objects/Save platform.tscn" id="16_t0a5d"]
+[ext_resource type="PackedScene" uid="uid://b3jqpd8yaby5n" path="res://scenes/objects/activators/Trigger.tscn" id="18_a013u"]
+[ext_resource type="PackedScene" uid="uid://crq8uvarh0m6b" path="res://scenes/objects/activatables/MethodCaller.tscn" id="19_3rgco"]
+[ext_resource type="PackedScene" uid="uid://b0shxl8o6cx82" path="res://scenes/objects/activators/EnemyKillSwitch.tscn" id="20_opkmp"]
+[ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="22_2ktxa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1pwbc"]
+sky_top_color = Color(0.10593646, 0.13576365, 0.17549357, 1)
+sky_horizon_color = Color(0.21827355, 0.22340795, 0.23368835, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.3071527, 0.31511155, 0.32767558, 1)
+ground_curve = 0.0083174845
+
+[sub_resource type="Sky" id="Sky_j08sa"]
+sky_material = SubResource("ProceduralSkyMaterial_1pwbc")
+
+[sub_resource type="Environment" id="Environment_x4si1"]
+background_mode = 2
+sky = SubResource("Sky_j08sa")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level1" type="Node3D"]
+script = ExtResource("1_1pwbc")
+next_level_num = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x4si1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+shadow_enabled = true
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.0
+directional_shadow_split_3 = 0.0
+directional_shadow_max_distance = 0.0
+
+[node name="LevelGeometry" parent="." instance=ExtResource("2_607xp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13045883, 0.05416298, -0.0029830933)
+
+[node name="Pit" parent="LevelGeometry" instance=ExtResource("3_avroq")]
+transform = Transform3D(23.04, 0, 0, 0, 1, 0, 0, 0, 8.763123, 0, 0, -23.913689)
+
+[node name="Pit3" parent="LevelGeometry" instance=ExtResource("3_avroq")]
+transform = Transform3D(34.56, 0, 0, 0, 1, 0, 0, 0, 30.670929, -34.19148, 0, -58.972332)
+
+[node name="Pit2" parent="LevelGeometry" instance=ExtResource("3_avroq")]
+transform = Transform3D(23.04, 0, 0, 0, 1, 0, 0, 0, 8.763123, 29.067484, 0.2857182, -36.861374)
+
+[node name="FallRescue" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(23.098698, 0, 0, 0, 3.8973908, 0, 0, 0, 1.7335372, 0, 3.9486952, -19.286884)
+
+[node name="FallRescue3" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(-3.3412985e-07, 0, -1.331, 0, 2.992, 0, 7.644, 0, -5.8179857e-08, 25.045294, 3.5460002, -37.011833)
+
+[node name="FallRescue4" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(-3.3412985e-07, 0, -1.331, 0, 2.992, 0, 7.644, 0, -5.8179857e-08, 38.588875, 3.5460002, -37.011833)
+
+[node name="FallRescue2" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(23.098698, 0, 0, 0, 3.8973908, 0, 0, 0, 1.7335372, 0, 3.9486952, -28.047367)
+
+[node name="FallRescue5" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(16.177105, 0, 0, 0, 3.8973908, 0, 0, 0, 1.7335372, -33.855694, 3.9486952, -52.398727)
+
+[node name="FallRescue6" parent="LevelGeometry" instance=ExtResource("4_ygbf3")]
+transform = Transform3D(15.553778, 0, 0, 0, 3.8973908, 0, 0, 0, 1.7335372, -33.855694, 3.9486952, -69.06081)
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("3_tqoff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5185604, 13.309158)
+
+[node name="Grunt" parent="Entities" instance=ExtResource("6_ix6jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.063282, 2.4091625, -62.55663)
+
+[node name="Grunt2" parent="Entities" instance=ExtResource("6_ix6jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.78719, 2.4091625, -62.55663)
+
+[node name="Grunt3" parent="Entities" instance=ExtResource("6_ix6jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.800205, 2.4091625, -64.65611)
+
+[node name="Hooks" type="Node3D" parent="."]
+
+[node name="Collectibles" type="Node3D" parent="."]
+
+[node name="Pot" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.118715, 0, 1.707541)
+
+[node name="Pot6" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.118715, 2.1025949, -11.911467)
+coin_count = 2
+
+[node name="Pot7" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.118715, 2.1511772, -13.16506)
+coin_count = 2
+
+[node name="Pot8" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6008625, 2.1519783, -11.731561)
+coin_count = 4
+
+[node name="Pot9" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6008625, 1.9833004, -32.903236)
+coin_count = 2
+
+[node name="Pot11" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6008625, 2.0906112, -45.02798)
+
+[node name="Pot12" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6008625, 2.0779626, -47.079926)
+
+[node name="Pot13" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.16859, 2.0674107, -47.079926)
+
+[node name="Pot14" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.340757, 2.1705682, -47.079926)
+coin_count = 4
+
+[node name="Pot15" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.340757, 2.1296515, -31.870148)
+coin_count = 1
+
+[node name="Pot16" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.53639, 2.0779076, -34.072765)
+coin_count = 2
+
+[node name="Pot17" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.53639, 2.0197415, -40.3152)
+
+[node name="Pot18" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.53639, 2.1810992, -42.901073)
+coin_count = 2
+
+[node name="Pot19" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.53639, 2.0724106, -46.709908)
+
+[node name="Pot10" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6008625, 2.0166464, -34.787697)
+coin_count = 1
+
+[node name="Pot20" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.113241, 2.0166464, -34.42543)
+
+[node name="Pot21" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.113241, 2.0166464, -40.242447)
+coin_count = 2
+
+[node name="Pot22" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.935112, 2.0166464, -34.53998)
+
+[node name="Pot2" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.018871, 0, 1.707541)
+coin_count = 4
+
+[node name="Pot3" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8280296, 0, 1.707541)
+coin_count = 5
+
+[node name="Pot4" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1424923, 0, 1.707541)
+coin_count = 2
+
+[node name="Pot5" parent="Collectibles" instance=ExtResource("4_mtxap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.511755, 0, 1.707541)
+coin_count = 1
+
+[node name="Key" parent="Collectibles" instance=ExtResource("7_us4oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.48956, 2.8895078, -39.431133)
+
+[node name="Crest" parent="Collectibles" instance=ExtResource("9_rq5f5")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -25.699999, 3.5029793, -30.6)
+
+[node name="Coin" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341632, 0)
+
+[node name="Coin2" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341632, -3.8868365)
+
+[node name="Coin3" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -11.615795)
+
+[node name="Coin5" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -7.736007)
+
+[node name="Coin4" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -17.290222)
+
+[node name="Coin6" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -19.568497)
+
+[node name="Coin10" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -26.759333)
+
+[node name="Coin11" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -29.321728)
+
+[node name="Coin12" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -33.063644)
+
+[node name="Coin13" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4341629, -36.840916)
+
+[node name="Coin17" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4379587, 2.4341629, -36.840916)
+
+[node name="Coin18" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3446307, 2.4341629, -36.840916)
+
+[node name="Coin19" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.010393, 2.4341629, -36.840916)
+
+[node name="Coin20" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.903039, 2.4341629, -36.840916)
+
+[node name="Coin21" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.763329, 2.4341629, -36.840916)
+
+[node name="Coin22" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.554203, 2.4341629, -36.840916)
+
+[node name="Coin23" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.796484, 2.4341629, -36.840916)
+
+[node name="Coin24" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.920233, 2.4341629, -36.840916)
+
+[node name="Coin25" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.479595, 2.4341629, -36.840916)
+
+[node name="Coin26" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.23185, 2.4341629, -44.63837)
+
+[node name="Coin27" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.751186, 2.4341629, -44.63837)
+
+[node name="Coin28" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.85786, 2.4341629, -44.63837)
+
+[node name="Coin29" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.590202, 2.4341629, -44.63837)
+
+[node name="Coin30" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.32334, 2.4341629, -44.63837)
+
+[node name="Coin31" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.391293, 2.4341629, -44.63837)
+
+[node name="Coin32" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.10409, 2.4341629, -44.63837)
+
+[node name="Coin33" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.625757, 2.4341629, -44.63837)
+
+[node name="Coin34" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.237709, 2.4341629, -44.63837)
+
+[node name="Coin14" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7337537, 2.4341629, -36.840916)
+
+[node name="Coin15" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.412941, 2.4341629, -36.840916)
+
+[node name="Coin16" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.861862, 2.4341629, -36.840916)
+
+[node name="Coin35" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.299812, 2.4341629, -36.840916)
+
+[node name="Coin36" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.975231, 2.4341629, -36.840916)
+
+[node name="Coin37" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5782, 2.4341629, -36.840916)
+
+[node name="Coin38" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.449945, 2.4341629, -36.840916)
+
+[node name="Coin39" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.678614, 2.4341629, -36.840916)
+
+[node name="Coin40" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.042015, 2.4341629, -39.32628)
+
+[node name="Coin41" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.042015, 2.4341629, -43.077396)
+
+[node name="Coin42" parent="Collectibles" instance=ExtResource("10_2ktxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.042015, 2.4341629, -47.959637)
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="LevelBeginPlatform" parent="Objects" instance=ExtResource("3_et5g2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1024732, 13.103911)
+
+[node name="3dText" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.902558, 5.2600517)
+text = "To move, use the WASD keys or the left analog stick
+Move the camera with the mouse or the right analog stick"
+
+[node name="Text3D" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2530162, -7.524041)
+text = "To jump, press the space bar or the A button on controller
+Jump height depends on how long the button is held"
+
+[node name="Text3D2" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2530162, -26.120338)
+text = "Some gaps are too big to clear with a single jump
+While midair, press the jump button again to double jump"
+
+[node name="Text3D3" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 10.329143, 3.7337897, -41.042007)
+text = "This door is locked by a switch
+To use it, simple attack it with the left mouse button or the X button on controller"
+
+[node name="Text3D5" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 25.192308, 3.7337897, -36.797695)
+text = "Some gaps are too large to simply jump over
+To cross, you can use your trusty grappling hook
+Use the right mouse button or the B button to shoot your hook at the  target on the pillar
+The hook will shoot at your crosshair
+"
+
+[node name="Text3D7" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(-0.02603759, 0, 0.99966097, 0, 1, 0, -0.99966097, 0, -0.02603759, 15.579502, 3.7337897, -44.619663)
+text = "Gray pressure plates like this are permanent
+Simply walk over them to activate"
+
+[node name="Text3D6" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 47.67291, 3.7337897, -34.57897)
+text = "To pick up collectibles, simply walk over them"
+
+[node name="Text3D4" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -10.0400915, 3.7337897, -41.042007)
+text = "Some doors are locked by keys
+To open them walk into the lock with at least one key"
+
+[node name="Text3D8" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(-1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, -1, -25.642038, 4.8622284, -29.213915)
+text = "This is a crest
+Crests are valuable collectibles found in levels"
+
+[node name="Text3D9" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1.3909066e-08, 0, 1, 0, 1, 0, -1, 0, 1.3909066e-08, -30.99993, 3.5420876, -37.145077)
+text = "This is a save point
+Walking on it will save your progress
+and let you restart here after quitting or dying"
+
+[node name="Text3D10" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.78668, 3.5420876, -51.983215)
+text = "These enemies block your path
+Defeat them with your attacks to open the door"
+
+[node name="Text3D11" parent="Objects" instance=ExtResource("6_p8gt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.78668, 3.5420876, -79.42228)
+text = "This is a level end platform
+Stepping on it will take you to the next level"
+
+[node name="Door" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_63pat")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1.72441, 0, -1, 0, -4.371139e-08, -12.055864, 2.1111457, -36.191925)
+activators = [NodePath("../Lock")]
+
+[node name="Door2" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_63pat")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.72441, 0, 1, 0, -4.371139e-08, 12.154969, 2.1111457, -37.68209)
+activators = [NodePath("../Switch")]
+
+[node name="Door3" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_63pat")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.850176, 2.1111457, -41.426163)
+activators = [NodePath("../PermPressurePlate")]
+
+[node name="Door4" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_63pat")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -33.105377, 2.1111457, -73.404915)
+activators = [NodePath("../EnemyKillSwitch")]
+
+[node name="Door5" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_63pat")]
+transform = Transform3D(0.008325249, 0, 0.9999653, 0, 1, 0, -0.9999653, 0, 0.008325249, -33.133472, 2.1111457, -45.49652)
+activators = [NodePath("../Trigger")]
+
+[node name="Lock" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("10_qwrgn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.850324, 3.1973228, -36.88249)
+activatables = [NodePath("../Door")]
+
+[node name="Switch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("11_di3eq")]
+transform = Transform3D(-4.371139e-08, -1, 0, -1, 4.371139e-08, -8.742278e-08, 8.742278e-08, -3.821371e-15, -1, 11.862931, 3.73271, -34.33066)
+activatables = [NodePath("../Door2")]
+
+[node name="HookPoint" parent="Objects" instance=ExtResource("12_sg1p3")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 39.38358, 3.9245672, -37.006912)
+
+[node name="PermPressurePlate" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("13_d2h6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.041847, 2.2141628, -43.10293)
+activatables = [NodePath("../Door3")]
+
+[node name="LevelEndPlatform" parent="Objects" instance=ExtResource("15_tt7l4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.883667, 2.1541634, -78.20261)
+
+[node name="SavePlatform" parent="Objects" instance=ExtResource("16_t0a5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 2.1541626, -37)
+
+[node name="Trigger" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("18_a013u")]
+transform = Transform3D(11.256355, 0, 0, 0, 4.29635, 0, 0, 0, 1, -33.888844, 2.604163, -49.61608)
+activatables = [NodePath("../Door5"), NodePath("../GauntletMethodCaller")]
+
+[node name="Trigger2" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("18_a013u")]
+transform = Transform3D(0.9761693, 0, 0, 0, 4.29635, 0, 0, 0, 1, -33.98512, 2.604163, -36.991745)
+one_time = false
+activatables = [NodePath("../MethodCaller")]
+
+[node name="MethodCaller" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("19_3rgco")]
+callable = "open_door"
+activators = [NodePath("../Trigger2")]
+
+[node name="EnemyKillSwitch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("20_opkmp")]
+required_enemies = 3
+activatables = [NodePath("../Door4")]
+
+[node name="GauntletMethodCaller" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("19_3rgco")]
+callable = "init_gauntlet"
+activators = [NodePath("../Trigger")]
+
+[node name="BreakableWall" parent="Objects" instance=ExtResource("22_2ktxa")]
+transform = Transform3D(1.008742, 0, 0, 0, 1, 0, 0, 0, 1, -25.891663, 4.104163, -33.409767)

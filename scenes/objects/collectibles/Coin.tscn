@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cr1nsk15hroe3" path="res://assets/models/objects/coin.fbx" id="3_11k5e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4geym"]
-bounce = 0.4
+bounce = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4geym"]
 
@@ -13,6 +13,7 @@ bounce = 0.4
 [node name="Coin" type="RigidBody3D" groups=["Persist"]]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_4geym")
+linear_damp = 1.0
 script = ExtResource("1_4geym")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

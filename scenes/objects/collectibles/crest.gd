@@ -21,3 +21,6 @@ func save() -> Dictionary:
 		"scale_z" : scale.z
 	}
 	return save_dict
+
+func get_value():
+	return 100

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0shxl8o6cx82"]
+
+[ext_resource type="Script" uid="uid://cvtesakdnxweo" path="res://scenes/objects/activators/enemy_kill_switch.gd" id="1_lisk8"]
+
+[node name="EnemyKillSwitch" type="Node3D" groups=["PersistState"]]
+script = ExtResource("1_lisk8")

@@ -30,6 +30,12 @@ func quit_to_menu() -> void:
 		$Level.remove_child(child)
 
 func start_new_game() -> void:
+	var test_level = load("res://scenes/levels/Level1/Level1.tscn")
+	$Level.add_child(test_level.instantiate())
+	$MainMenu.toggle(false)
+	$Level.get_child(0).init()
+
+func start_test_level() -> void:
 	var test_level = load("res://scenes/test/test_level.tscn")
 	$Level.add_child(test_level.instantiate())
 	$MainMenu.toggle(false)

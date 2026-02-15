@@ -1,13 +1,16 @@
-[gd_scene load_steps=37 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=42 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
 [ext_resource type="Texture2D" uid="uid://c1i527xpg88b2" path="res://scenes/test/texture_07.png" id="2_spoc0"]
 [ext_resource type="PackedScene" uid="uid://wff5cdgwbvj3" path="res://scenes/objects/collectibles/key.tscn" id="5_llyy7"]
 [ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="5_rnfgp"]
+[ext_resource type="PackedScene" uid="uid://dlixmnl3dkjjx" path="res://scenes/entities/enemies/Warrior.tscn" id="5_yqvmj"]
 [ext_resource type="PackedScene" uid="uid://fyqwogj8obpk" path="res://scenes/entities/enemies/Rogue.tscn" id="6_8lmeq"]
+[ext_resource type="PackedScene" uid="uid://ced0ep2tr0bll" path="res://scenes/entities/enemies/Grunt.tscn" id="6_kx1rg"]
 [ext_resource type="PackedScene" uid="uid://bln72krdh4ej3" path="res://scenes/objects/activators/PermPressurePlate.tscn" id="6_mr7is"]
 [ext_resource type="PackedScene" uid="uid://drx6p0ym787qq" path="res://scenes/objects/activators/TempPressurePlate.tscn" id="7_aq6h5"]
+[ext_resource type="PackedScene" uid="uid://diidq8mrr35xi" path="res://scenes/entities/enemies/Mage.tscn" id="7_jmk3s"]
 [ext_resource type="PackedScene" uid="uid://ckh1m7p7ab37s" path="res://scenes/objects/activators/HeavyPressurePlate.tscn" id="8_rk3gu"]
 [ext_resource type="PackedScene" uid="uid://dit6nuictyh6y" path="res://scenes/objects/Box.tscn" id="9_uf6c7"]
 [ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="10_k1k2k"]
@@ -28,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://c2bpf44pw5sq0" path="res://scenes/objects/Lava.tscn" id="25_xefnc"]
 [ext_resource type="PackedScene" uid="uid://so40ueoxk262" path="res://scenes/objects/Save platform.tscn" id="26_ommu7"]
 [ext_resource type="PackedScene" uid="uid://b3jqpd8yaby5n" path="res://scenes/objects/activators/Trigger.tscn" id="27_4vwgt"]
+[ext_resource type="PackedScene" uid="uid://b7g8gmv0osnmr" path="res://scenes/objects/LevelBeginPlatform.tscn" id="28_8lmeq"]
+[ext_resource type="PackedScene" uid="uid://c52wqbt1pg77y" path="res://scenes/objects/terrain/wall.tscn" id="33_7k5i0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -78,13 +83,22 @@ shadow_enabled = true
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_euepx")]
-transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, -1.5795575, 1.0500001, 1.8490039)
+transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, -31.469286, 1.0500001, -3.1322165)
 
 [node name="Box" parent="Entities" instance=ExtResource("9_uf6c7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6995115, 3.0925434, 6.816755)
 
 [node name="Rogue" parent="Entities" instance=ExtResource("6_8lmeq")]
 transform = Transform3D(-0.7039404, 0, -0.710259, 0, 1, 0, 0.710259, 0, -0.7039404, 27.259708, 0, 24.299965)
+
+[node name="Warrior" parent="Entities" instance=ExtResource("5_yqvmj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.41564, 0, 0)
+
+[node name="Grunt" parent="Entities" instance=ExtResource("6_kx1rg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.660736)
+
+[node name="Mage" parent="Entities" instance=ExtResource("7_jmk3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.48211, 0, -35.660736)
 
 [node name="Hooks" type="Node3D" parent="."]
 
@@ -199,6 +213,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3275547, -4.5930643)
 [node name="Trigger" parent="Objects" instance=ExtResource("27_4vwgt")]
 transform = Transform3D(5.2775693, 0, 0, 0, 2.8754096, 0, 0, 0, 0.34672117, 0, 1.4877048, 9.830006)
 
+[node name="LevelBeginPlatform" parent="Objects" instance=ExtResource("28_8lmeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6815772, 0.09999995, 0)
+
+[node name="SavePlatform2" parent="Objects" instance=ExtResource("26_ommu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.513046, 0.09999995, -4.1437817)
+
+[node name="Trigger2" parent="Objects" instance=ExtResource("27_4vwgt")]
+transform = Transform3D(7.5767937, 0, 0, 0, 1.6186914, 0, 0, 0, 1.6277666, -36.775887, 0.85934573, 8.499958)
+
 [node name="LevelGeometry" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="LevelGeometry"]
@@ -207,6 +230,7 @@ size = Vector3(1.7963867, 1, 1)
 material = SubResource("StandardMaterial3D_fn47k")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/Floor"]
+collision_mask = 9
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tgyrj")
@@ -215,6 +239,7 @@ shape = SubResource("ConcavePolygonShape3D_tgyrj")
 transform = Transform3D(1, 0, 0, 0, 2.0070424, 0, 0, 0, 7.9588923, -6.1379642, 1.0535214, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/CSGBox3D"]
+collision_mask = 9
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/CSGBox3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_spoc0")
@@ -224,6 +249,10 @@ transform = Transform3D(1, 0, 0, 0, 6.7551513, 0, 0, 0, 7.9588923, -7.1379642, 3
 material = SubResource("StandardMaterial3D_spoc0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LevelGeometry/CSGBox3D2"]
+collision_mask = 9
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/CSGBox3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_spoc0")
+
+[node name="Wall" parent="." instance=ExtResource("33_7k5i0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.11866, 0.05000006, -20.721682)

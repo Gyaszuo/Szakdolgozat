@@ -8,22 +8,22 @@ var current_activations: int = 0:
 	set(value):
 		if value >= 0:
 			current_activations = value
-		print("Current activations: ",current_activations)
-		print("Activated: ",!activated)
+		#print("Current activations: ",current_activations)
+		#print("Activated: ",!activated)
 		if current_activations == activation_req and !activated:
-			print("trigger")
+			#print("trigger")
 			trigger()
 		elif current_activations != activation_req and activated:
-			print("untrigger")
+			#print("untrigger")
 			untrigger()
 var activated: bool = false
 	
 func activate() -> void:
-	print("activate")
+	#print("activate")
 	current_activations += 1
 
 func deactivate() -> void:
-	print("deactivate")
+	#print("deactivate")
 	current_activations -= 1
 
 @abstract

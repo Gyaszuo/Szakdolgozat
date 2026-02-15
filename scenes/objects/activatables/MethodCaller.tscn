@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crq8uvarh0m6b"]
+
+[ext_resource type="Script" uid="uid://bqj5thegvvof2" path="res://scenes/objects/activatables/method_caller.gd" id="1_ggcun"]
+
+[node name="MethodCaller" type="Node3D"]
+script = ExtResource("1_ggcun")

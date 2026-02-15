@@ -15,3 +15,6 @@ func _on_button_pressed() -> void:
 
 func _on_button_3_pressed() -> void:
 	get_parent().load_game()
+
+func _on_test_level_pressed() -> void:
+	get_parent().start_test_level()

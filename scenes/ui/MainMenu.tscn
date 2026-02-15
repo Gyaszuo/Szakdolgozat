@@ -53,6 +53,11 @@ text = "Continue game"
 layout_mode = 2
 text = "Quit"
 
+[node name="Test level" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Test level"
+
 [connection signal="pressed" from="VBox/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBox/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="VBox/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBox/Test level" to="." method="_on_test_level_pressed"]

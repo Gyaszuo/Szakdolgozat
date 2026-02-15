@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi23exgs88dlt"]
+
+[ext_resource type="PackedScene" uid="uid://drusuaa2pnx7x" path="res://assets/models/objects/torch_lit.fbx" id="1_8y0hp"]
+
+[node name="TorchLit" type="Node3D"]
+
+[node name="torch_lit" parent="." instance=ExtResource("1_8y0hp")]
+
+[node name="torch_lit" parent="torch_lit" index="0"]
+layers = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="torch_lit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.631375, 0)
+light_color = Color(1, 0.62352943, 0.27058825, 1)
+shadow_enabled = true
+shadow_caster_mask = 4294967293
+omni_range = 268.097
+
+[editable path="torch_lit"]
