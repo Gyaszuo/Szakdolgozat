@@ -1,6 +1,25 @@
 [gd_scene load_steps=2 format=3 uid="uid://n4m4kcepfjyg"]
 
-[ext_resource type="Script" uid="uid://b084p8y3tc48u" path="res://scenes/objects/text_3D.gd" id="1_7s6af"]
+[ext_resource type="Texture2D" uid="uid://cc0avuwqcoyfb" path="res://assets/ui_textures/tip_warning.png" id="1_v153y"]
 
 [node name="Text3D" type="Label3D"]
-script = ExtResource("1_7s6af")
+layers = 4
+extra_cull_margin = 20.0
+visibility_range_begin_margin = 5.0
+visibility_range_end = 15.0
+visibility_range_fade_mode = 1
+billboard = 2
+alpha_cut = 1
+texture_filter = 1
+text = "asd"
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.345, 0, 0, 0, 0.345, 0, 0, 0, 0.345, 0, 0, 0)
+layers = 4
+visibility_range_begin = 15.0
+visibility_range_end = 20.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_v153y")

@@ -5,17 +5,18 @@ extends Activator
 
 var activated = false:
 	set(value):
+		activated = value
 		if value:
 			mesh_instance_3d.mesh.material.albedo_color = Color(0,0.7,0)
 			hook_hitbox_component.set_deferred("monitoring",false)
 			hook_hitbox_component.set_deferred("monitorable",false)
 
 func switch()-> void:
-	activate()
 	activated = true
+	activate()
 
-func load_state(activated: bool) -> void:
-	if activated:
+func load_state(param_activated: bool) -> void:
+	if param_activated:
 		switch()
 
 func save() -> Dictionary:

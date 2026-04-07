@@ -2,11 +2,18 @@ class_name Main
 extends Node
 
 var treasure: int
+var total_treasure: int
+const DEBUG_UNLOCK_SEQUENCE = ["S","Z","A","K","D","O","L","G","O","Z","A","T"]
+var debug_mode = false:
+	set(value):
+		debug_mode = value
+		if(value):
+			$MainMenu.enable_debug()
+var current_sequence = []
 
 const handled_keys = [
 	"filename",
 	"parent",
-	"node_name",
 	"pos_x",
 	"pos_y",
 	"pos_z",
@@ -24,31 +31,54 @@ const handled_keys = [
 	"scale_z"
 ]
 
+func _unhandled_input(event: InputEvent) -> void:
+	if $Level.get_children().size() == 0 and not debug_mode:
+		if event.is_pressed():
+			current_sequence.push_back(event.as_text())
+			print(current_sequence)
+			for i in range(current_sequence.size()):
+				if current_sequence[i] != DEBUG_UNLOCK_SEQUENCE[i]:
+					current_sequence.clear()
+					break
+				if i == (DEBUG_UNLOCK_SEQUENCE.size() - 1):
+					debug_mode = true
+	else:
+		current_sequence.clear()
+
 func quit_to_menu() -> void:
-	$MainMenu.toggle(true)
+	print("quit in Main")
+	$MainMenu.visible = true
 	for child in $Level.get_children():
 		$Level.remove_child(child)
 
-func start_new_game() -> void:
-	var test_level = load("res://scenes/levels/Level1/Level1.tscn")
-	$Level.add_child(test_level.instantiate())
-	$MainMenu.toggle(false)
-	$Level.get_child(0).init()
+func show_summary_screen(param_total_treasure: int, param_remaining_treasure: int,level: String):
+	$SummaryScreen.visible = true
+	$SummaryScreen.level = level
+	$SummaryScreen.set_completion(param_total_treasure,param_remaining_treasure)
 
-func start_test_level() -> void:
-	var test_level = load("res://scenes/test/test_level.tscn")
-	$Level.add_child(test_level.instantiate())
-	$MainMenu.toggle(false)
-	$Level.get_child(0).init()
+func deferred_load(level: String) -> void:
+	call_deferred("load_next_level",level)
 
 func load_next_level(level: String) -> void:
-	var next_level = load(level)
+	var remaining_treasure = total_treasure - $Level.get_child(0).calc_max_treasure()
 	$Level.remove_child($Level.get_child(0))
+	show_summary_screen(total_treasure,remaining_treasure,level)
+
+func load_level(level: String) -> void:
+	var next_level = load(level)
+	if $Level.get_children().size() > 0:
+		$Level.remove_child($Level.get_child(0))
 	$Level.add_child(next_level.instantiate())
-	$Level.get_child(0).init()
-	$Level.get_child(0).player.treasure = treasure
+	total_treasure = $Level.get_child(0).calc_max_treasure()
+	$MainMenu.visible = false
+	$SummaryScreen.visible = false
+	_init_level()
+
+func save_treasure(value: int):
+	treasure = value
 
 func save_game() -> void:
+	print("Saved game")
 	var save_file = FileAccess.open("user://szakdolgozat.save",FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	save_file.store_line($Level.get_child(0).save())
@@ -87,6 +117,7 @@ func load_game() -> void:
 	var level_file_path = save_file.get_line()
 	var level = load(level_file_path).instantiate()
 	$Level.add_child(level)
+	total_treasure = $Level.get_child(0).calc_max_treasure()
 	
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for i in save_nodes:
@@ -106,7 +137,7 @@ func load_game() -> void:
 		
 		var new_object = load(node_data["filename"]).instantiate()
 		get_node(node_data["parent"]).add_child(new_object)
-		if new_object.has_method("init"):
+		if new_object is Enemy:
 			new_object.body.global_position = Vector3(node_data["pos_x"],node_data["pos_y"],node_data["pos_z"])
 			new_object.body.global_rotation = Vector3(node_data["rot_x"],node_data["rot_y"],node_data["rot_z"])
 			new_object.body.scale = Vector3(node_data["scale_x"],node_data["scale_y"],node_data["scale_z"])
@@ -117,6 +148,7 @@ func load_game() -> void:
 		if node_data.get("respawn_pos_x") != null:
 			new_object.respawn_pos = Vector3(node_data["respawn_pos_x"],node_data["respawn_pos_y"],node_data["respawn_pos_z"])
 			new_object.fall_rescue_pos = Vector3(node_data["fall_rescue_pos_x"],node_data["fall_rescue_pos_y"],node_data["fall_rescue_pos_z"])
+			treasure = node_data["treasure"]
 		
 		for i in node_data.keys():
 			if i in handled_keys:
@@ -141,5 +173,22 @@ func load_game() -> void:
 				continue
 			node.set(i,node_data[i])
 		
-	$MainMenu.toggle(false)
+	_init_level()
+	$MainMenu.visible = false
+	
+func _init_level() -> void:
+	if not $Level.get_child(0).is_connected("load_next_level",deferred_load):
+		$Level.get_child(0).connect("load_next_level",deferred_load)
+	if not $Level.get_child(0).is_connected("save_treasure",save_treasure):
+		$Level.get_child(0).connect("save_treasure",save_treasure)
+	if not $Level.get_child(0).is_connected("quit",quit_to_menu):
+		$Level.get_child(0).connect("quit",quit_to_menu)
+	for child in $Level.get_child(0).objects.get_children():
+		if child is RespawnPlatform or child is BeginPlatform:
+			if not child.is_connected("save_game",save_game):
+				child.connect("save_game",save_game)
 	$Level.get_child(0).init()
+	$Level.get_child(0).player.treasure = treasure
+	if not $Level.get_child(0).player.main_ui.menu.is_connected("quit",quit_to_menu):
+		$Level.get_child(0).player.main_ui.menu.connect("quit",quit_to_menu)
+	

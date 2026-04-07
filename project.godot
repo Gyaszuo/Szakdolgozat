@@ -153,11 +153,16 @@ menu={
 3d_physics/layer_14="PlayerBarrier"
 3d_physics/layer_15="HookBarrier"
 3d_physics/layer_16="Fall"
-3d_physics/layer_17="NavRegion"
+3d_physics/layer_17="EnemyBarrier"
+3d_physics/layer_18="BoxBarrier"
 
 [navigation]
 
 3d/default_cell_height=4.523000000000001
+
+[physics]
+
+3d/run_on_separate_thread=true
 
 [rendering]
 

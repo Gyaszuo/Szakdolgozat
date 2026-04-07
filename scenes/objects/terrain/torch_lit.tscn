@@ -3,11 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://drusuaa2pnx7x" path="res://assets/models/objects/torch_lit.fbx" id="1_8y0hp"]
 
 [node name="TorchLit" type="Node3D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 
 [node name="torch_lit" parent="." instance=ExtResource("1_8y0hp")]
 
 [node name="torch_lit" parent="torch_lit" index="0"]
 layers = 2
+visibility_range_end = 60.0
+visibility_range_fade_mode = 2
 
 [node name="OmniLight3D" type="OmniLight3D" parent="torch_lit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.631375, 0)

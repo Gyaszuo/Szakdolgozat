@@ -597,9 +597,6 @@ transform = Transform3D(1.3651232, 0, 0, 0, 1, 0, 0, 0, 1.9192039, -26, 2, -29.5
 [node name="FloorWoodLargeDark11" parent="Floors" instance=ExtResource("2_0te3g")]
 transform = Transform3D(-1.0849349e-07, 0, 2.1495082, 0, 0.99999994, 0, -2.482042, 0, -9.395799e-08, -33.999996, 2, -45.99742)
 
-[node name="FloorWoodLargeDark14" parent="Floors" instance=ExtResource("2_0te3g")]
-transform = Transform3D(-8.137012e-10, 0, 2.1495078, 0, 1.4039998, 0, -0.018615317, 0, -9.395798e-08, -33.999996, 2.1604009, -50.99742)
-
 [node name="FloorWoodLargeDark13" parent="Floors" instance=ExtResource("2_0te3g")]
 transform = Transform3D(-1.0849349e-07, 0, 1.9192038, 0, 0.99999994, 0, -2.482042, 0, -8.389107e-08, -33.999996, 2, -76.59742)
 

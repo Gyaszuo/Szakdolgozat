@@ -42,6 +42,8 @@ var prev_position: Vector3
 var respawn_pos: Vector3 = Vector3(0,1,0)
 var fall_rescue_pos: Vector3 = Vector3(0,1,0)
 var dashing: bool = false
+var barrier_blocked = false
+var dash_vector: Vector3
 
 var health: int = 6:
 	set(value):
@@ -64,9 +66,10 @@ const MAX_WALK: float = 4.0
 const MAX_RUN: float = 6.0
 const HOOK_SPEED: float = 6.0
 const HOOK_MIN_DIST: float = 2.0
-const PUSH_FORCE = 1.0
+const PUSH_FORCE = 3.0
 
 signal shoot_hook(direction: Vector3)
+signal quit
 
 func _ready() -> void:
 	print("player")
@@ -86,6 +89,9 @@ func _physics_process(delta: float) -> void:
 
 func move_logic(delta: float) -> void:
 	prev_position = position
+	if dashing:
+		velocity = velocity.move_toward(Vector3.ZERO,base_speed * stop_speed * delta *2)
+		return
 	if is_hooking:
 		var hook_dir = global_position.direction_to(hook_target)
 		velocity = hook_dir * HOOK_SPEED
@@ -130,6 +136,9 @@ func jump_logic() -> void:
 		if Input.is_action_just_pressed("jump"):
 			set_move_state("Jump_Idle")
 			squash_and_stretch_component.do_squash_and_stretch(1.2,0.15)
+			if barrier_blocked:
+				fall_speed = 1.0
+				barrier_blocked = false
 			velocity.y = djump_impulse
 			is_hooking = false
 		return
@@ -137,6 +146,9 @@ func jump_logic() -> void:
 		return
 	if is_on_floor():
 		can_double_jump = true
+		if barrier_blocked:
+			fall_speed = 1.0
+			barrier_blocked = false
 	if Input.is_action_pressed("jump"):
 		if is_dead:
 			return
@@ -156,6 +168,9 @@ func jump_logic() -> void:
 
 func double_jump() -> void:
 	if !is_on_floor() and can_double_jump and not is_dead:
+		if barrier_blocked:
+			fall_speed = 1.0
+			barrier_blocked = false
 		jump_timer.stop()
 		set_move_state("Jump_Idle")
 		squash_and_stretch_component.do_squash_and_stretch(1.2,0.15)
@@ -250,15 +265,13 @@ func _on_attack_timer_timeout() -> void:
 func dodge() -> void:
 	if dodge_cooldown_timer.time_left or movement_input == Vector2.ZERO:
 		return
+	dodge_cooldown_timer.start()
 	extra_anim.animation = "Dodge_Forward"
 	$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	run_speed = 10.0
-	base_speed = 10.0
+	velocity = Vector3(movement_input.x,0,movement_input.y) * 10
 	dashing = true
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.4).timeout
 	dashing = false
-	toggle_speed(true)
-	dodge_cooldown_timer.start()
 
 func hook() -> void:
 	if get_parent().get_parent().find_child("Hooks").get_children().size() == 0:
@@ -288,6 +301,7 @@ func hit() -> void:
 
 func die() -> void:
 	is_dead = true
+	set_collision_layer_value(2,false)
 	$AnimationTree.set("parameters/DeathOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	var tween = create_tween()
 	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,1),2.0)
@@ -298,12 +312,13 @@ func die() -> void:
 	tween = create_tween()
 	tween.tween_property(main_ui.color_rect,"color",Color(0,0,0,0),2.0)
 	is_dead = false
+	set_collision_layer_value(2,true)
 
 func push() -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody3D:
-			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
+		if c.get_collider() is Box:
+			c.get_collider().velocity = (-c.get_normal() * PUSH_FORCE)
 
 func set_move_state(state_name: String) -> void:
 	move_state_machine.travel(state_name)
@@ -338,7 +353,7 @@ func fall():
 func save() -> Dictionary:
 	var save_dict = {
 		"filename" : get_scene_file_path(),
-		"node_name" : name,
+		"name" : name,
 		"parent" : get_parent().get_path(),
 		"pos_x" : global_position.x,
 		"pos_y" : global_position.y,
@@ -360,3 +375,7 @@ func save() -> Dictionary:
 		"scale_z" : scale.z
 	}
 	return save_dict
+
+func quit_game() -> void:
+	print("quit in Player")
+	quit.emit()

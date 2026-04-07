@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb4xlwvubxrgo"]
+
+[ext_resource type="Script" uid="uid://gqtep3toiiym" path="res://scenes/objects/activatables/enemy_barrier.gd" id="1_m8ars"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8ars"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 0.53711885, 0.50881755, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8ars"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_m8ars")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqcl3"]
+
+[node name="EnemyBarrier" type="Node3D"]
+script = ExtResource("1_m8ars")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_m8ars")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
+collision_layer = 65536
+collision_mask = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_sqcl3")
+debug_color = Color(0.99215686, 0, 0.23529412, 1)

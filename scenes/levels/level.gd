@@ -8,9 +8,13 @@ extends Node3D
 @onready var collectibles: Node3D = $Collectibles
 @onready var objects: Node3D = $Objects
 @onready var level_geometry: Node3D = $LevelGeometry
+@onready var respawn_timer: Timer = $RespawnTimer
 @export var next_level_num: int = 1
 
 var hook_scene: PackedScene = preload("res://scenes/entities/player/hook.tscn")
+signal save_treasure(treasure: int)
+signal load_next_level(next_level_string: String)
+signal quit
 
 func shoot_hook(direction: Vector3):
 	if hooks.get_child_count() == 0:
@@ -21,30 +25,38 @@ func shoot_hook(direction: Vector3):
 		hook_instance.player = player
 
 func next_level():
-	var next_level_string =  "res://scenes/levels/Level" + String.num(next_level_num) + "Level" + String.num(next_level_num) + ".tscn"
-	get_parent().get_parent().treasure = player.treasure
-	get_parent().get_parent().load_next_level(next_level_string)
+	var next_level_string =  "res://scenes/levels/Level" + String.num(next_level_num,0) + "/Level" + String.num(next_level_num,0) + ".tscn"
+	save_treasure.emit(player.treasure)
+	load_next_level.emit(next_level_string)
 
 func save():
 	return get_scene_file_path()
 
 func init():
-	print("init")
 	for i in entities.get_children():
 		if i is Player: player = i
-	player.connect("shoot_hook",shoot_hook)
+	if not player.is_connected("shoot_hook",shoot_hook):
+		player.connect("shoot_hook",shoot_hook)
+	if not player.is_connected("quit",quit_game):
+		player.connect("quit",quit_game)
 	for child in entities.get_children():
-		if child.has_method("init"):
+		if child.has_method("init") and child is not Box:
 			child.player = player
 			child.init()
-	await get_tree().create_timer(5.0).timeout
+			if child.has_signal("death"):
+				child.connect("death",update_kill_switches)
+	respawn_timer.start()
+	await respawn_timer.timeout
 	for child in objects.get_children():
 		if child is RespawnPlatform:
 			child.enabled = true
 
+func call_method(callable: String):
+	call_deferred(callable)
+
 func calc_max_treasure() -> int:
 	var sum = 0
-	for node in collectibles:
+	for node in collectibles.get_children():
 		if node is Key: continue
 		sum += node.get_value()
 	return sum
@@ -54,3 +66,7 @@ func update_kill_switches():
 	for i in $Objects.get_children():
 		if i is EnemyKillSwitch:
 			i.update()
+
+func quit_game() -> void:
+	print("quit in Level")
+	quit.emit()

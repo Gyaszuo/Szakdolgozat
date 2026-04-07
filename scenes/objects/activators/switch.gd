@@ -5,7 +5,7 @@ var activated: bool = false
 @onready var stick: MeshInstance3D = $Base/Stick
 @onready var area_3d: Area3D = $Area3D
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
+func _on_area_3d_area_entered(_area: Area3D) -> void:
 	var rotation_tween = create_tween()
 	var color_tween = create_tween()
 	area_3d.set_deferred("monitoring",false)
@@ -28,8 +28,9 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	area_3d.set_deferred("monitoring",true)
 	area_3d.set_deferred("monitorable",true)
 
-func load_state(activated: bool) -> void:
-	if activated:
+func load_state(param_activated: bool) -> void:
+	if param_activated:
+		activated = true;
 		var rotation_tween = create_tween()
 		var color_tween = create_tween()
 		area_3d.set_deferred("monitoring",false)
@@ -37,7 +38,6 @@ func load_state(activated: bool) -> void:
 		rotation_tween.tween_property(stick,"rotation",Vector3(0,0,deg_to_rad(-30)),0.5)
 		color_tween.tween_property(stick.mesh.material,"albedo_color",Color(0,0.7,0),0.5)	
 		await rotation_tween.finished
-		self.activated = true;
 		activate()
 		area_3d.set_deferred("monitoring",true)
 		area_3d.set_deferred("monitorable",true)

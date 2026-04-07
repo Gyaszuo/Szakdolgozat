@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cprapmaviwjle"]
+
+[ext_resource type="Script" uid="uid://ballkd325rbtg" path="res://scenes/objects/activatables/box_barrier.gd" id="1_ioq4p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65hsm"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_65hsm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_65hsm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65hsm"]
+
+[node name="BoxBarrier" type="Node3D"]
+script = ExtResource("1_ioq4p")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_65hsm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 131072
+collision_mask = 512
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_65hsm")

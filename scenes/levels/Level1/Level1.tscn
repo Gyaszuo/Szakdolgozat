@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c1fa3lkbijhpb"]
+[gd_scene load_steps=28 format=3 uid="uid://c1fa3lkbijhpb"]
 
 [ext_resource type="Script" uid="uid://wsuys181ijcp" path="res://scenes/levels/Level1/level_1.gd" id="1_1pwbc"]
 [ext_resource type="PackedScene" uid="uid://c3ftjr526bkk3" path="res://scenes/levels/Level1/Level1Geometry.tscn" id="2_607xp"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://crq8uvarh0m6b" path="res://scenes/objects/activatables/MethodCaller.tscn" id="19_3rgco"]
 [ext_resource type="PackedScene" uid="uid://b0shxl8o6cx82" path="res://scenes/objects/activators/EnemyKillSwitch.tscn" id="20_opkmp"]
 [ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="22_2ktxa"]
+[ext_resource type="PackedScene" uid="uid://cb4xlwvubxrgo" path="res://scenes/objects/activatables/EnemyBarrier.tscn" id="24_0ei1w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1pwbc"]
 sky_top_color = Color(0.10593646, 0.13576365, 0.17549357, 1)
@@ -31,14 +32,20 @@ ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0.3071527, 0.31511155, 0.32767558, 1)
 ground_curve = 0.0083174845
 
-[sub_resource type="Sky" id="Sky_j08sa"]
+[sub_resource type="Sky" id="Sky_2ktxa"]
 sky_material = SubResource("ProceduralSkyMaterial_1pwbc")
 
 [sub_resource type="Environment" id="Environment_x4si1"]
 background_mode = 2
-sky = SubResource("Sky_j08sa")
+sky = SubResource("Sky_2ktxa")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_depth_begin = 60.0
+volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_1pwbc")
@@ -310,7 +317,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.042015, 2.4341629, -47.95
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="LevelBeginPlatform" parent="Objects" instance=ExtResource("3_et5g2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1024732, 13.103911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23408777, 13.103911)
 
 [node name="3dText" parent="Objects" instance=ExtResource("6_p8gt5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.902558, 5.2600517)
@@ -411,10 +418,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.041847, 2.2141628, -43.102
 activatables = [NodePath("../Door3")]
 
 [node name="LevelEndPlatform" parent="Objects" instance=ExtResource("15_tt7l4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.883667, 2.1541634, -78.20261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.883667, 2.2340877, -78.20261)
 
 [node name="SavePlatform" parent="Objects" instance=ExtResource("16_t0a5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 2.1541626, -37)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 2.2340877, -37)
 
 [node name="Trigger" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("18_a013u")]
 transform = Transform3D(11.256355, 0, 0, 0, 4.29635, 0, 0, 0, 1, -33.888844, 2.604163, -49.61608)
@@ -426,7 +433,6 @@ one_time = false
 activatables = [NodePath("../MethodCaller")]
 
 [node name="MethodCaller" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("19_3rgco")]
-callable = "open_door"
 activators = [NodePath("../Trigger2")]
 
 [node name="EnemyKillSwitch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("20_opkmp")]
@@ -434,8 +440,18 @@ required_enemies = 3
 activatables = [NodePath("../Door4")]
 
 [node name="GauntletMethodCaller" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("19_3rgco")]
-callable = "init_gauntlet"
 activators = [NodePath("../Trigger")]
 
 [node name="BreakableWall" parent="Objects" instance=ExtResource("22_2ktxa")]
 transform = Transform3D(1.008742, 0, 0, 0, 1, 0, 0, 0, 1, -25.891663, 4.104163, -33.409767)
+
+[node name="EnemyBarrier" parent="Objects" instance=ExtResource("24_0ei1w")]
+transform = Transform3D(8.699233, 0, 0, 0, 2.4536765, 0, 0, 0, 0.08377063, -33.853065, 3.435356, -50.859943)
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="next_level" from="Objects/LevelEndPlatform" to="." method="next_level"]
+[connection signal="method_call" from="Objects/MethodCaller" to="." method="open_door"]
+[connection signal="method_call" from="Objects/GauntletMethodCaller" to="." method="init_gauntlet"]

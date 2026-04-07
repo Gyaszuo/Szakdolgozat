@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://bwfqjylolmnnu" path="res://scenes/objects/activatables/hook_barrier.gd" id="1_65kwk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe57a"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.33056295, 0.6291571, 0.9986382, 0.39215687)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a4q40"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_fe57a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_65kwk"]

@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://dxna2vxt61vb1" path="res://scenes/objects/activatables/player_barrier.gd" id="1_rm77v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe57a"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(1, 0.4117647, 0.19607843, 0.39215687)
 
-[sub_resource type="BoxMesh" id="BoxMesh_vx5ge"]
+[sub_resource type="BoxMesh" id="BoxMesh_rm77v"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_fe57a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rm77v"]
@@ -18,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_rm77v")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vx5ge")
+mesh = SubResource("BoxMesh_rm77v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 8192

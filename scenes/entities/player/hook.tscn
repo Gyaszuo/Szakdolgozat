@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c4fjm1kalkp18" path="res://assets/models/terrain/hook.glb" id="3_4mnfp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fxqey"]
+radius = 0.34800908
 
 [node name="Hitbox" type="Area3D"]
 collision_layer = 16

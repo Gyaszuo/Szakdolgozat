@@ -6,8 +6,15 @@
 size = Vector3(0.0066894535, 0.0072138673, 0.013769532)
 
 [node name="Pillar" type="StaticBody3D"]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 
 [node name="column" parent="." instance=ExtResource("1_d4fi8")]
+
+[node name="column" parent="column" index="0"]
+visibility_range_end = 60.0
+visibility_range_fade_mode = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.0073242188, 0.68847656, -0.013428323)

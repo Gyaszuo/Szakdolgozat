@@ -6,8 +6,8 @@ var enabled: bool = false
 var killed_enemies: int = 0
 @export var required_enemies: int
 
-func load_state(activated: bool) -> void:
-	if activated:
+func load_state(param_activated: bool) -> void:
+	if param_activated:
 		update()
 
 func update() -> void:

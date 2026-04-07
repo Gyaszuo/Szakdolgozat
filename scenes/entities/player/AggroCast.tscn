@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://chluf6c3wgoy7"]
 
 [node name="AggroCast" type="RayCast3D"]
+collision_mask = 65537

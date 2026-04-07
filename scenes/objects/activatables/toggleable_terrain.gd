@@ -2,36 +2,43 @@ class_name ToggleableTerrain
 extends Activatable
 
 @export var preActivated: bool = false
+@export var mesh: MeshInstance3D
+@export var collision: CollisionShape3D
+@export var alphaAmount: float = 0.25
 
 func _ready() -> void:
 	if preActivated:
-		$StaticBody3D/CollisionShape3D.disabled = true
+		call_deferred("collision_change",true)
 		var tween = create_tween()
-		tween.tween_method(self.fade,1.0,0.25,1.0)
+		tween.tween_method(self.fade,1.0,alphaAmount,1.0)
 
 func trigger() -> void:
 	if not preActivated:
 		activated = true
-		$StaticBody3D/CollisionShape3D.disabled = true
+		call_deferred("collision_change",true)
 		var tween = create_tween()
-		tween.tween_method(self.fade,1.0,0.25,1.0)
+		tween.tween_method(self.fade,1.0,alphaAmount,1.0)
 	else:
 		activated = true
-		$StaticBody3D/CollisionShape3D.disabled = false
+		call_deferred("collision_change",false)
 		var tween = create_tween()
-		tween.tween_method(self.fade,0.25,1.0,1.0)
+		tween.tween_method(self.fade,alphaAmount,1.0,1.0)
 
 func untrigger() -> void:
 	if not preActivated:
 		activated = false
-		$StaticBody3D/CollisionShape3D.disabled = false
+		call_deferred("collision_change",false)
 		var tween = create_tween()
-		tween.tween_method(self.fade,0.25,1.0,1.0)
+		tween.tween_method(self.fade,alphaAmount,1.0,1.0)
 	else:
 		activated = false
-		$StaticBody3D/CollisionShape3D.disabled = true
+		call_deferred("collision_change",true)
 		var tween = create_tween()
-		tween.tween_method(self.fade,1.0,0.25,1.0)
+		tween.tween_method(self.fade,1.0,alphaAmount,1.0)
 
 func fade(value: float) -> void:
-	$Mesh.mesh.material.albedo_color.a = value
+	var arr_mesh: ArrayMesh = mesh.mesh
+	arr_mesh.surface_get_material(0).albedo_color.a = value
+
+func collision_change(value: bool) -> void:
+	collision.disabled = value

@@ -1,6 +1,8 @@
 class_name BeginPlatform
 extends StaticBody3D
 
+signal save_game
+
 var used: bool = false:
 	set(value):
 		used = value
@@ -11,7 +13,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Player:
 		used = true
 		body.respawn_pos = $Marker3D.global_position
-		get_parent().get_parent().get_parent().get_parent().save_game()
+		save_game.emit()
 
 func disable() -> void:
 	$Area3D/CollisionShape3D.disabled = true

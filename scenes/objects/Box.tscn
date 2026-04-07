@@ -1,23 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dit6nuictyh6y"]
+[gd_scene load_steps=4 format=3 uid="uid://dit6nuictyh6y"]
 
 [ext_resource type="Script" uid="uid://dajy50r5djwws" path="res://scenes/objects/box.gd" id="1_p3axb"]
 [ext_resource type="PackedScene" uid="uid://dw78uku6tt83x" path="res://assets/models/objects/box_large.fbx" id="1_wyre1"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kcwnm"]
-friction = 0.75
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_kcwnm"]
+size = Vector3(1.5, 1.5, 1.5)
 
-[node name="Box" type="RigidBody3D" groups=["Persist"]]
+[node name="Box" type="CharacterBody3D" groups=["Persist"]]
 collision_layer = 512
-collision_mask = 1759
-physics_material_override = SubResource("PhysicsMaterial_kcwnm")
-lock_rotation = true
+collision_mask = 132831
 script = ExtResource("1_p3axb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04824829, 0)
 shape = SubResource("BoxShape3D_kcwnm")
 
-[node name="box_large" parent="." instance=ExtResource("1_wyre1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+[node name="box_large" parent="CollisionShape3D" instance=ExtResource("1_wyre1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7517517, 0)

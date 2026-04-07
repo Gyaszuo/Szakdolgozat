@@ -2,7 +2,7 @@ class_name Hook
 extends Area3D
 
 var direction: Vector3
-var speed: float = 30.0
+var speed: float = 40.0
 var player: Player
 var hook_started: bool = false
 var switching: bool = false
@@ -11,7 +11,7 @@ var stuck_point: Marker3D = null
 @onready var chain: Node3D = $Chain
 @onready var chain_end: Marker3D = $Chain/Marker3D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if hook_started and !player.is_hooking and !switching:
 		player.toggle_main_hand(false)
 		queue_free()
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		player.toggle_main_hand(false)
 		queue_free()
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	player.toggle_main_hand(false)
 	queue_free()
 

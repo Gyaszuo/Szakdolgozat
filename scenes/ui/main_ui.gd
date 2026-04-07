@@ -7,6 +7,8 @@ extends Control
 @onready var menu: Control = $Menu
 @onready var key_bar: KeyBar = $KeyBar
 
+signal quit
+
 func update_health(value: int) -> void:
 	health_bar.update_health(value)
 
@@ -16,7 +18,7 @@ func update_keys(value: int) -> void:
 func update_treasure(value: int) -> void:
 	treasure_counter.update_treasure(value)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		open_menu()
 
@@ -39,3 +41,7 @@ func fade_screen(value: bool) -> void:
 		await tween.finished
 		get_tree().paused = false
 		
+
+func quit_game() -> void:
+	print("quit in MainUI")
+	quit.emit()

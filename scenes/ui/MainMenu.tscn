@@ -13,51 +13,109 @@ script = ExtResource("1_vjtqc")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 23.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 110
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 84
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 76
 text = "Szakdolgozat"
 horizontal_alignment = 1
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = -33.0
-offset_right = 46.5
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 30
 
-[node name="Button" type="Button" parent="VBox"]
+[node name="StartGame" type="Button" parent="MarginContainer/VBoxContainer/VBox"]
 layout_mode = 2
 text = "Start new game"
 
-[node name="Button3" type="Button" parent="VBox"]
+[node name="ContinueGame" type="Button" parent="MarginContainer/VBoxContainer/VBox"]
 layout_mode = 2
 text = "Continue game"
 
-[node name="Button2" type="Button" parent="VBox"]
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBox"]
 layout_mode = 2
 text = "Quit"
 
-[node name="Test level" type="Button" parent="VBox"]
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Level select"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Level1" type="Button" parent="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "1"
+
+[node name="Level2" type="Button" parent="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "2"
+
+[node name="Level3" type="Button" parent="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "3"
+
+[node name="Level4" type="Button" parent="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "4"
+
+[node name="Test level" type="Button" parent="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Test level"
 
-[connection signal="pressed" from="VBox/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="VBox/Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="VBox/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="VBox/Test level" to="." method="_on_test_level_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBox/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBox/ContinueGame" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBox/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer/Level4" to="." method="_on_level_4_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/MarginContainer/HBoxContainer/Test level" to="." method="_on_test_level_pressed"]

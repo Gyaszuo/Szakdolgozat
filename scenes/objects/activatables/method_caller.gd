@@ -1,10 +1,10 @@
 class_name MethodCaller
 extends Activatable
 
-@export var callable: String
+signal method_call()
 
 func trigger() -> void:
-	get_parent().get_parent().call_deferred(callable)
+	method_call.emit()
 	untrigger()
 
 func untrigger() -> void:

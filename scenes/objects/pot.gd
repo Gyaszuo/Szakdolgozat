@@ -18,7 +18,7 @@ func hit() -> void:
 func save() -> Dictionary:
 	var save_dict = {
 		"filename" : get_scene_file_path(),
-		"node_name" : name,
+		"name" : name,
 		"parent" : get_parent().get_path(),
 		"pos_x" : global_position.x,
 		"pos_y" : global_position.y,

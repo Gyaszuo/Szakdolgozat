@@ -14,8 +14,8 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func disable() -> void:
 	$Area3D/CollisionShape3D.disabled = true
 
-func load_state(activated: bool) -> void:
-	if activated:
+func load_state(param_activated: bool) -> void:
+	if param_activated:
 		var player = PseudoPlayer.new()
 		player.keys = 1
 		_on_area_3d_body_entered(player)
