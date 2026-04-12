@@ -15,6 +15,7 @@ collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_4geym")
 linear_damp = 1.0
 script = ExtResource("1_4geym")
+spin_speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, 0, 0)
@@ -31,4 +32,11 @@ shape = SubResource("SphereShape3D_hm7b3")
 [node name="coin" parent="." instance=ExtResource("3_11k5e")]
 transform = Transform3D(0.7041015, 0.46063524, 0.54042226, 0, 0.7610517, -0.64869136, -0.7100994, 0.45674455, 0.5358577, 0, 0, 0)
 
+[node name="coin" parent="coin" index="0"]
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+
+[editable path="coin"]

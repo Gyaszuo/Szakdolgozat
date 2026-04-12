@@ -11,3 +11,7 @@ func attack() -> void:
 	else:
 		attack_anim.animation = "Unarmed_Melee_Attack_Punch_B"
 	animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	attack_timer.start(randf_range(1.5,2))
+
+func _on_vision_timer_timeout() -> void:
+	aggro = false

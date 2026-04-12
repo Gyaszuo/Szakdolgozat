@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=45 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="10_k1k2k"]
 [ext_resource type="PackedScene" uid="uid://dpbvqt4mxety1" path="res://scenes/objects/activators/Lock.tscn" id="11_hsfnj"]
 [ext_resource type="PackedScene" uid="uid://c1ax6ryjuxbkt" path="res://scenes/objects/activators/Switch.tscn" id="12_cudyp"]
+[ext_resource type="PackedScene" uid="uid://dg66xuh5xd5ui" path="res://scenes/objects/collectibles/Heart.tscn" id="12_wvg0q"]
 [ext_resource type="PackedScene" uid="uid://dq2qkiiiu5pl3" path="res://scenes/objects/HookPoint.tscn" id="13_uquo7"]
 [ext_resource type="PackedScene" uid="uid://byfcyt6ira4ck" path="res://scenes/objects/activators/HookSwitch.tscn" id="14_n14kl"]
 [ext_resource type="PackedScene" uid="uid://dlnec7qs4oc0o" path="res://scenes/objects/Pot.tscn" id="15_q5g0a"]
@@ -74,6 +75,7 @@ uv1_scale = Vector3(4, 4, 4)
 
 [node name="TestLevel" type="Node3D"]
 script = ExtResource("1_ipv86")
+level_name = "Test level"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fn47k")
@@ -85,7 +87,7 @@ shadow_enabled = true
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_euepx")]
-transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, 6.362997, 1.0500001, -15.120648)
+transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, 2.54148, 2.400083, -0.02561307)
 
 [node name="Box" parent="Entities" instance=ExtResource("9_uf6c7")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6995115, 5.1778812, 6.816755)
@@ -126,6 +128,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.345011, 0.10351585, 0)
 
 [node name="Pot3" parent="Collectibles" instance=ExtResource("15_q5g0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1309931, 0.10351585, 0)
+
+[node name="Heart" parent="Collectibles" instance=ExtResource("12_wvg0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5265841, 0.8, -11.265538)
+
+[node name="Heart2" parent="Collectibles" instance=ExtResource("12_wvg0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51833224, 0.8, -11.265538)
+
+[node name="Heart3" parent="Collectibles" instance=ExtResource("12_wvg0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5776131, 0.8, -11.265538)
+
+[node name="Heart4" parent="Collectibles" instance=ExtResource("12_wvg0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9887495, 0.8, -11.265538)
 
 [node name="Objects" type="Node3D" parent="."]
 
@@ -297,3 +311,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9191785, 0.05000019, -3.770
 
 [node name="Wall" parent="." instance=ExtResource("33_7k5i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.11866, 0.05000006, -20.721682)
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

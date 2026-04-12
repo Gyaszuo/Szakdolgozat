@@ -95,6 +95,7 @@ point_count = 2
 [node name="Level2" type="Node3D"]
 script = ExtResource("1_n7m3w")
 next_level_num = 3
+level_name = "Level 2 - Crossroads"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k04t2")
@@ -935,6 +936,10 @@ text = "Brown pressure plates like this are temporary."
 [node name="Text3D4" parent="Objects" instance=ExtResource("33_74lpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.561787, 2.3698666, 85.5218)
 text = "This area is optional"
+
+[node name="Text3D13" parent="Objects" instance=ExtResource("33_74lpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.941409, 3.7215397, 96.18274)
+text = "Reset puzzle"
 
 [node name="Text3D5" parent="Objects" instance=ExtResource("33_74lpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026872993, 3.293285, 107.69147)

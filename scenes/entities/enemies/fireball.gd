@@ -1,11 +1,14 @@
 class_name Fireball
 extends Area3D
 
-var direction: Vector2
-const speed: float = 5.0
+var direction: Vector3
+var speed: float
+
+func _ready() -> void:
+	speed = randf_range(5,10)
 
 func _process(delta: float) -> void:
-	position += Vector3(direction.x,0,direction.y) * speed * delta
+	position += Vector3(direction.x,direction.y,direction.z) * speed * delta
 
 func _on_life_timer_timeout() -> void:
 	queue_free()

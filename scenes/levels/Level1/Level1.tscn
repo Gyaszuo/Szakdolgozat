@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://6r51oodsmn1p" path="res://scenes/objects/BreakableWall.tscn" id="22_2ktxa"]
 [ext_resource type="PackedScene" uid="uid://cb4xlwvubxrgo" path="res://scenes/objects/activatables/EnemyBarrier.tscn" id="24_0ei1w"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1pwbc"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ei1w"]
 sky_top_color = Color(0.10593646, 0.13576365, 0.17549357, 1)
 sky_horizon_color = Color(0.21827355, 0.22340795, 0.23368835, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
@@ -33,26 +33,28 @@ ground_horizon_color = Color(0.3071527, 0.31511155, 0.32767558, 1)
 ground_curve = 0.0083174845
 
 [sub_resource type="Sky" id="Sky_2ktxa"]
-sky_material = SubResource("ProceduralSkyMaterial_1pwbc")
+sky_material = SubResource("ProceduralSkyMaterial_0ei1w")
 
-[sub_resource type="Environment" id="Environment_x4si1"]
+[sub_resource type="Environment" id="Environment_eqohu"]
 background_mode = 2
 sky = SubResource("Sky_2ktxa")
 tonemap_mode = 2
-glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0, 0, 0, 1)
 fog_density = 1.0
-fog_depth_begin = 60.0
+fog_depth_begin = 40.0
+fog_depth_end = 60.0
+volumetric_fog_density = 0.0337
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_1pwbc")
 next_level_num = 2
+level_name = "Level 1 - Beginnings"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_x4si1")
+environment = SubResource("Environment_eqohu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)

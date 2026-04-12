@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3jpvqgrxsfxa"]
+
+[ext_resource type="Script" uid="uid://c8s6igporu2ia" path="res://scenes/objects/activators/timer_switch.gd" id="1_p3wgw"]
+
+[node name="TimerSwitch" type="Node3D"]
+script = ExtResource("1_p3wgw")
+
+[node name="RepeatTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="OffsetTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RepeatTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="OffsetTimer" to="." method="_on_offset_timer_timeout"]

@@ -17,6 +17,9 @@ material = SubResource("StandardMaterial3D_fe57a")
 script = ExtResource("1_65kwk")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("BoxMesh_a4q40")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

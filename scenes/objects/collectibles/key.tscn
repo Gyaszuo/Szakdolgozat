@@ -69,6 +69,9 @@ spot_angle_attenuation = 0.007812513
 
 [node name="key" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.25386518, 0, 0)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("ArrayMesh_t8td0")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_8tbyl")

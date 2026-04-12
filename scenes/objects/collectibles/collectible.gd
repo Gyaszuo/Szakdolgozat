@@ -10,6 +10,9 @@ func _on_hitbox_body_entered(body: Node3D) -> void
 func _physics_process(_delta: float) -> void:
 	rotation.y += spin_speed
 
+func get_value() -> int:
+	return 0
+
 func save() -> Dictionary:
 	var save_dict = {
 		"filename" : get_scene_file_path(),

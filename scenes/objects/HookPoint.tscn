@@ -32,5 +32,8 @@ shape = SubResource("CylinderShape3D_uxdnv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("CylinderMesh_uxdnv")
 skeleton = NodePath("../..")

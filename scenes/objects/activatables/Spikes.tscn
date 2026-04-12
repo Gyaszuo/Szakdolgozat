@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://b7rkvg4jjlykt" path="res://assets/models/terrain/floor_tile_big_spikes.tscn" id="1_n2rjr"]
 [ext_resource type="Script" uid="uid://bsln2wefchcoq" path="res://scenes/objects/activatables/spikes.gd" id="1_q2yd6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n2rjr"]
-size = Vector3(0.44415283, 0.6776123, 0.21224976)
+[sub_resource type="BoxShape3D" id="BoxShape3D_q2yd6"]
+resource_local_to_scene = true
+size = Vector3(0.040222168, 0.03970337, 0.01947403)
 
 [node name="Spikes" type="Node3D"]
 script = ExtResource("1_q2yd6")
@@ -12,16 +13,20 @@ script = ExtResource("1_q2yd6")
 [node name="floor_tile_big_spikes" parent="." instance=ExtResource("1_n2rjr")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
+[node name="floor_tile_big_spikes" parent="floor_tile_big_spikes" index="0"]
+visibility_range_fade_mode = 1
+
 [node name="spikes" parent="floor_tile_big_spikes/floor_tile_big_spikes" index="0"]
 transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, -2.842171e-14, 0, 2.842171e-14, 1.0000002, 0, 0, 0)
+visibility_range_fade_mode = 1
 
 [node name="Area3D" type="Area3D" parent="floor_tile_big_spikes/floor_tile_big_spikes/spikes" index="0"]
 collision_layer = 4
 collision_mask = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tile_big_spikes/floor_tile_big_spikes/spikes/Area3D"]
-transform = Transform3D(0.051400382, 0, 0, 0, 0.032865435, -3.5527137e-15, 0, 1.7763568e-15, 0.09353494, -1.4115277e-05, -0.00014643384, 0.010034857)
-shape = SubResource("BoxShape3D_n2rjr")
+transform = Transform3D(1, 0, 0, 0, 1.0001993, 2.3746338e-11, 0, -2.3746338e-11, 1.0001993, -9.155182e-05, 4.909047e-05, 0.01019354)
+shape = SubResource("BoxShape3D_q2yd6")
 
 [node name="RefreshTimer" type="Timer" parent="."]
 wait_time = 0.05

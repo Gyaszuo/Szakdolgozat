@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg66xuh5xd5ui"]
+
+[ext_resource type="Script" uid="uid://cantd53css5ww" path="res://scenes/objects/collectibles/heart.gd" id="1_b8wop"]
+[ext_resource type="PackedScene" uid="uid://ch3nuuqxpw4f" path="res://assets/models/objects/heart.glb" id="2_iwa8o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b8wop"]
+
+[node name="Heart" type="Node3D" groups=["Persist"]]
+script = ExtResource("1_b8wop")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 4096
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_b8wop")
+
+[node name="heart" parent="." instance=ExtResource("2_iwa8o")]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, -0.31550142, -0.28170672, 0)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

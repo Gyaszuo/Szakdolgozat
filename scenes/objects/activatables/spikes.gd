@@ -15,24 +15,24 @@ func trigger() -> void:
 		activated = true
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(spikes,"position",Vector3(0,0,-0.02),0.5)
+		tween.tween_property(spikes,"position",Vector3(0,0,-0.02),0.25)
 	else:
 		activated = true
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(spikes,"position",Vector3(0,0,0),0.5)
+		tween.tween_property(spikes,"position",Vector3(0,0,0),0.25)
 
 func untrigger() -> void:
 	if not preActivated:
 		activated = false
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(spikes,"position",Vector3(0,0,0),0.5)
+		tween.tween_property(spikes,"position",Vector3(0,0,0),0.25)
 	else:
 		activated = false
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(spikes,"position",Vector3(0,0,-0.02),0.5)
+		tween.tween_property(spikes,"position",Vector3(0,0,-0.02),0.25)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Player:

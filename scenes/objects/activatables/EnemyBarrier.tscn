@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8ars"]
 resource_local_to_scene = true
 transparency = 1
-albedo_color = Color(1, 0.53711885, 0.50881755, 0.39215687)
+albedo_color = Color(0.9860849, 0, 0.2768236, 0.39215687)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m8ars"]
 resource_local_to_scene = true
@@ -17,6 +17,9 @@ material = SubResource("StandardMaterial3D_m8ars")
 script = ExtResource("1_m8ars")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("BoxMesh_m8ars")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

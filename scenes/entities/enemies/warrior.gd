@@ -23,6 +23,7 @@ func attack() -> void:
 	else:
 		attack_anim.animation = "2H_Melee_Attack_Spin"
 	$Body/AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	attack_timer.start(randf_range(1.5,2))
 
 func toggle_spin_hitbox(value: bool) -> void:
 	$Body/model/Area3D2/CollisionShape3D.disabled = !value
@@ -30,3 +31,6 @@ func toggle_spin_hitbox(value: bool) -> void:
 
 func _on_area_3d_2_body_entered(enter_body: Node3D) -> void:
 	enter_body.hit()
+
+func _on_vision_timer_timeout() -> void:
+	aggro = false

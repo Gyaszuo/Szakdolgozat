@@ -64,7 +64,8 @@ process_thread_messages = 0
 [node name="wall_pillar" type="MeshInstance3D" parent="WallPillar/wall_pillar"]
 transform = Transform3D(100, 0, 0, 0, -2.3841858e-05, 99.99999, 0, -99.99999, -2.3841858e-05, 0, 0, 0)
 visibility_range_end = 60.0
-visibility_range_fade_mode = 2
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("ArrayMesh_c7a0s")
 skeleton = NodePath("")
 

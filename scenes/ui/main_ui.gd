@@ -40,7 +40,19 @@ func fade_screen(value: bool) -> void:
 		tween.tween_property(color_rect,"color",Color(0,0,0,0),0.2)
 		await tween.finished
 		get_tree().paused = false
-		
+
+func show_title(title: String) -> void:
+	print(title)
+	$LevelTitle/Label.text = title
+	var tween = create_tween()
+	await tween.tween_method(title_font_color_change,Color(1,1,1,0),Color(1,1,1,1),2).finished
+	await get_tree().create_timer(3).timeout
+	tween = create_tween()
+	await tween.tween_method(title_font_color_change,Color(1,1,1,1),Color(1,1,1,0),2).finished
+	$LevelTitle/Label.text = ""
+
+func title_font_color_change(color: Color):
+	$LevelTitle/Label.add_theme_color_override("font_color", color)
 
 func quit_game() -> void:
 	print("quit in MainUI")

@@ -13,11 +13,13 @@ process_thread_messages = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_w5euy")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="floor_foundation_front" parent="." instance=ExtResource("1_w5euy")]
 
 [node name="floor_foundation_front" parent="floor_foundation_front" index="0"]
 visibility_range_end = 60.0
-visibility_range_fade_mode = 2
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 
 [editable path="floor_foundation_front"]

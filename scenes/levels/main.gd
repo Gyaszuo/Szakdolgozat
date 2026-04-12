@@ -3,6 +3,7 @@ extends Node
 
 var treasure: int
 var total_treasure: int
+var total_crests: int
 const DEBUG_UNLOCK_SEQUENCE = ["S","Z","A","K","D","O","L","G","O","Z","A","T"]
 var debug_mode = false:
 	set(value):
@@ -51,18 +52,19 @@ func quit_to_menu() -> void:
 	for child in $Level.get_children():
 		$Level.remove_child(child)
 
-func show_summary_screen(param_total_treasure: int, param_remaining_treasure: int,level: String):
+func show_summary_screen(param_total_treasure: int, param_remaining_treasure: int,level: String,param_total_crests: int, param_remaining_crests: int):
 	$SummaryScreen.visible = true
 	$SummaryScreen.level = level
-	$SummaryScreen.set_completion(param_total_treasure,param_remaining_treasure)
+	$SummaryScreen.set_completion(param_total_treasure,param_remaining_treasure,param_total_crests,param_remaining_crests)
 
 func deferred_load(level: String) -> void:
 	call_deferred("load_next_level",level)
 
 func load_next_level(level: String) -> void:
 	var remaining_treasure = total_treasure - $Level.get_child(0).calc_max_treasure()
+	var remaining_crests = total_crests - $Level.get_child(0).calc_max_crests()
 	$Level.remove_child($Level.get_child(0))
-	show_summary_screen(total_treasure,remaining_treasure,level)
+	show_summary_screen(total_treasure,remaining_treasure,level,total_crests,remaining_crests)
 
 func load_level(level: String) -> void:
 	var next_level = load(level)
@@ -70,6 +72,7 @@ func load_level(level: String) -> void:
 		$Level.remove_child($Level.get_child(0))
 	$Level.add_child(next_level.instantiate())
 	total_treasure = $Level.get_child(0).calc_max_treasure()
+	total_crests = $Level.get_child(0).calc_max_crests()
 	$MainMenu.visible = false
 	$SummaryScreen.visible = false
 	_init_level()
@@ -118,6 +121,7 @@ func load_game() -> void:
 	var level = load(level_file_path).instantiate()
 	$Level.add_child(level)
 	total_treasure = $Level.get_child(0).calc_max_treasure()
+	total_crests = $Level.get_child(0).calc_max_crests()
 	
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for i in save_nodes:

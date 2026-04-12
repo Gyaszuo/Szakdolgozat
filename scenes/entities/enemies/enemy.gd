@@ -22,7 +22,8 @@ var walk_anim = "Walking_D_Skeletons"
 @onready var model: Node3D = $Body/model
 @onready var hitbox: CollisionShape3D = $Body/CollisionShape3D
 @onready var marker: Marker3D = $Body/Marker3D
-@onready var attack_timer = $Body/AttackTimer
+@onready var attack_timer: Timer = $Body/AttackTimer
+@onready var vision_timer: Timer = $Body/VisionTimer
 @onready var animation_tree: AnimationTree = $Body/AnimationTree
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/MoveStateMachine/playback")
 @onready var attack_anim: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('AttackAnimation')
@@ -38,9 +39,13 @@ func _physics_process(delta: float) -> void:
 		aggro_cast.target_position = player.to_local(marker.global_position)
 		if not aggro_cast.is_colliding() && pre_aggro:
 			aggro = true
+			vision_timer.stop()
+		if aggro_cast && aggro:
+			if vision_timer.is_stopped():
+				vision_timer.start()
 
 func movement_logic(delta: float) -> void:
-	if dead:
+	if dead or attacking:
 		return
 	if aggro:
 		set_move_state(walk_anim)
@@ -48,10 +53,15 @@ func movement_logic(delta: float) -> void:
 		var target_v2: Vector2 = Vector2(target_dir.x,target_dir.z)
 		var target_angle: float = -target_v2.angle() + PI/2
 		model.global_rotation.y = rotate_toward(model.global_rotation.y,target_angle,TURN_SPEED * delta)
-		if body.global_position.distance_to(player.global_position) >= attack_range:
+		if body.global_position.distance_to(player.global_position) > attack_range:
 			body.velocity = Vector3(target_v2.x,0,target_v2.y) * speed
 		else:
+			body.velocity = Vector3.ZERO
 			set_move_state("Idle")
+			if dead or player == null or attacking:
+				return
+			if attack_timer.time_left == 0:
+				attack()
 	else:
 		body.velocity = Vector3.ZERO
 		set_move_state("Idle")
@@ -89,13 +99,7 @@ func disable_collision() -> void:
 
 func toggle_attack_hitbox(value: bool) -> void:
 	model.get_child(2).get_child(0).disabled = !value
-	attacking = value
-
-func _on_attack_timer_timeout() -> void:
-	if dead or player == null or attacking:
-		return
-	if body.global_position.distance_to(player.global_position) <= attack_range:
-		attack()
+	attacking = value	
 
 func _on_area_3d_body_entered(enter_body: Node3D) -> void:
 	enter_body.hit()

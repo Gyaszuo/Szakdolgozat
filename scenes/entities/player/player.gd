@@ -47,7 +47,7 @@ var dash_vector: Vector3
 
 var health: int = 6:
 	set(value):
-		health = value
+		health = clamp(value,0,6)
 		main_ui.update_health(value)
 		if value == 0:
 			die()

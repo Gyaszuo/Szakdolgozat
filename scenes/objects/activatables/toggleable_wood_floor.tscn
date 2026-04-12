@@ -91,11 +91,17 @@ collision = NodePath("Floor/CollisionShape3D")
 
 [node name="floor_wood_large_dark" type="MeshInstance3D" parent="Floor/floor_wood_large_dark"]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0.07927376, 0)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("ArrayMesh_gcppo")
 skeleton = NodePath("")
 
 [node name="floor_wood_large_dark" type="MeshInstance3D" parent="Floor/floor_wood_large_dark/floor_wood_large_dark"]
 transform = Transform3D(1.0000001, 0, 0, 0, -1.0000001, -8.742278e-08, 0, 8.742278e-08, -1.0000001, 0, 9.450171e-11, -0.00079273776)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("ArrayMesh_raeat")
 skeleton = NodePath("")
 

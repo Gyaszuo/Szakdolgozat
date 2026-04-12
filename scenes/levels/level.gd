@@ -10,6 +10,7 @@ extends Node3D
 @onready var level_geometry: Node3D = $LevelGeometry
 @onready var respawn_timer: Timer = $RespawnTimer
 @export var next_level_num: int = 1
+@export var level_name: String
 
 var hook_scene: PackedScene = preload("res://scenes/entities/player/hook.tscn")
 signal save_treasure(treasure: int)
@@ -45,6 +46,7 @@ func init():
 			child.init()
 			if child.has_signal("death"):
 				child.connect("death",update_kill_switches)
+	player.main_ui.show_title(level_name)
 	respawn_timer.start()
 	await respawn_timer.timeout
 	for child in objects.get_children():
@@ -57,16 +59,20 @@ func call_method(callable: String):
 func calc_max_treasure() -> int:
 	var sum = 0
 	for node in collectibles.get_children():
-		if node is Key: continue
 		sum += node.get_value()
 	return sum
 
+func calc_max_crests() -> int:
+	var sum = 0
+	for node in collectibles.get_children():
+		if node is Crest:
+			sum += 1
+	return sum
+
 func update_kill_switches():
-	print("update_kill_switches")
 	for i in $Objects.get_children():
 		if i is EnemyKillSwitch:
 			i.update()
 
 func quit_game() -> void:
-	print("quit in Level")
 	quit.emit()

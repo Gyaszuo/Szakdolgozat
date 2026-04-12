@@ -30,6 +30,8 @@ shape = SubResource("BoxShape3D_vcasu")
 debug_color = Color(0.93966174, 0.116844065, 0.54242563, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
 mesh = SubResource("PlaneMesh_xhpmm")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_u0gke")

@@ -124,11 +124,16 @@ transform = Transform3D(0.385, 0, 0, 0, 1, 0, 0, 0, 0.374, 0, 0.049986422, 0)
 
 [node name="floor_dirt_large_rocky" type="MeshInstance3D" parent="floor_dirt_large_rocky"]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
 mesh = SubResource("ArrayMesh_6ikx7")
 skeleton = NodePath("")
 
 [node name="floor_dirt_large_rocky" type="MeshInstance3D" parent="floor_dirt_large_rocky/floor_dirt_large_rocky"]
 transform = Transform3D(-1, 1.0421608e-14, -8.742278e-08, -1.0421609e-14, 1, 2.384186e-07, 8.7422784e-08, 2.384186e-07, -1, 0, 1.1920931e-10, -0.0010000002)
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = SubResource("ArrayMesh_2adtd")
 skeleton = NodePath("")
 

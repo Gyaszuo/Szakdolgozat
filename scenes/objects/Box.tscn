@@ -17,3 +17,10 @@ shape = SubResource("BoxShape3D_kcwnm")
 
 [node name="box_large" parent="CollisionShape3D" instance=ExtResource("1_wyre1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7517517, 0)
+
+[node name="box_large" parent="CollisionShape3D/box_large" index="0"]
+visibility_range_end = 60.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+
+[editable path="CollisionShape3D/box_large"]

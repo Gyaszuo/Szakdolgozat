@@ -17,14 +17,17 @@ process_thread_messages = 0
 
 [node name="wall_Tsplit" parent="wall_Tsplit" index="0"]
 visibility_range_end = 60.0
-visibility_range_fade_mode = 2
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.75)
 shape = SubResource("BoxShape3D_1nus3")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_1px8y")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [editable path="wall_Tsplit"]
