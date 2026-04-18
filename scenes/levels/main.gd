@@ -49,11 +49,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func quit_to_menu() -> void:
 	print("quit in Main")
 	$MainMenu.visible = true
+	$MainMenu._ready()
 	for child in $Level.get_children():
 		$Level.remove_child(child)
 
 func show_summary_screen(param_total_treasure: int, param_remaining_treasure: int,level: String,param_total_crests: int, param_remaining_crests: int):
 	$SummaryScreen.visible = true
+	$SummaryScreen._ready()
 	$SummaryScreen.level = level
 	$SummaryScreen.set_completion(param_total_treasure,param_remaining_treasure,param_total_crests,param_remaining_crests)
 
@@ -64,18 +66,28 @@ func load_next_level(level: String) -> void:
 	var remaining_treasure = total_treasure - $Level.get_child(0).calc_max_treasure()
 	var remaining_crests = total_crests - $Level.get_child(0).calc_max_crests()
 	$Level.remove_child($Level.get_child(0))
-	show_summary_screen(total_treasure,remaining_treasure,level,total_crests,remaining_crests)
+	if level == "End":
+		load_level(level)
+	else:
+		show_summary_screen(total_treasure,remaining_treasure,level,total_crests,remaining_crests)
 
 func load_level(level: String) -> void:
-	var next_level = load(level)
-	if $Level.get_children().size() > 0:
-		$Level.remove_child($Level.get_child(0))
-	$Level.add_child(next_level.instantiate())
-	total_treasure = $Level.get_child(0).calc_max_treasure()
-	total_crests = $Level.get_child(0).calc_max_crests()
-	$MainMenu.visible = false
-	$SummaryScreen.visible = false
-	_init_level()
+	if level == "End":
+		$MainMenu.visible = false
+		$SummaryScreen.visible = false
+		$EndScreen.visible = true
+		$EndScreen._ready()
+		$EndScreen.set_completion(treasure)
+	else:
+		var next_level = load(level)
+		if $Level.get_children().size() > 0:
+			$Level.remove_child($Level.get_child(0))
+		$Level.add_child(next_level.instantiate())
+		total_treasure = $Level.get_child(0).calc_max_treasure()
+		total_crests = $Level.get_child(0).calc_max_crests()
+		$MainMenu.visible = false
+		$SummaryScreen.visible = false
+		_init_level()
 
 func save_treasure(value: int):
 	treasure = value
@@ -195,4 +207,11 @@ func _init_level() -> void:
 	$Level.get_child(0).player.treasure = treasure
 	if not $Level.get_child(0).player.main_ui.menu.is_connected("quit",quit_to_menu):
 		$Level.get_child(0).player.main_ui.menu.connect("quit",quit_to_menu)
-	
+
+func restart_game() -> void:
+	treasure = 0
+	total_crests = 0
+	total_treasure = 0
+	$EndScreen.visible = false
+	$MainMenu.visible = true
+	$MainMenu._ready()

@@ -21,6 +21,16 @@ func shoot() -> void:
 	get_parent().add_child(fireball)
 	fireball.global_position = $Body/model/Rig/Skeleton3D/BoneAttachment3D/Skeleton_Staff/Marker3D.global_position
 	fireball.direction = target_dir
+	fireball.setup()
 
-func _on_vision_timer_timeout() -> void:
-	aggro = false
+func change_color(alpha: float):
+	$Body/model/Rig/Skeleton3D/head/Skeleton_Mage_Hat.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_ArmLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_ArmRight.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_Body.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_Eyes.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_Jaw.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_LegLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_LegRight.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Mage_Skull.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/BoneAttachment3D/Skeleton_Staff/Skeleton_Staff.material_overlay.set_shader_parameter('alpha',alpha)

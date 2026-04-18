@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=3 uid="uid://drwcu3p72h0xd"]
+
+[ext_resource type="Script" uid="uid://cfj52kg5k3xkc" path="res://scenes/levels/Level4/level_4.gd" id="1_4bkud"]
+[ext_resource type="PackedScene" uid="uid://cpat5msvyeimi" path="res://scenes/levels/Level4/Level4Geometry.tscn" id="2_3wllv"]
+[ext_resource type="PackedScene" uid="uid://b7g8gmv0osnmr" path="res://scenes/objects/LevelBeginPlatform.tscn" id="3_7ysbk"]
+[ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="3_qyho5"]
+[ext_resource type="PackedScene" uid="uid://dbsg54ut3626a" path="res://scenes/entities/enemies/Boss.tscn" id="4_bw6r7"]
+[ext_resource type="PackedScene" uid="uid://bgtlhskkgke67" path="res://scenes/objects/LevelEndPlatform.tscn" id="5_aepno"]
+[ext_resource type="PackedScene" uid="uid://dqv7uxds8j5" path="res://scenes/objects/activatables/Door.tscn" id="6_fp2ik"]
+[ext_resource type="PackedScene" uid="uid://b3jqpd8yaby5n" path="res://scenes/objects/activators/Trigger.tscn" id="8_7g3g0"]
+[ext_resource type="PackedScene" uid="uid://crq8uvarh0m6b" path="res://scenes/objects/activatables/MethodCaller.tscn" id="9_8k2t3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3wllv"]
+sky_top_color = Color(0.10593646, 0.13576365, 0.17549357, 1)
+sky_horizon_color = Color(0.21827355, 0.22340795, 0.23368835, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.3071527, 0.31511155, 0.32767558, 1)
+ground_curve = 0.0083174845
+
+[sub_resource type="Sky" id="Sky_2ktxa"]
+sky_material = SubResource("ProceduralSkyMaterial_3wllv")
+
+[sub_resource type="Environment" id="Environment_7ysbk"]
+background_mode = 2
+sky = SubResource("Sky_2ktxa")
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_depth_begin = 40.0
+fog_depth_end = 60.0
+volumetric_fog_density = 0.0337
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="Level4" type="Node3D"]
+script = ExtResource("1_4bkud")
+next_level_num = -1
+level_name = "Level 4 - Skeleton Knight"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7ysbk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+shadow_enabled = true
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.0
+directional_shadow_split_3 = 0.0
+directional_shadow_max_distance = 0.0
+
+[node name="LevelGeometry" parent="." instance=ExtResource("2_3wllv")]
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("3_qyho5")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.9000001, -8)
+
+[node name="Boss" parent="Entities" instance=ExtResource("4_bw6r7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.19999999, 19.099998)
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="LevelBeginPlatform" parent="Objects" instance=ExtResource("3_7ysbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17992479, -7.8)
+
+[node name="LevelEndPlatform" parent="Objects" instance=ExtResource("5_aepno")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24999994, 31.3)
+
+[node name="Door" parent="Objects" instance=ExtResource("6_fp2ik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7616633, 0, 22)
+
+[node name="Door2" parent="Objects" instance=ExtResource("6_fp2ik")]
+transform = Transform3D(0, 0, -1.0000001, 0, 1, 0, 1.0000001, 0, 0, -0.7616633, 0, 2)
+
+[node name="Trigger" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("8_7g3g0")]
+transform = Transform3D(38.219997, 0, 0, 0, 5.44, 0, 0, 0, 1, 0, 2.8499248, 5)
+activatables = [NodePath("../StartBattle")]
+
+[node name="Trigger2" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("8_7g3g0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -7.8)
+one_time = false
+activatables = [NodePath("../RestartBattle")]
+
+[node name="StartBattle" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_8k2t3")]
+activators = [NodePath("../Trigger")]
+
+[node name="RestartBattle" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("9_8k2t3")]
+activators = [NodePath("../Trigger2")]
+
+[node name="EnemySummon1" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8999996, 0.3, 19.951082)
+
+[node name="EnemySummon2" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 0.3, 19.951)
+
+[node name="HeartSummon1" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.6, 4)
+
+[node name="HeartSummon2" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.6, 19)
+
+[node name="HeartSummon3" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.6, 4)
+
+[node name="HeartSummon4" type="Marker3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.6, 19)
+
+[node name="Hooks" type="Node3D" parent="."]
+
+[node name="Collectibles" type="Node3D" parent="."]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="HeartTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="death" from="Entities/Boss" to="." method="end_boss"]
+[connection signal="raise" from="Entities/Boss" to="." method="raise_skeletons"]
+[connection signal="next_level" from="Objects/LevelEndPlatform" to="." method="next_level"]
+[connection signal="method_call" from="Objects/StartBattle" to="." method="activate_boss"]
+[connection signal="method_call" from="Objects/RestartBattle" to="." method="restart_boss"]
+[connection signal="timeout" from="HeartTimer" to="." method="spawn_heart"]

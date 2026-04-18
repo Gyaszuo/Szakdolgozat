@@ -13,6 +13,10 @@ func _process(delta: float) -> void:
 func _on_life_timer_timeout() -> void:
 	queue_free()
 
+func setup():
+	print(direction)
+	$FireballMesh.rotation = Vector3(-PI/2 + direction.y,-(Vector2(direction.x,direction.z).angle() +PI/2),0)
+
 func _on_body_entered(body: Node3D) -> void:
 	print("entered")
 	if "hit" in body:

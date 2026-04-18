@@ -1,33 +1,50 @@
-[gd_scene load_steps=6 format=3 uid="uid://d00dn586gfhrk"]
+[gd_scene load_steps=12 format=3 uid="uid://d00dn586gfhrk"]
 
-[ext_resource type="Shader" uid="uid://5a8hn7rx68cv" path="res://scenes/objects/Lava.gdshader" id="1_5wtls"]
 [ext_resource type="Script" uid="uid://bpkvf2bn07jgp" path="res://scenes/entities/enemies/fireball.gd" id="1_gcbpu"]
+[ext_resource type="ArrayMesh" uid="uid://cbjryj4vxfvlw" path="res://assets/models/enemies/fireball_shell_mesh.obj" id="2_223ft"]
+[ext_resource type="Shader" uid="uid://1oe3xek245ab" path="res://scenes/entities/enemies/Fireball.gdshader" id="3_223ft"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcbpu"]
+[sub_resource type="Gradient" id="Gradient_223ft"]
+colors = PackedColorArray(0.99607843, 0.039215688, 0, 1, 1, 0.7921569, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gisiu"]
+gradient = SubResource("Gradient_223ft")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i77we"]
+noise_type = 2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg6t0"]
+noise = SubResource("FastNoiseLite_i77we")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gisiu"]
 render_priority = 0
-shader = ExtResource("1_5wtls")
-shader_parameter/dark_lava_color = Color(1, 0.40392157, 0, 1)
-shader_parameter/light_lava_color = Color(0.95686275, 0.6431373, 0.21176471, 1)
-shader_parameter/speed = 2.0790000987525
-shader_parameter/scale = 10.0
-shader_parameter/sharpness = 1.0
-shader_parameter/emission_intensity = 1.4610000693975
-
-[sub_resource type="SphereMesh" id="SphereMesh_0c21y"]
-material = SubResource("ShaderMaterial_gcbpu")
-radius = 0.25
-height = 0.5
+shader = ExtResource("3_223ft")
+shader_parameter/noise_sampler = SubResource("NoiseTexture2D_cg6t0")
+shader_parameter/gradient_sampler = SubResource("GradientTexture1D_gisiu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2brdl"]
 radius = 0.2456436
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_223ft"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 4.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_gisiu"]
+material = SubResource("StandardMaterial3D_223ft")
 
 [node name="Fireball" type="Area3D"]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_gcbpu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_0c21y")
+[node name="FireballMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.32, 0, 0, 0, -1.3987644e-08, 0.32, 0, -0.32, -1.3987644e-08, 0, 0.04688695, 0)
+mesh = ExtResource("2_223ft")
+surface_material_override/0 = SubResource("ShaderMaterial_gisiu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_2brdl")
@@ -36,6 +53,10 @@ shape = SubResource("SphereShape3D_2brdl")
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 0, 0)
+mesh = SubResource("SphereMesh_gisiu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

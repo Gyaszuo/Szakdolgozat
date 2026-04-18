@@ -5,6 +5,9 @@ extends Node3D
 
 func hit() -> void:
 	hp -= 1
+	var tween = create_tween()
+	tween.tween_method(change_color,0.0,0.25,0.125)
+	tween.tween_method(change_color,0.25,0.0,0.125)
 	if hp <= 0:
 		queue_free()
 
@@ -25,3 +28,6 @@ func save() -> Dictionary:
 		"scale_z" : scale.z
 	}
 	return save_dict
+
+func change_color(alpha: float):
+	$broken_wall_leafless/wall_cracked.material_overlay.set_shader_parameter('alpha',alpha)

@@ -17,5 +17,16 @@ func attack() -> void:
 	animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	attack_timer.start(randf_range(1.5,2))
 
-func _on_vision_timer_timeout() -> void:
-	aggro = false
+func change_color(alpha: float):
+	$Body/model/Rig/Skeleton3D/head/Skeleton_Rogue_Hood.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/chest/Skeleton_Rogue_Cape.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_ArmLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_ArmRight.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_Body.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_Eyes.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_Head.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_Jaw.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_LegLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/Skeleton_Rogue_LegRight.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/right_handslot/Skeleton_Blade/Skeleton_Blade.material_overlay.set_shader_parameter('alpha',alpha)
+	$Body/model/Rig/Skeleton3D/left_handslot/Skeleton_Blade/Skeleton_Blade.material_overlay.set_shader_parameter('alpha',alpha)

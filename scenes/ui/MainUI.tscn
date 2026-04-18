@@ -92,7 +92,6 @@ color = Color(0, 0, 0, 0)
 
 [node name="Menu" parent="." instance=ExtResource("4_cdatp")]
 visible = false
-z_index = 1
 layout_mode = 1
 
 [connection signal="quit" from="Menu" to="." method="quit_game"]

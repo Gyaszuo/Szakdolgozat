@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://wjd841ejn8l6"]
+[gd_scene load_steps=45 format=3 uid="uid://wjd841ejn8l6"]
 
 [ext_resource type="Script" uid="uid://bid8vn6j0x0el" path="res://scenes/levels/Level2/level_2.gd" id="1_n7m3w"]
 [ext_resource type="PackedScene" uid="uid://jb27rtd2swqa" path="res://scenes/levels/Level2/Level2Geometry.tscn" id="2_u7y0i"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://n4m4kcepfjyg" path="res://scenes/objects/Text3D.tscn" id="33_74lpw"]
 [ext_resource type="PackedScene" uid="uid://btw7hag6n8dvi" path="res://scenes/objects/collectibles/Coin.tscn" id="35_7f1ir"]
 [ext_resource type="PackedScene" uid="uid://dlnec7qs4oc0o" path="res://scenes/objects/Pot.tscn" id="36_w6i6m"]
+[ext_resource type="PackedScene" uid="uid://dg66xuh5xd5ui" path="res://scenes/objects/collectibles/Heart.tscn" id="37_ng1ah"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_agphc"]
 sky_top_color = Color(0.10593646, 0.13576365, 0.17549357, 1)
@@ -506,6 +507,7 @@ activators = [NodePath("../PermPressurePlate")]
 [node name="ToggleableWoodFloor" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("19_frwcn")]
 transform = Transform3D(1.5491141, 0, 0, 0, 3.7269733, 0, 0, 0, 2.011532, 0, -4.720581, -38.11731)
 preActivated = true
+alphaAmount = 0.0
 activators = [NodePath("../EndSecretHookSwitch")]
 
 [node name="EnemyBarrier" parent="Objects" instance=ExtResource("20_p6ctp")]
@@ -515,13 +517,13 @@ transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 2.5055046, 27.1
 transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 2.5055046, 39.751064, 1.9682055, 0.35099262)
 
 [node name="EnemyBarrier3" parent="Objects" instance=ExtResource("20_p6ctp")]
-transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 2.5055046, 47.568096, 1.9682055, 0.35099262)
+transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 5.861175, 47.568096, 1.9682055, 0.35099262)
 
 [node name="EnemyBarrier4" parent="Objects" instance=ExtResource("20_p6ctp")]
-transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 2.5055046, 59.211273, 1.9682055, 0.35099262)
+transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 5.3002324, 59.211273, 1.9682055, 0.35099262)
 
 [node name="EnemyBarrier5" parent="Objects" instance=ExtResource("20_p6ctp")]
-transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 2.5055046, 67.25217, 1.9682055, 0.35099262)
+transform = Transform3D(0.05671823, 0, 0, 0, 2.9875426, 0, 0, 0, 5.2032433, 67.25217, 1.9682055, 0.35099262)
 
 [node name="EnemyBarrier6" parent="Objects" instance=ExtResource("20_p6ctp")]
 transform = Transform3D(-1.2903398e-07, 0, -3.0066047, 0, 2.9875426, 0, 2.9519534, 0, -1.3142288e-07, 63.252167, 1.9682055, 13.428834)
@@ -921,6 +923,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.648322, 2, -13.062195)
 text = "This is a player barrier. 
 While it's visible, it prevents you from going through it.
 To disable this one, hit a switch in all 3 wings."
+
+[node name="Text3D14" parent="Objects" instance=ExtResource("33_74lpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.897913, 3.4241614, 0.25567043)
+text = "Tip!
+You can dodge through attacks with
+ LShift or Right Trigger"
+
+[node name="Text3D15" parent="Objects" instance=ExtResource("33_74lpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29292297, 2.548357, -4.6140294)
+text = "Tip!
+You can sprint with LCtrl or Left Bumper"
 
 [node name="Text3D2" parent="Objects" instance=ExtResource("33_74lpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2368903, 2, 36.73792)
@@ -1841,6 +1854,24 @@ coin_count = 2
 [node name="Pot8" parent="Collectibles" instance=ExtResource("36_w6i6m")]
 transform = Transform3D(8.940697e-08, 0, -1, 0, 1, 0, 1, 0, 8.940697e-08, 14.686205, 4.8292565, 14.297422)
 coin_count = 1
+
+[node name="Heart" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.300552, 1.2917442, 0.058078885)
+
+[node name="Heart2" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.300552, 1.2917442, 5.994459)
+
+[node name="Heart3" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98.76463, 5.031744, -21.425821)
+
+[node name="Heart4" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.17217, 2.0149074, -17.82421)
+
+[node name="Heart5" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.981667, 6.6729755, -44.1426)
+
+[node name="Heart6" parent="Collectibles" instance=ExtResource("37_ng1ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0785082, 4.060092, -54.283707)
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 10.0

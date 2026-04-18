@@ -44,6 +44,7 @@ var fall_rescue_pos: Vector3 = Vector3(0,1,0)
 var dashing: bool = false
 var barrier_blocked = false
 var dash_vector: Vector3
+var boss: Boss
 
 var health: int = 6:
 	set(value):
@@ -193,8 +194,6 @@ func ability_logic(delta) -> void:
 		dodge()
 	if Input.is_action_just_pressed("hook"):
 		hook()
-	if Input.is_action_just_pressed("hit"):
-		fall()
 
 func attack() -> void:
 	if attack_cooldown_timer.time_left or is_hooking or is_attacking:
@@ -298,6 +297,9 @@ func hit() -> void:
 		health -= 1
 		invulnerability_timer.start()
 		is_hooking = false
+		var tween = create_tween()
+		tween.tween_method(change_color,0.0,0.25,0.125)
+		tween.tween_method(change_color,0.25,0.0,0.125)
 
 func die() -> void:
 	is_dead = true
@@ -377,5 +379,20 @@ func save() -> Dictionary:
 	return save_dict
 
 func quit_game() -> void:
-	print("quit in Player")
 	quit.emit()
+
+func change_color(alpha: float):
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_l/Knife_Offhand.material_overlay.set_shader_parameter('alpha',alpha)
+	$"ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_r/1H_Crossbow".material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/handslot_r/Knife.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/chest/Rogue_Cape.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_ArmLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_ArmRight.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_Body.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_Head_Hooded.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_LegLeft.material_overlay.set_shader_parameter('alpha',alpha)
+	$ModelPivot/Rogue_Hooded/Rig/Skeleton3D/Rogue_LegRight.material_overlay.set_shader_parameter('alpha',alpha)
+
+func toggle_boss_healthbar(value: bool):
+	if boss:
+		boss.toggle_boss_healthbar(value)

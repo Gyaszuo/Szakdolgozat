@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bade3llwvsvug"]
+[gd_scene load_steps=46 format=3 uid="uid://bade3llwvsvug"]
 
 [ext_resource type="PackedScene" uid="uid://bolj1oiudlh54" path="res://scenes/entities/player/player.tscn" id="1_euepx"]
 [ext_resource type="Script" uid="uid://m22v7grf8nus" path="res://scenes/test/test_level.gd" id="1_ipv86"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://cprapmaviwjle" path="res://scenes/objects/activatables/BoxBarrier.tscn" id="31_r7ba0"]
 [ext_resource type="PackedScene" uid="uid://c52wqbt1pg77y" path="res://scenes/objects/terrain/wall.tscn" id="33_7k5i0"]
 [ext_resource type="PackedScene" uid="uid://dvx2q0k1mrpb0" path="res://scenes/objects/terrain/wall_corner.tscn" id="34_r7ba0"]
+[ext_resource type="PackedScene" uid="uid://crq8uvarh0m6b" path="res://scenes/objects/activatables/MethodCaller.tscn" id="35_ga7xo"]
 [ext_resource type="PackedScene" uid="uid://wuscq1wusewl" path="res://scenes/objects/terrain/wall_door.tscn" id="35_wvg0q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_euepx"]
@@ -87,7 +88,7 @@ shadow_enabled = true
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_euepx")]
-transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, 2.54148, 2.400083, -0.02561307)
+transform = Transform3D(-0.59181607, 0, -0.8060727, 0, 1, 0, 0.8060727, 0, -0.59181607, 2.6000001, 1.8000001, 0)
 
 [node name="Box" parent="Entities" instance=ExtResource("9_uf6c7")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.6995115, 5.1778812, 6.816755)
@@ -168,7 +169,7 @@ activatables = [NodePath("../Door")]
 
 [node name="Switch" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
 transform = Transform3D(2.9802319e-08, 1, -2.9802322e-08, -1, 2.9802322e-08, 4.371139e-08, 4.371139e-08, 2.9802322e-08, 1, -5.605384, 1.5008686, -3.0418637)
-activatables = [NodePath("../Door"), NodePath("../Path3D/PathFollow3D/MovingPlatform"), null]
+activatables = [NodePath("../Door"), NodePath("../Path3D/PathFollow3D/MovingPlatform")]
 
 [node name="HookPoint" parent="Objects" instance=ExtResource("13_uquo7")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5781612, 5.601453, 0)
@@ -221,8 +222,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1446276, 0.10000001, 1.5084
 [node name="HookSwitch2" parent="Objects" instance=ExtResource("14_n14kl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3275547, -4.5930643)
 
-[node name="Trigger" parent="Objects" instance=ExtResource("27_4vwgt")]
-transform = Transform3D(5.2775693, 0, 0, 0, 2.8754096, 0, 0, 0, 0.34672117, 0, 1.4877048, 9.830006)
+[node name="Trigger" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("27_4vwgt")]
+transform = Transform3D(-2.3068986e-07, 0, -0.34672114, 0, 2.8754096, 0, 5.277569, 0, -1.5155663e-08, 2.8848581, 1.4877048, 19.451548)
+activatables = [NodePath("../MethodCaller")]
 
 [node name="LevelBeginPlatform" parent="Objects" instance=ExtResource("28_8lmeq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6815772, 0.09999995, 0)
@@ -270,6 +272,9 @@ activatables = [NodePath("../PuzzleBarrier1"), NodePath("../PuzzleBarrier5"), No
 [node name="Switch5" parent="Objects" node_paths=PackedStringArray("activatables") instance=ExtResource("12_cudyp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3883476, 0.1924144, 34.105186)
 activatables = [NodePath("../PuzzleBarrier3"), NodePath("../PuzzleBarrier2"), NodePath("../PuzzleBarrier6")]
+
+[node name="MethodCaller" parent="Objects" node_paths=PackedStringArray("activators") instance=ExtResource("35_ga7xo")]
+activators = [NodePath("../Trigger")]
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 

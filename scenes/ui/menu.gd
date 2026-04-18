@@ -4,5 +4,8 @@ signal quit
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
-	print("quit in Menu")
 	quit.emit()
+
+func _ready() -> void:
+	if visible:
+		$PanelContainer/VBoxContainer/Quit.grab_focus()

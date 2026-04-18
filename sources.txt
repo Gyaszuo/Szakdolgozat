@@ -1,2 +1,6 @@
 heart pulse shader: https://godotshaders.com/shader/pulsing-screen-scale-shader-heartbeat-sine-modes
 lava shader: https://godotshaders.com/shader/stylized-lava
+fireball model, shader and main inspiration: https://www.youtube.com/watch?v=AoGOIiBo4Eg&t=36298s
+Player model: https://kaylousberg.itch.io/kaykit-adventurers
+Skeleton models: https://kaylousberg.itch.io/kaykit-skeletons
+Dungeon models: https://kaylousberg.itch.io/kaykit-dungeon-remastered

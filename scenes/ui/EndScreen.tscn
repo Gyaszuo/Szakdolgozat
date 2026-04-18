@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://osuo2i26ycx"]
+
+[ext_resource type="Script" uid="uid://di0t0u0ce2h3h" path="res://scenes/ui/end_screen.gd" id="1_1ad5n"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ad5n")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 84
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 76
+text = "Congratulations!
+You've completed the game!"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Total treasure found:"
+
+[node name="TreasureCounter" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="MenuButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Back to main menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer2/MenuButton" to="." method="_on_menu_button_pressed"]

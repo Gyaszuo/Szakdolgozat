@@ -2,22 +2,6 @@
 class_name Enemy
 extends Node3D
 
-var health:
-	set(value):
-		if value >= 0:
-			health = value
-			if health == 0:
-				die()
-var speed
-var aggro: bool = false
-var pre_aggro: bool = false
-var dead: bool = false
-var attack_range: float = 2.0
-var player: Player
-var attacking: bool = false
-var aggro_cast_scene: PackedScene = preload("res://scenes/entities/player/AggroCast.tscn")
-var aggro_cast
-var walk_anim = "Walking_D_Skeletons"
 @onready var body: CharacterBody3D = $Body
 @onready var model: Node3D = $Body/model
 @onready var hitbox: CollisionShape3D = $Body/CollisionShape3D
@@ -29,9 +13,32 @@ var walk_anim = "Walking_D_Skeletons"
 @onready var attack_anim: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('AttackAnimation')
 @onready var extra_anim: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('ExtraAnimation') 
 
+var speed
+var aggro: bool = false
+var pre_aggro: bool = false
+var dead: bool = false
+var attack_range: float = 2.0
+var player: Player
+var attacking: bool = false
+var aggro_cast_scene: PackedScene = preload("res://scenes/entities/player/AggroCast.tscn")
+var aggro_cast
+var walk_anim = "Walking_D_Skeletons"
+var active: bool = false
+var boss_fight = false
+var health:
+	set(value):
+		if value >= 0:
+			update_healthbar(value)
+			health = value
+			if health == 0:
+				die()
+
 const TURN_SPEED = 10.0
 
 signal death
+
+func update_healthbar(_value):
+	pass
 
 func _physics_process(delta: float) -> void:
 	movement_logic(delta)
@@ -45,9 +52,9 @@ func _physics_process(delta: float) -> void:
 				vision_timer.start()
 
 func movement_logic(delta: float) -> void:
-	if dead or attacking:
+	if dead or attacking or not active:
 		return
-	if aggro:
+	if aggro or boss_fight:
 		set_move_state(walk_anim)
 		var target_dir: Vector3 = (player.global_position - body.global_position).normalized()
 		var target_v2: Vector2 = Vector2(target_dir.x,target_dir.z)
@@ -92,7 +99,12 @@ func _on_vision_circle_body_exited(_body: Node3D) -> void:
 func attack()
 
 func hit() -> void:
+	if not active:
+		return
 	health -= 1
+	var tween = create_tween()
+	tween.tween_method(change_color,0.0,0.25,0.125)
+	tween.tween_method(change_color,0.25,0.0,0.125)
 
 func disable_collision() -> void:
 	hitbox.disabled = true
@@ -134,3 +146,12 @@ func save() -> Dictionary:
 
 func init():
 	attack_timer.wait_time = randf_range(1.5,2)
+
+@abstract
+func change_color(alpha: float)
+
+func _on_vision_timer_timeout() -> void:
+	aggro = false
+
+func activate() -> void:
+	active = true

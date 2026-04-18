@@ -26,9 +26,12 @@ func shoot_hook(direction: Vector3):
 		hook_instance.player = player
 
 func next_level():
-	var next_level_string =  "res://scenes/levels/Level" + String.num(next_level_num,0) + "/Level" + String.num(next_level_num,0) + ".tscn"
 	save_treasure.emit(player.treasure)
-	load_next_level.emit(next_level_string)
+	if next_level_num == -1:
+		load_next_level.emit("End")
+	else:
+		var next_level_string =  "res://scenes/levels/Level" + String.num(next_level_num,0) + "/Level" + String.num(next_level_num,0) + ".tscn"
+		load_next_level.emit(next_level_string)
 
 func save():
 	return get_scene_file_path()
@@ -41,7 +44,7 @@ func init():
 	if not player.is_connected("quit",quit_game):
 		player.connect("quit",quit_game)
 	for child in entities.get_children():
-		if child.has_method("init") and child is not Box:
+		if child is Enemy:
 			child.player = player
 			child.init()
 			if child.has_signal("death"):

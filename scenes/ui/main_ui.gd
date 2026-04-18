@@ -8,6 +8,7 @@ extends Control
 @onready var key_bar: KeyBar = $KeyBar
 
 signal quit
+signal boss_health(value: bool)
 
 func update_health(value: int) -> void:
 	health_bar.update_health(value)
@@ -20,6 +21,7 @@ func update_treasure(value: int) -> void:
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
+		boss_health.emit(false)
 		open_menu()
 
 func open_menu() -> void:
@@ -27,6 +29,7 @@ func open_menu() -> void:
 		fade_screen(true)
 	else:
 		fade_screen(false)
+		boss_health.emit(true)
 
 func fade_screen(value: bool) -> void:
 	var tween = create_tween()
@@ -35,6 +38,7 @@ func fade_screen(value: bool) -> void:
 		tween.tween_property(color_rect,"color",Color(0,0,0,0.5),0.2)
 		await tween.finished
 		menu.visible = true
+		menu._ready()
 	else:
 		menu.visible = false
 		tween.tween_property(color_rect,"color",Color(0,0,0,0),0.2)
@@ -55,5 +59,4 @@ func title_font_color_change(color: Color):
 	$LevelTitle/Label.add_theme_color_override("font_color", color)
 
 func quit_game() -> void:
-	print("quit in MainUI")
 	quit.emit()
