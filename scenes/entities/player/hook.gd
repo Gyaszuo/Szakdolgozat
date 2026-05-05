@@ -18,7 +18,6 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if stuck_point != null:
-		print(stuck_point.global_position.distance_to(player.global_position))
 		player.hook_target = stuck_point.global_position
 		global_position = stuck_point.global_position
 	position += Vector3(direction.x,direction.y,direction.z) * speed * delta

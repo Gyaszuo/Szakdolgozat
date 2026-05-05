@@ -42,14 +42,7 @@ func update_healthbar(_value):
 
 func _physics_process(delta: float) -> void:
 	movement_logic(delta)
-	if aggro_cast:
-		aggro_cast.target_position = player.to_local(marker.global_position)
-		if not aggro_cast.is_colliding() && pre_aggro:
-			aggro = true
-			vision_timer.stop()
-		if aggro_cast && aggro:
-			if vision_timer.is_stopped():
-				vision_timer.start()
+	update_aggro_casts()
 
 func movement_logic(delta: float) -> void:
 	if dead or attacking or not active:
@@ -77,6 +70,16 @@ func movement_logic(delta: float) -> void:
 		set_move_state("Jump_Idle")
 		body.velocity -= Vector3(0,10,0)
 	body.move_and_slide()
+
+func update_aggro_casts():
+	if aggro_cast:
+		aggro_cast.target_position = player.to_local(marker.global_position)
+		if not aggro_cast.is_colliding() && pre_aggro:
+			aggro = true
+			vision_timer.stop()
+		if aggro_cast && aggro:
+			if vision_timer.is_stopped():
+				vision_timer.start()
 
 func _on_vision_circle_body_entered(_body: Node3D) -> void:
 	if aggro:
