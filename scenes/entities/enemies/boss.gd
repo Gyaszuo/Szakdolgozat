@@ -298,6 +298,8 @@ func die() -> void:
 	call_deferred("disable_collision")
 	extra_anim.animation = "Death_C_Skeletons"
 	animation_tree.set("parameters/ExtraAnimOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	if aggro_cast:
+		player.aggro_cast.remove_child(aggro_cast)
 	await get_tree().create_timer(6).timeout
 	death.emit()
 	queue_free()

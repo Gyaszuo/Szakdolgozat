@@ -95,7 +95,8 @@ func set_move_state(state_name: String) -> void:
 func _on_vision_circle_body_exited(_body: Node3D) -> void:
 	aggro = false
 	pre_aggro = false
-	player.aggro_cast.remove_child(aggro_cast)
+	if aggro_cast:
+		player.aggro_cast.remove_child(aggro_cast)
 	aggro_cast = null
 
 @abstract
@@ -125,6 +126,9 @@ func die() -> void:
 	call_deferred("disable_collision")
 	extra_anim.animation = "Death_C_Skeletons"
 	animation_tree.set("parameters/ExtraAnimOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	if aggro_cast:
+		player.aggro_cast.remove_child(aggro_cast)
+	aggro_cast = null
 	await get_tree().create_timer(1.5).timeout
 	queue_free()
 

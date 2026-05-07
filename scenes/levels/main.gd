@@ -205,8 +205,6 @@ func _init_level() -> void:
 				child.connect("save_game",save_game)
 	$Level.get_child(0).init()
 	$Level.get_child(0).player.treasure = treasure
-	if not $Level.get_child(0).player.main_ui.menu.is_connected("quit",quit_to_menu):
-		$Level.get_child(0).player.main_ui.menu.connect("quit",quit_to_menu)
 
 func restart_game() -> void:
 	treasure = 0
