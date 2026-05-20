@@ -26,8 +26,10 @@ func _process(_delta: float) -> void:
 
 func open_menu() -> void:
 	if get_tree().paused == false:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		fade_screen(true)
 	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		fade_screen(false)
 		boss_health.emit(true)
 

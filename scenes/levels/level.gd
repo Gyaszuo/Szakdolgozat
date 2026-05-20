@@ -37,6 +37,7 @@ func save():
 	return get_scene_file_path()
 
 func init():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	for i in entities.get_children():
 		if i is Player: player = i
 	if not player.is_connected("shoot_hook",shoot_hook):

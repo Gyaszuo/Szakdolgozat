@@ -118,7 +118,8 @@ func toggle_attack_hitbox(value: bool) -> void:
 	attacking = value	
 
 func _on_area_3d_body_entered(enter_body: Node3D) -> void:
-	enter_body.hit()
+	if(enter_body.has_method("hit")):
+		enter_body.hit()
 
 func die() -> void:
 	death.emit()

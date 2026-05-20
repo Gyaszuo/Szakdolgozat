@@ -54,6 +54,7 @@ func quit_to_menu() -> void:
 		$Level.remove_child(child)
 
 func show_summary_screen(param_total_treasure: int, param_remaining_treasure: int,level: String,param_total_crests: int, param_remaining_crests: int):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$SummaryScreen.visible = true
 	$SummaryScreen._ready()
 	$SummaryScreen.level = level
@@ -73,6 +74,7 @@ func load_next_level(level: String) -> void:
 
 func load_level(level: String) -> void:
 	if level == "End":
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		$MainMenu.visible = false
 		$SummaryScreen.visible = false
 		$EndScreen.visible = true
