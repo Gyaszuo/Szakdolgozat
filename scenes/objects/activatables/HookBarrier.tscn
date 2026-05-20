@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe57a"]
 resource_local_to_scene = true
 transparency = 1
-albedo_color = Color(0.33056295, 0.6291571, 0.9986382, 0.39215687)
+albedo_color = Color(0.32941177, 0.627451, 1, 0.49019608)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a4q40"]
 resource_local_to_scene = true
